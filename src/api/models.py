@@ -30,6 +30,7 @@ class Movies(db.Model):
 
     def serialize(self):
         return {
+            "id": self.id,
             "name": self.name,
             # do not serialize the password, its a security breach
         }
