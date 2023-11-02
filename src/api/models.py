@@ -24,6 +24,7 @@ class Movies(db.Model):
     release_date = db.Column(db.String(80), unique=False, nullable=False)
     rating = db.Column(db.String(80), unique=False, nullable=False)
     overview = db.Column(db.String(), unique=False, nullable=False)
+    image_url = db.Column(db.String(300), unique=False, nullable=False)
 
     def __repr__(self):
         return f'<Peliculas {self.name}>'
@@ -32,5 +33,9 @@ class Movies(db.Model):
         return {
             "id": self.id,
             "name": self.name,
+            "release_date": self.release_date,
+            "rating": self.rating,
+            "overview": self.overview,
+            "image_url": self.image_url
             # do not serialize the password, its a security breach
         }

@@ -23,10 +23,15 @@ def get_movies():
     result = list(map(lambda item: item.serialize(), all_movies))
     return jsonify(result), 200
 
+@api.route('/movies/<int:movie_id>', methods=['GET'])
+def get_movie(movie_id):
+    movie = Movies.query.filter_by(id=movie_id).first()
+    return jsonify(movie.serialize()), 200
+
 @api.route('/movies', methods=['POST'])
 def create_movie():
     body = request.get_json()
-    new_movie = Movies(name=body["name"],release_date=body["release_date"],rating=body["rating"],overview=body["overview"])
+    new_movie = Movies(name=body["name"],release_date=body["release_date"],rating=body["rating"],overview=body["overview"],image_url=["image_url"])
     db.session.add(new_movie)
     db.session.commit()
     return jsonify(new_movie.serialize()), 200
@@ -39,10 +44,12 @@ def edit_movie(movie_id):
     release_date = body["release_date"]
     rating = body["rating"]
     overview = body["overview"]
+    image_url = body["image_url"]
     movie.name = name
     movie.release_date = release_date
     movie.rating = rating
     movie.overview = overview
+    movie.image_url = image_url
     db.session.commit()
     return jsonify(movie.serialize()), 200
 

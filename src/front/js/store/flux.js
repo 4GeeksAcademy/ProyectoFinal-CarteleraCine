@@ -22,6 +22,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
+			displayMovies: () => {
+				
+				fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/movies")
+					.then(res => res.json())
+					.then((data) => {
+						console.log(data)
+						setStore({movies: data})
+					});
+					},
+			
 			getMessage: async () => {
 				try{
 					// fetching data from the backend

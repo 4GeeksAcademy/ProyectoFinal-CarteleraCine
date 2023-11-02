@@ -7,6 +7,7 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { Movies } from "./pages/movies";
+import { MovieInfo } from "./pages/movie_info";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -29,10 +30,10 @@ const Layout = () => {
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Movies />} path="/movies" />
+                        <Route element={<MovieInfo />} path="/movies/:movie_id" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
-                    <Footer />
                 </ScrollToTop>
             </BrowserRouter>
         </div>
