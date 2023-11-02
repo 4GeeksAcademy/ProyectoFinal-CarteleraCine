@@ -17,3 +17,19 @@ class User(db.Model):
             "email": self.email,
             # do not serialize the password, its a security breach
         }
+
+class City (db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name  = db.Column(db.String(80), unique=False, nullable=False)
+    image = db.Column(db.String(), unique=False, nullable=False)
+
+    def __repr__(self):
+        return f'<City {self.ciudades}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "city": self.name,
+            "image": self.image
+            # do not serialize the password, its a security breach
+        }
