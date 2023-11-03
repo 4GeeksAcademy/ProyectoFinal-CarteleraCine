@@ -4,14 +4,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			demo: [
 				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
+					cadena: "Cinemark",
+					cinema: "Oxigeno",
+					ciudad: "Heredia"
 				},
 				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
+					cadena: "Cinepolis",
+					cinema: "Paseo de las Flores",
+					ciudad: "Heredia"
+				},
+				{
+					cadena: "CineColombia",
+					cinema: "Santa Fe",
+					ciudad: "Medellin"
+				},
+				{
+					cadena: "CineColombia",
+					cinema: "Molinos",
+					ciudad: "Medellin"
+				},
+				{
+					cadena: "Procinal",
+					cinema: "Aventura",
+					ciudad: "Medellin"
+				},
+				{
+					cadena: "Procinal",
+					cinema: "Florida",
+					ciudad: "Medellin"
 				}
 			]
 		},
