@@ -2,12 +2,9 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
-
-import { Home } from "./pages/home";
-import { Demo } from "./pages/demo";
-import { Single } from "./pages/single";
 import { Movies } from "./pages/movies";
 import { MovieInfo } from "./pages/movie_info";
+import { MovieForm } from "./pages/movie_form";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -27,11 +24,10 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar />
                     <Routes>
-                        <Route element={<Home />} path="/" />
-                        <Route element={<Demo />} path="/demo" />
-                        <Route element={<Movies />} path="/movies" />
-                        <Route element={<MovieInfo />} path="/movies/:movie_id" />
-                        <Route element={<Single />} path="/single/:theid" />
+                        <Route element={<Movies />} path="/" />
+                        <Route element={<MovieInfo />} path="/:movie_id" />
+                        <Route element={<MovieForm opt="add" />} path="/Add" />
+						<Route element={<MovieForm opt="edit" />} path="/Edit/:id" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                 </ScrollToTop>

@@ -11,7 +11,7 @@ export const MovieInfo = () => {
 
     useEffect (() => {
         
-        fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/movies/" + params.movie_id)
+        fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/" + params.movie_id)
         .then((response) => response.json())
         .then((data) => {
             console.log(data)
