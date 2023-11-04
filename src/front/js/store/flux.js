@@ -1,48 +1,37 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			],
+			
 			movies: [],
 			current_movie: null
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
 
-			displayMovies: () => {
+			// displayMovies: () => {
 				
-				fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api")
-					.then(res => res.json())
-					.then((data) => {
-						console.log(data)
-						setStore({movies: data})
-					});
-					},
+			// 	fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api")
+			// 		.then(res => res.json())
+			// 		.then((data) => {
+			// 			console.log(data)
+			// 			setStore({movies: data})
+			// 		});
+			// 		},
 			
 			createMovie: (movie) => {
 				
-				fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api", {
-					method: "POST",
+				let requestOptions = {
+					method: 'POST',
 					body: JSON.stringify(movie),
 					headers: {
 						"Content-Type": "application/json"
 					}
-				})
-				.then((response) => response.json())
-				.then((data) => console.log(data))
+					};
+						  
+					fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api", requestOptions)
+					.then(response => response.json())
+					.then(result => console.log(result))
 			},
-		
 					
 			deleteMovie: (indexDelete) => {
 				console.log(indexDelete)
@@ -61,11 +50,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
-			loadSomeData: (id) => {
+			displayMovies: (id) => {
 				let path = ""
-				id ? path="/movies/"+id : path="/movies"
+				id ? path= "/" +id : path="/"
 
-				fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/" + path)
+				fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api" + path)
 					.then(response => response.json())
 					.then((data) => {
 						console.log(data)

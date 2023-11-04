@@ -9,7 +9,7 @@ export const Movies = () => {
 
 	return (
 		<div className="moviePage container">
-					<h3 className="text-black ms-3 mb-4 mt-3">Now Playing Movies</h3>
+					<h3 className="text-black ms-2 mb-4 mt-3">Now Playing Movies</h3>
 					<Link to="/Add">
 					<button className="mb-3 ms-2 btn btn-success">Create new movie</button>
 					</Link>

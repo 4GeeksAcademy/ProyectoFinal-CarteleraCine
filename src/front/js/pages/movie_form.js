@@ -20,14 +20,13 @@ export const MovieForm = (props) => {
                 
                     let requestOptions = {
                         method: 'PUT',
-                        redirect: 'follow',
                         body: JSON.stringify(newMovie),
                         headers: {
                                     "Content-Type": "application/json"
                                 }
                             };
                       
-                       fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/movies/" + params.id, requestOptions)
+                       fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/" + params.id, requestOptions)
                         .then(response => response.json())
                         .then(result => console.log(result))
                 
@@ -35,39 +34,40 @@ export const MovieForm = (props) => {
         }
         
         useEffect (()=> {
-            actions.loadSomeData(params.id)
+            actions.displayMovies(params.id)
+            console.log(params.id)
         }, [])
 
         useEffect (()=> {
             setName(store.current_movie?.name),
-            setReleaseDate(store.current_movie?.releaseDate),
-            setRating(store.current_contact?.rating),
-            setOverview(store.current_contact?.overview)
-            setImageUrl(store.current_contact?.imageUrl)
+            setReleaseDate(store.current_movie?.release_date),
+            setRating(store.current_movie?.rating),
+            setOverview(store.current_movie?.overview)
+            setImageUrl(store.current_movie?.image_url)
         }, [store.current_movie])
     
 	return (
 		<form action="/">
 			<h1 className="d-flex justify-content-center mt-5">{props.opt == "add" ? "Add a new movie" : "Edit movie"}</h1>
 			<div className="mb-3 mx-5">
-                <label htmlFor="name" className="form-label">Name</label>
-                <input value= {name} onChange={(e) => {setName(e.target.value)}} name="Name" type="text" className="form-control" />
+                <label htmlFor="Name" className="form-label">Name</label>
+                <input defaultValue= {name} onChange={(e) => {setName(e.target.value)}} type="text" className="form-control" />
             </div>
             <div className="mb-3 mx-5">
-                <label htmlFor="releaseDate" className="form-label">Release Date</label>
-                <input value= {releaseDate} onChange={(e) => {setReleaseDate(e.target.value)}} name="releaseDate" type="text" className="form-control" />
+                <label htmlFor="ReleaseDate" className="form-label">Release Date</label>
+                <input defaultValue= {releaseDate} onChange={(e) => {setReleaseDate(e.target.value)}} type="text" className="form-control" />
             </div>
             <div className="mb-3 mx-5">
-                <label htmlFor="rating" className="form-label">Rating</label>
-                <input value= {rating} onChange={(e) => {setRating(e.target.value)}} name="Rating" type="text" className="form-control"  />
+                <label htmlFor="Rating" className="form-label">Rating</label>
+                <input defaultValue= {rating} onChange={(e) => {setRating(e.target.value)}} type="text" className="form-control"  />
             </div>
 			<div className="mb-3 mx-5">
-                <label htmlFor="overview" className="form-label">Overview</label>
-                <input value= {overview} onChange={(e) => {setOverview(e.target.value)}} name="Overview" type="text" className="form-control"  />
+                <label htmlFor="Overview" className="form-label">Overview</label>
+                <input defaultValue= {overview} onChange={(e) => {setOverview(e.target.value)}} type="text" className="form-control"  />
             </div>
             <div className="mb-3 mx-5">
-                <label htmlFor="imageUrl" className="form-label">Image URL</label>
-                <input value={imageUrl} onChange={(e) => {setImageUrl(e.target.value)}} name="image_url" type="text" className="form-control" />
+                <label htmlFor="ImageUrl" className="form-label">Image URL</label>
+                <input defaultValue={imageUrl} onChange={(e) => {setImageUrl(e.target.value)}} type="text" className="form-control" />
             </div>
 			<div className="d-grid gap-2">
                 <button onClick={() => saveButton()} className="btn btn-primary mx-5 mt-3">Save</button>

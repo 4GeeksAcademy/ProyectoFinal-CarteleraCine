@@ -29,8 +29,8 @@ const injectContext = PassedComponent => {
 			 * store, instead use actions, like this:
 			 **/
 			
-			state.actions.displayMovies();
-			state.actions.loadSomeData(false);
+			state.actions.displayMovies(false);
+			
 		}, []);
 
 		// The initial value for the context is not null anymore, but the current state of this component,
