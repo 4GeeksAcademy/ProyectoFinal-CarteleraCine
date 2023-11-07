@@ -1,25 +1,53 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { Context } from "../store/appContext";
 import "../../styles/home.css";
 
 export const Formulario = () => {
+    const {actions} = useContext(Context)
+    const [multiplex, setMultiplex] = useState({
+        cadena: "",
+        cinema: "",
+        ciudad: "",
+        pais: ""
+    })
+    
+    const handleChange = (event) =>{
+        setMultiplex({
+            ...multiplex, 
+            [event.target.name]: event.target.value
+        })
+    }
+
+    const saveMultiplex = async (event) =>{
+        event.preventDefault()
+        const result = await actions.crearMultiplex(multiplex)
+        console.log(result);
+        if (result== 200 ) {
+            alert("Guardado satisfactoriamente")
+        } else{
+            alert("Try again")
+        }
+    }
+
     return (
         <div className="container">
-            <form>
+            <form onSubmit={saveMultiplex}>
                 <div className="form-group">
                     <label htmlFor="cadena">Cadena</label>
-                    <input type="cadena" className="form-control" id="cadena" placeholder="Cadena" />
+                    <input name="cadena" value={multiplex.cadena} onChange={handleChange}
+                    type="text" className="form-control" id="cadena" placeholder="Cadena" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="cinema">Cinema</label>
-                    <input type="cinema" className="form-control" id="cinema" placeholder="Cinema" />
+                    <input name="cinema" value={multiplex.cinema} onChange={handleChange} type="text" className="form-control" id="cinema" placeholder="Cinema" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="ciudad">Ciudad</label>
-                    <input type="Ciudad" className="form-control" id="Ciudad" placeholder="Ciudad" />
+                    <input name="ciudad" value={multiplex.ciudad} onChange={handleChange} type="text" className="form-control" id="ciudad" placeholder="ciudad" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="pais">Pais</label>
-                    <input type="Pais" className="form-control" id="Pais" placeholder="Pais" />
+                    <input name="pais" value={multiplex.pais} onChange={handleChange} type="text" className="form-control" id="pais" placeholder="pais" />
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>

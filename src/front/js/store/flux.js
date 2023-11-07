@@ -22,7 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			mostrarMultiplex: () => {
-				fetch("https://glowing-space-sniffle-9px5qxrxpr7c4x7-3001.app.github.dev/api/multiplex")
+				fetch(`${process.env.BACKEND_URL}/api/multiplex`)
 					.then(response => response.json())
 					.then((data) => {
 						setStore({cadenas: data})
@@ -30,20 +30,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			
-			crearMultiplex: (newMultiplex) => {
-				fetch(("https://glowing-space-sniffle-9px5qxrxpr7c4x7-3001.app.github.dev/api/multiplex"), requestOptions)
-				.then(response => response.text())
-				.catch(error => console.log("error", error));
-				
+			crearMultiplex: async (newMultiplex) => {
 				const store = getStore();
-				const crearMultiplex = [...store.cadenas, newMultiplex]
-				const requestOptions = {
-					method: "POST",
-					headers: {"Content-Type": "application/json"},
-					body: JSON.stringify(newMultiplex)
-				};
-				console.log("Creado");
-				setStore({cadenas:crearMultiplex})
+				try {
+					const requestOptions = {
+						method: "POST",
+						headers: {"Content-Type": "application/json"},
+						body: JSON.stringify(newMultiplex)
+					};
+				const response = await fetch(`${process.env.BACKEND_URL}/api/multiplex`, requestOptions)
+				return response.status
+				} catch (error) {
+					console.log("error", error)
+				}				
 			},
 
 			getMessage: async () => {
