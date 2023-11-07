@@ -24,12 +24,12 @@ class City (db.Model):
     image = db.Column(db.String(), unique=False, nullable=False)
 
     def __repr__(self):
-        return f'<City {self.ciudades}>'
+        return f'<City {self.name}>'
 
     def serialize(self):
         return {
             "id": self.id,
-            "city": self.name,
+            "name": self.name,
             "image": self.image
             # do not serialize the password, its a security breach
         }

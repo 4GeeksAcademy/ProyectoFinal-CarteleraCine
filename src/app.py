@@ -48,6 +48,7 @@ def handle_invalid_usage(error):
     return jsonify(error.to_dict()), error.status_code
 
 # generate sitemap with all your endpoints
+
 @app.route('/')
 def sitemap():
     if ENV == "development":

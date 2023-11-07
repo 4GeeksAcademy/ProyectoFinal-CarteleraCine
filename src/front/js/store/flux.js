@@ -1,54 +1,84 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
-		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+	  store: {
+		City: []
+	  },
+	  actions: {
+		displayCity: () => {
+		  fetch("https://friendly-eureka-qr65wvrvq75fxj5g-3001.app.github.dev/api/city/")
+			.then(res => res.json())
+			.then(data => {
+			  setStore({ City: data });
+			})
+			.catch(error => console.log('Error al cargar ciudades', error));
 		},
-		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-
-			getMessage: async () => {
-				try{
-					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
-					const data = await resp.json()
-					setStore({ message: data.message })
-					// don't forget to return something, that is how the async resolves
-					return data;
-				}catch(error){
-					console.log("Error loading message from backend", error)
+		addCity: newCity => {
+		  const requestOptions = {
+			method: 'POST',
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(newCity)
+		  };
+  
+		  fetch("https://friendly-eureka-qr65wvrvq75fxj5g-3001.app.github.dev/api/city/", requestOptions)
+			.then(response => response.text())
+			.then(result => console.log(result))
+			.catch(error => console.log('Error al agregar ciudad', error));
+		},
+		editCity: (editedCity, index) => {
+		  const store = getStore();
+		  const updatedCity = [...store.City];
+		  updatedCity[index] = editedCity;
+  
+		  setStore({ City: updatedCity });
+  
+		  const requestOptions = {
+			method: 'PUT',
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(editedCity)
+		  };
+  
+		  fetch("https://friendly-eureka-qr65wvrvq75fxj5g-3001.app.github.dev/api/city/", requestOptions)
+			.then(response => response.text())
+			.then(result => console.log(result))
+			.catch(error => console.log('Error al editar ciudad', error));
+		},
+		deleteCity: id => {
+		  const store = getStore();
+		  console.log("Eliminar ciudad con ID: " + id);
+  
+		  setStore({ City: store.City.filter(item => item.id !== id) });
+  
+		  const requestOptions = {
+			method: 'DELETE',
+			redirect: 'follow'
+		  };
+  
+		  fetch("https://friendly-eureka-qr65wvrvq75fxj5g-3001.app.github.dev/api/city/" + id, requestOptions)
+			.then(response => response.text())
+			.then(result => {
+			  console.log(result);
+			})
+			.catch(error => console.log('Error al eliminar ciudad', error));
+		},
+		getMessage: async () => {
+			try {
+				// Realiza una solicitud para obtener un mensaje del backend (ajusta la URL según tu configuración)
+				const response = await fetch("URL_DEL_BACKEND");
+				if (!response.ok) {
+					throw new Error("Error en la solicitud");
 				}
-			},
-			changeColor: (index, color) => {
-				//get the store
+				const data = await response.json();
+
+				// Actualiza el mensaje en el estado
 				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
+				setStore({ message: data.message });
+			} catch (error) {
+				console.error("Error al cargar el mensaje desde el backend", error);
 			}
 		}
+	  }
 	};
-};
-
-export default getState;
+  };
+  
+  export default getState;
+  
