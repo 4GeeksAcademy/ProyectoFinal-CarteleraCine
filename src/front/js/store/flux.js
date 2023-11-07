@@ -2,37 +2,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: null,
-			demo: [
-				{
-					cadena: "Cinemark",
-					cinema: "Oxigeno",
-					ciudad: "Heredia"
-				},
-				{
-					cadena: "Cinepolis",
-					cinema: "Paseo de las Flores",
-					ciudad: "Heredia"
-				},
-				{
-					cadena: "CineColombia",
-					cinema: "Santa Fe",
-					ciudad: "Medellin"
-				},
-				{
-					cadena: "CineColombia",
-					cinema: "Molinos",
-					ciudad: "Medellin"
-				},
-				{
-					cadena: "Procinal",
-					cinema: "Aventura",
-					ciudad: "Medellin"
-				},
-				{
-					cadena: "Procinal",
-					cinema: "Florida",
-					ciudad: "Medellin"
-				}
+			cadenas: [
+				// {
+				// 	cadena: "Cinepolis",
+				// 	cinema: "Paseo de las Flores",
+				// 	ciudad: "Heredia"
+				// },
+				// {
+				// 	cadena: "CineColombia",
+				// 	cinema: "Santa Fe",
+				// 	ciudad: "Medellin"
+				// }
 			]
 		},
 		actions: {
@@ -40,6 +20,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
+
+			mostrarMultiplex: () => {
+				fetch("https://glowing-space-sniffle-9px5qxrxpr7c4x7-3001.app.github.dev/api/multiplex")
+					.then(response => response.json())
+					.then((data) => {
+						setStore({cadenas: data})
+						console.log(data);
+					});
+			},
+			
+			// crearMultiplex: (newMultiplex) => {
+			// 	fetch("https://glowing-space-sniffle-9px5qxrxpr7c4x7-3001.app.github.dev/api/multiplex"), requestOptions)
+			// 	.then(response => response.text())
+			// 	.catch(error => console.log("error", error));
+				
+			// 	const store = getStore();
+			// 	const actualizarCadena = [...store.cadenas, newMultiplex]
+			// 	const requestOptions = {
+			// 		method: "POST",
+			// 		headers: {"Content-Type": "application/json"},
+			// 		body: JSON.stringify(newMultiplex)
+			// 	};
+			// 	setStore({cadenas:actualizarCadena})
+			// },
 
 			getMessage: async () => {
 				try{
@@ -59,13 +63,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//we have to loop the entire demo array to look for the respective index
 				//and change its color
-				const demo = store.demo.map((elm, i) => {
+				const cadenas = store.cadenas.map((elm, i) => {
 					if (i === index) elm.background = color;
 					return elm;
 				});
 
 				//reset the global store
-				setStore({ demo: demo });
+				setStore({ cadenas: cadenas });
 			}
 		}
 	};

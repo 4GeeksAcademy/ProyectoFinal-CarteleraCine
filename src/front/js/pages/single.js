@@ -10,13 +10,13 @@ export const Single = props => {
 
 	return (
 		<div className="jumbotron">
-			<h1 className="display-4">This will show the cinema element: {store.demo[params.theid].cinema}</h1>
+			<h1 className="display-4">Esto muestra el cinema: {store.cadenas[params.theid].cinema}</h1>
 			<img src={rigoImageUrl} />
 			<hr className="my-4" />
 
-			<Link to="/">
+			<Link to="/cadenas">
 				<span className="btn btn-primary btn-lg" href="#" role="button">
-					Back multiplex
+					Vuelve a la lista
 				</span>
 			</Link>
 		</div>

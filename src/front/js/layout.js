@@ -4,7 +4,7 @@ import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
 import { Multiplex } from "./pages/multiplex";
-import { Demo } from "./pages/demo";
+import { Cadenas } from "./pages/cadenas";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
@@ -26,7 +26,7 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Multiplex />} path="/" />
-                        <Route element={<Demo />} path="/demo" />
+                        <Route element={<Cadenas />} path="/cadenas" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>

@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
-export const Demo = () => {
+export const Cadenas = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
 		<div className="container">
 			<ul className="list-group">
-				{store.demo.map((item, index) => {
+				{store.cadenas.map((item, index) => {
 					return (
 						<li
 							key={index}
@@ -34,7 +34,7 @@ export const Demo = () => {
 			</ul>
 			<br />
 			<Link to="/">
-				<button className="btn btn-primary">Back home</button>
+				<button className="btn btn-primary">Vuelve a multiplex</button>
 			</Link>
 		</div>
 	);
