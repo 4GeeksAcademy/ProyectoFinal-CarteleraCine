@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
-import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { Link, useParams } from "react-router-dom";
 import "../../styles/home.css";
 
 export const Multiplex = () => {
@@ -32,6 +32,11 @@ export const Multiplex = () => {
 						</Link>		
 					</div>
 				</div>
+			</div>
+			<div>
+				<Link to="/formulario">
+					<button className="btn btn-primary">New multiplex</button>
+				</Link>
 			</div>
 			<div className="alert alert-info">
 				{store.message || "Loading message from the backend (make sure your python backend is running)..."}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-
+import PropTypes from "prop-types";
+import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Cadenas = () => {
@@ -18,24 +18,17 @@ export const Cadenas = () => {
 							<Link to={"/single/" + index}>
 								<span>Link to: {item.cadena}</span>
 							</Link>
-							{// Conditional render example
-							// Check to see if the background is orange, if so, display the message
-							item.background === "orange" ? (
-								<p style={{ color: item.initial }}>
-									Check store/flux.js scroll to the actions to see the code
-								</p>
-							) : null}
-							<button className="btn btn-success" onClick={() => actions.changeColor(index, "orange")}>
-								Change Color
-							</button>
 						</li>
 					);
 				})}
 			</ul>
 			<br />
-			<Link to="/">
-				<button className="btn btn-primary">Vuelve a multiplex</button>
-			</Link>
+			<div className="container">
+				<Link to="/">
+					<button className="btn btn-primary">Vuelve a multiplex</button>
+				</Link>
+			</div>
+
 		</div>
 	);
 };

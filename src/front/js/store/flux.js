@@ -30,20 +30,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			
-			// crearMultiplex: (newMultiplex) => {
-			// 	fetch("https://glowing-space-sniffle-9px5qxrxpr7c4x7-3001.app.github.dev/api/multiplex"), requestOptions)
-			// 	.then(response => response.text())
-			// 	.catch(error => console.log("error", error));
+			crearMultiplex: (newMultiplex) => {
+				fetch(("https://glowing-space-sniffle-9px5qxrxpr7c4x7-3001.app.github.dev/api/multiplex"), requestOptions)
+				.then(response => response.text())
+				.catch(error => console.log("error", error));
 				
-			// 	const store = getStore();
-			// 	const actualizarCadena = [...store.cadenas, newMultiplex]
-			// 	const requestOptions = {
-			// 		method: "POST",
-			// 		headers: {"Content-Type": "application/json"},
-			// 		body: JSON.stringify(newMultiplex)
-			// 	};
-			// 	setStore({cadenas:actualizarCadena})
-			// },
+				const store = getStore();
+				const crearMultiplex = [...store.cadenas, newMultiplex]
+				const requestOptions = {
+					method: "POST",
+					headers: {"Content-Type": "application/json"},
+					body: JSON.stringify(newMultiplex)
+				};
+				console.log("Creado");
+				setStore({cadenas:crearMultiplex})
+			},
 
 			getMessage: async () => {
 				try{
@@ -57,20 +58,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const cadenas = store.cadenas.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ cadenas: cadenas });
-			}
 		}
 	};
 };
