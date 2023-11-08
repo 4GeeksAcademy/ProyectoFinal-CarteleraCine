@@ -33,6 +33,7 @@ export const Home = () => {
         {store.City.map((item, index) => {
           return (
             <li key={index} className="list-group-item d-flex justify-content-between">
+              <img src={item.image}/>
               {editIndex === index ? (
                 <div>
                   <input

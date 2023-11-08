@@ -1,10 +1,29 @@
-const getState = ({ getStore, getActions, setStore }) => {
+const getState = ({ getStore, setStore }) => {
 	return {
 	  store: {
 		City: []
 	  },
+
 	  actions: {
-		displayCity: () => {
+		displayCity: async () => {
+			try {
+				// Realiza una solicitud para obtener un mensaje del backend (ajusta la URL según tu configuración)
+				const response = await fetch("https://friendly-eureka-qr65wvrvq75fxj5g-3001.app.github.dev/api/city/");
+				if (!response.ok) {
+					throw new Error("Error en la solicitud");
+				}
+				const data = await response.json();
+
+				// Actualiza el mensaje en el estado
+				console.log(data)
+				const store = getStore();
+				setStore({ City: data });
+			} catch (error) {
+				console.error("Error al cargar el mensaje desde el backend", error);
+			}
+		},
+
+		displayCity1: () => {
 		  fetch("https://friendly-eureka-qr65wvrvq75fxj5g-3001.app.github.dev/api/city/")
 			.then(res => res.json())
 			.then(data => {
@@ -12,6 +31,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			})
 			.catch(error => console.log('Error al cargar ciudades', error));
 		},
+
 		addCity: newCity => {
 		  const requestOptions = {
 			method: 'POST',
@@ -24,6 +44,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			.then(result => console.log(result))
 			.catch(error => console.log('Error al agregar ciudad', error));
 		},
+
+		
+		
 		editCity: (editedCity, index) => {
 		  const store = getStore();
 		  const updatedCity = [...store.City];

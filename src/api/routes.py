@@ -7,6 +7,13 @@ from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
 
+@api.route('/city', methods=['GET'])
+def get_all_city():
+    city = City.query.all()
+    if len(city) < 1:
+        raise APIException('City not found', status_code=404)
+    city = list(map(lambda item: item.serialize(), city))
+    return jsonify(city), 200
 
 @api.route('/city/<int:city_id>', methods=['GET'])
 def get_city(city_id):
