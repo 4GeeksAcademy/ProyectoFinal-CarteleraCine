@@ -45,13 +45,25 @@ export const City = () => {
 			</div>
 
 			<div>
-				<h2>Ciudades:</h2>
+				{/* <h2>Ciudades:</h2> */}
+
 				<ul>
+				<br />
 					{store.City.map((city, index) => (
-						<li key={index}>
+
+						<li className="container text-center" style={{ width: '40%', height: '30%' , listStyleType: 'none' }} key={index}>
+						<div className="row">
+						<div className="col align-self-center mb-2 fw-bold">
+						<br />
 							{city.name}
-							<img src={city.image} alt={city.name} />
-						</li>
+							
+						</div>
+						</div>
+						<div className="row mt-2">
+							<img div className="col align-self-center mt-2"src={city.image}  style={{ width: '40%', height: '30%' }} alt={city.name} />
+						</div>
+						
+					</li>
 					))}
 				</ul>
 			</div>

@@ -23,15 +23,6 @@ const getState = ({ getStore, setStore }) => {
 			}
 		},
 
-		displayCity1: () => {
-		  fetch("https://friendly-eureka-qr65wvrvq75fxj5g-3001.app.github.dev/api/city/")
-			.then(res => res.json())
-			.then(data => {
-			  setStore({ City: data });
-			})
-			.catch(error => console.log('Error al cargar ciudades', error));
-		},
-
 		addCity: newCity => {
 		  const requestOptions = {
 			method: 'POST',
