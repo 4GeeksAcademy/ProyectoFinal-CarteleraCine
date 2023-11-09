@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Movies
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -16,3 +16,46 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+@api.route('/', methods=['GET'])
+def get_movies():
+    all_movies = Movies.query.all()
+    result = list(map(lambda item: item.serialize(), all_movies))
+    return jsonify(result), 200
+
+@api.route('/<int:movie_id>', methods=['GET'])
+def get_movie(movie_id):
+    movie = Movies.query.filter_by(id=movie_id).first()
+    return jsonify(movie.serialize()), 200
+
+@api.route('/', methods=['POST'])
+def create_movie():
+    body = request.get_json()
+    new_movie = Movies(name=body["name"],release_date=body["release_date"],rating=body["rating"],overview=body["overview"],image_url=["image_url"])
+    db.session.add(new_movie)
+    db.session.commit()
+    return jsonify(new_movie.serialize()), 200
+
+@api.route('/<int:movie_id>', methods=['PUT'])
+def edit_movie(movie_id):
+    body = request.get_json()
+    movie = Movies.query.filter_by(id=movie_id).first()
+    name = body["name"]
+    release_date = body["release_date"]
+    rating = body["rating"]
+    overview = body["overview"]
+    image_url = body["image_url"]
+    movie.name = name
+    movie.release_date = release_date
+    movie.rating = rating
+    movie.overview = overview
+    movie.image_url = image_url
+    db.session.commit()
+    return jsonify(movie.serialize()), 200
+
+@api.route('/<int:movie_id>', methods=['DELETE'])
+def delete_movie(movie_id):
+    delete_movie = Movies.query.filter_by(id=movie_id).first()
+    db.session.delete(delete_movie)
+    db.session.commit()
+    return jsonify(), 200
