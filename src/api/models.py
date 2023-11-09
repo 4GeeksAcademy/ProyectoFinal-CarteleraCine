@@ -32,5 +32,6 @@ class Multiplex(db.Model):
         return{
             "cadena": self.cadena,
             "cinema": self.cinema,
-            "ciudad": self.ciudad
+            "ciudad": self.ciudad,
+            "id": self.id
         }
