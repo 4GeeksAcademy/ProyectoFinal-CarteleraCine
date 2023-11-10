@@ -6,7 +6,7 @@ import { Movies } from "./pages/movies";
 import { MovieInfo } from "./pages/movie_info";
 import { MovieForm } from "./pages/movie_form";
 import injectContext from "./store/appContext";
-
+import { App } from "./firebase/setup";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
@@ -25,6 +25,7 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Movies />} path="/" />
+                        <Route element={<App />} path="/firebase" />
                         <Route element={<MovieInfo />} path="/:movie_id" />
                         <Route element={<MovieForm opt="add" />} path="/Add" />
 						<Route element={<MovieForm opt="edit" />} path="/Edit/:id" />
