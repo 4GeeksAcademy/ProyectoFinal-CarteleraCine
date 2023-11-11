@@ -6,7 +6,7 @@ import { Context } from "../store/appContext";
 
 export const Movies = () => {
 	const { store, actions } = useContext(Context);
-
+	
 	return (
 		<div className="moviePage container">
 					<h3 className="text-black ms-2 mb-4 mt-3">Now Playing Movies</h3>
@@ -18,10 +18,10 @@ export const Movies = () => {
 								return (
 										<div className="col" key={item.id}>
 											<div className="card ms-1 mb-4" style={{width: "200px", height: "450px"}}>
-												<img src={item.image_url}  className="card-img-top" alt="..."/>
+												<img src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${item.poster_path}`}  className="card-img-top" alt="..."/>
 												<div className="card-body">
 													<Link to={"/" + item.id}>
-													<p className="lh-1">{item.name}</p>
+													<p className="lh-1">{item.title}</p>
 													</Link>
 													<p className="lh-1" style={{fontSize: "12px"}}>{item.release_date}</p>
 												</div>

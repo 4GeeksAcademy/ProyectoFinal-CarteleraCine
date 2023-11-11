@@ -8,15 +8,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			// Use getActions to call a function within a fuction
 
-			// displayMovies: () => {
+			displayMovies: () => {
 				
-			// 	fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api")
-			// 		.then(res => res.json())
-			// 		.then((data) => {
-			// 			console.log(data)
-			// 			setStore({movies: data})
-			// 		});
-			// 		},
+				let requestOptions = {
+					method: 'GET',
+					body: JSON.stringify(),
+					headers: {
+						"Content-Type": "application/json",
+						"Accept": "application/json",
+						"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YTcxOGQ2YTc0NzcwYmUwZjgwYzliOWY2YTc2OGE0YiIsInN1YiI6IjY1M2ZmODFjNTA3MzNjMDBlMjRhZGYwMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Bz1YACVZh6J9vBDp8p0bPsGlVpe5BZ-sowdWX5wBwdM"
+					}
+					};
+
+				fetch("https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1", requestOptions)
+					.then(res => res.json())
+					.then((data) => {
+						console.log(data)
+						setStore({movies: data.results})
+					});
+					},
 			
 			createMovie: (movie) => {
 				
@@ -50,17 +60,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
-			displayMovies: (id) => {
-				let path = ""
-				id ? path= "/" +id : path="/"
+			// displayMovies: (id) => {
+			// 	let path = ""
+			// 	id ? path= "/" +id : path="/"
 
-				fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api" + path)
-					.then(response => response.json())
-					.then((data) => {
-						console.log(data)
-						id==false ? setStore({movies:data}) : setStore({current_movie:data})
+			// 	fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api" + path)
+			// 		.then(response => response.json())
+			// 		.then((data) => {
+			// 			console.log(data)
+			// 			id==false ? setStore({movies:data}) : setStore({current_movie:data})
 						
-			})}
+			// })}
 			
 			
 		}
