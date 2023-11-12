@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext}  from "react";
 import { useParams } from "react-router-dom";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGripLinesVertical } from '@fortawesome/free-solid-svg-icons';
 import { Context } from "../store/appContext";
 
 export const MovieInfo = () => {
    
     const params = useParams();
     const [movie, setMovie] = useState({})
+    const [genres, setGenres] = useState([])
     console.log(params)
     console.log(params.movie_id)
 
@@ -26,9 +28,10 @@ export const MovieInfo = () => {
 				.then((data) => {
 					console.log(data)
 					setMovie(data)
+                    setGenres(data.genres)
 				})
     }, [])
-        
+    
             return (
                 <div className="container">
                     <div className="row mt-5" key={movie.id}>
@@ -37,8 +40,9 @@ export const MovieInfo = () => {
                         </div>
                         <div className="col-8">
                             <h2>{movie.title}</h2>
-                            <p>{movie.release_date}</p>
-                            <p className="fst-italic">Vote Average</p>
+                            <p className="fst-italic">{movie.release_date} · {movie.runtime} min </p>
+                            {genres.map((item, index) => (<li key={index}>{item.name}</li>))}
+                            <p className="fst-italic mt-3">Vote Average</p>
                             <p className="rounded-circle bg-info text-white d-flex justify-content-center align-items-center fs-3" style={{width: "70px", height: "70px"}}>{movie.vote_average}</p>
                             <h5>Overview</h5>
                             <p>{movie.overview}</p>
