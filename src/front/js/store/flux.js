@@ -3,6 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			
 			movies: [],
+			search_movies: [],
 			current_movie: null
 		},
 		actions: {
@@ -27,6 +28,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({movies: data.results})
 					});
 					},
+
+			// searchMovies: (title) => {
+				
+			// 	let requestOptions = {
+			// 		method: 'GET',
+			// 		body: JSON.stringify(),
+			// 		headers: {
+			// 			"Content-Type": "application/json",
+			// 			"Accept": "application/json",
+			// 			"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YTcxOGQ2YTc0NzcwYmUwZjgwYzliOWY2YTc2OGE0YiIsInN1YiI6IjY1M2ZmODFjNTA3MzNjMDBlMjRhZGYwMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Bz1YACVZh6J9vBDp8p0bPsGlVpe5BZ-sowdWX5wBwdM"
+			// 		}
+			// 		};
+		
+			// 	fetch("https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1&query=" + title, requestOptions)
+			// 		.then(res => res.json())
+			// 		.then((data) => {
+			// 			console.log(data)
+			// 			setStore({search_movies: data.results})
+			// 		});
+			// 		},
 			
 			createMovie: (movie) => {
 				

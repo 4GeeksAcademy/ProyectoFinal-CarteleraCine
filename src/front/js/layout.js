@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 import { Movies } from "./pages/movies";
+import { SearchMovies } from "./pages/movie_search";
 import { MovieInfo } from "./pages/movie_info";
 import { MovieForm } from "./pages/movie_form";
 import injectContext from "./store/appContext";
@@ -25,6 +26,7 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Movies />} path="/" />
+                        <Route element={<SearchMovies />} path="movie_search" />
                         <Route element={<MovieInfo />} path="/:movie_id" />
                         <Route element={<MovieForm opt="add" />} path="/Add" />
 						<Route element={<MovieForm opt="edit" />} path="/Edit/:id" />

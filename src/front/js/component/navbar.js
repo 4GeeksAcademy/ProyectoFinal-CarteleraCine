@@ -9,8 +9,8 @@ export const Navbar = () => {
 					<span className="navbar-brand mb-0 h1">Movie Theaters Colombia & Costa Rica</span>
 				</Link>
 				<div className="ml-auto">
-					<Link to="/">
-						<button className="btn btn-secondary">Home</button>
+					<Link to="/movie_search">
+						<button className="btn btn-secondary">Search</button>
 					</Link>
 				</div>
 			</div>
