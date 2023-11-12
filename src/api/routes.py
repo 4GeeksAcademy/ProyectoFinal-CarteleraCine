@@ -23,7 +23,7 @@ def get_movies():
     result = list(map(lambda item: item.serialize(), all_movies))
     return jsonify(result), 200
 
-@api.route('/<int:movie_id>', methods=['GET'])
+@api.route('/movies/<int:movie_id>', methods=['GET'])
 def get_movie(movie_id):
     movie = Movies.query.filter_by(id=movie_id).first()
     return jsonify(movie.serialize()), 200
@@ -36,7 +36,7 @@ def create_movie():
     db.session.commit()
     return jsonify(new_movie.serialize()), 200
 
-@api.route('/<int:movie_id>', methods=['PUT'])
+@api.route('/movies/<int:movie_id>', methods=['PUT'])
 def edit_movie(movie_id):
     body = request.get_json()
     movie = Movies.query.filter_by(id=movie_id).first()
@@ -53,7 +53,7 @@ def edit_movie(movie_id):
     db.session.commit()
     return jsonify(movie.serialize()), 200
 
-@api.route('/<int:movie_id>', methods=['DELETE'])
+@api.route('/movies/<int:movie_id>', methods=['DELETE'])
 def delete_movie(movie_id):
     delete_movie = Movies.query.filter_by(id=movie_id).first()
     db.session.delete(delete_movie)

@@ -43,7 +43,7 @@ export const SearchMovies = () => {
 								return (
 										<div className="col" key={item.id}>
 											<div className="card ms-1 mb-4" style={{width: "200px", height: "450px"}}>
-												<img src={item.poster_path ? `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${item.poster_path}` : `https://deutschothek.com/wp-content/uploads/2018/01/placeholder.png`}  className="card-img-top" alt="..."/>
+												<img src={item.poster_path ? `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${item.poster_path}` : `https://firebasestorage.googleapis.com/v0/b/movie-theaters-92b7e.appspot.com/o/images%2FPhoto%20not%20available.webp?alt=media&token=b712ab2a-5488-4d49-b0a7-e71c3a233c5c`}  className="card-img-top" alt="..."/>
 												<div className="card-body">
 													<Link to={"/" + item.id}>
 													<p className="lh-1">{item.title}</p>
