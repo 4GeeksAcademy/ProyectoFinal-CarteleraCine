@@ -30,10 +30,6 @@ export const SearchMovies = () => {
 		e.preventDefault();
 		console.log('You clicked submit.');
 	  }
-	
-	
-	// 	searchButton()
-	// }, [])
 
 	return (
 		<div className="moviePage container">
@@ -47,7 +43,7 @@ export const SearchMovies = () => {
 								return (
 										<div className="col" key={item.id}>
 											<div className="card ms-1 mb-4" style={{width: "200px", height: "450px"}}>
-												<img src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${item.poster_path}`}  className="card-img-top" alt="..."/>
+												<img src={item.poster_path ? `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${item.poster_path}` : `https://deutschothek.com/wp-content/uploads/2018/01/placeholder.png`}  className="card-img-top" alt="..."/>
 												<div className="card-body">
 													<Link to={"/" + item.id}>
 													<p className="lh-1">{item.title}</p>
