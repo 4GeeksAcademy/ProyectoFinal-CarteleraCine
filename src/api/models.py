@@ -18,24 +18,21 @@ class User(db.Model):
             # do not serialize the password, its a security breach
         }
     
-class Movies(db.Model):
+
+class Multiplex(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), unique=False, nullable=False)
-    release_date = db.Column(db.String(80), unique=False, nullable=False)
-    rating = db.Column(db.String(80), unique=False, nullable=False)
-    overview = db.Column(db.String(), unique=False, nullable=False)
-    image_url = db.Column(db.String(300), unique=False, nullable=False)
-
+    cadena = db.Column(db.String(50), unique=False, nullable=False)
+    cinema = db.Column(db.String(50), unique=True, nullable=False)
+    ciudad = db.Column(db.String(50), unique=False, nullable=False)
+    pais = db.Column(db.String(50), unique=False, nullable=False)
+        
     def __repr__(self):
-        return f'<Peliculas {self.name}>'
-
+        return f'<Multiplex{self.cinema}>'
+    
     def serialize(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            "release_date": self.release_date,
-            "rating": self.rating,
-            "overview": self.overview,
-            "image_url": self.image_url
-            # do not serialize the password, its a security breach
+        return{
+            "cadena": self.cadena,
+            "cinema": self.cinema,
+            "ciudad": self.ciudad,
+            "id": self.id
         }
