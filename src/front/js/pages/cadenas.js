@@ -22,17 +22,19 @@ export const Cadenas = () => {
 							<button>
 								<i className="fa fa-trash" type="button" onClick={() => actions.eliminarMultiplex(index)} />
 							</button>
+                            <Link to="/editarMultiplex">
 							<button>
 								<i className="fa-solid fa-pencil" type="button" onClick={() => actions.editarMultiplex(item.index)} />
 							</button>
+                            </Link>
 						</li>
 					);
 				})}
 			</ul>
 			<br />
 			<div className="container">
-				<Link to="/">
-					<button className="btn btn-primary">Vuelve a multiplex</button>
+				<Link to="/formulario">
+					<button className="btn btn-primary">Nuevo multiplex</button>
 				</Link>
 			</div>
 

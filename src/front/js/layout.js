@@ -3,10 +3,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
-import { Multiplex } from "./pages/multiplex";
 import { Cadenas } from "./pages/cadenas";
 import { Single } from "./pages/single";
-import {Formulario} from "./pages/formulario"
+import { Formulario } from "./pages/formulario"
+import { EditarMultiplex } from "./pages/editarMultiplex"
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -26,10 +26,10 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar />
                     <Routes>
-                        <Route element={<Multiplex />} path="/" />
                         <Route element={<Cadenas />} path="/cadenas" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<Formulario />} path="/formulario" />
+                        <Route element={<EditarMultiplex />} path="/editarMultiplex" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

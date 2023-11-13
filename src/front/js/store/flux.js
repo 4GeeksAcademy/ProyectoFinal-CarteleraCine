@@ -57,13 +57,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						headers: {"Content-Type": "application/json"},
 						body: JSON.stringify(multiplexEditado),
 					};
-					const response = await fetch(`${process.env.BACKEND_URL}/api/multiplex/${index}`, requestOptions)
+					const response = await fetch(`${process.env.BACKEND_URL}/api/multiplex/`, requestOptions)
 					return response.status;
 				} catch (error) {
 					console.log("Error al editar", error);					
 				}					
 			},
 			
+
 			eliminarMultiplex: async (index) => {
 				try {
 					const store = getStore();

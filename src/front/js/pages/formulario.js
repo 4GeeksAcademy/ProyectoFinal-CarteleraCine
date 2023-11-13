@@ -4,41 +4,33 @@ import { Context } from "../store/appContext";
 import "../../styles/home.css";
 
 export const Formulario = () => {
-    const {store, actions } = useContext(Context)
+    const { store, actions } = useContext(Context);
     const [multiplex, setMultiplex] = useState({
         cadena: "",
         cinema: "",
         ciudad: "",
         pais: ""
-    })
+    });
 
     const handleChange = (event) => {
         setMultiplex({
             ...multiplex,
             [event.target.name]: event.target.value
-        })
+        });
     }
 
     const saveMultiplex = async (event) => {
-        event.preventDefault()
-        const result = await actions.crearMultiplex(multiplex)
+        event.preventDefault();
+        const result = await actions.crearMultiplex(multiplex);
         console.log(result);
         if (result === 200) {
-           alert("Creado satisfactoriamente")
+            alert("¡Creado satisfactoriamente!");
+        } else if (result === 409) {
+            alert("Ya existe");
         } else {
-            alert("Ya existe")
+            alert("Error", "Algo salió mal al crear el multiplex.");
         }
     }
-
-    // const editarMultiplex = async (event) => {
-	// 	event.preventDefault();
-	// 	const result = await actions.editarMultiplex(multiplex);
-	// 	if (result === 200) {
-	// 		alert("Editado satisfactoriamente");
-	// 	} else {
-	// 		alert("Error", "Inténtalo de nuevo", error);
-	// 	}
-	// };
     
     return (
         <div className="container">
@@ -67,4 +59,5 @@ export const Formulario = () => {
             </form>
         </div>
     );
-};
+}
+
