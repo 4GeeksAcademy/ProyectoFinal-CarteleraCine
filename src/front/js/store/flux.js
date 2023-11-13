@@ -36,19 +36,18 @@ const getState = ({ getStore, setStore }) => {
 			.catch(error => console.log('Error al agregar ciudad', error));
 		},
 
-		
-		
 		editCity: (editedCity, index) => {
-		  const store = getStore();
-		  const updatedCity = [...store.City];
-		  updatedCity[index] = editedCity;
-  
-		  setStore({ City: updatedCity });
+			const store = getStore();
+			const updatedCity = [...store.City];
+			updatedCity[index] = { ...editedCity }; // Realiza una copia de editedCity
+		  
+			setStore({ City: updatedCity });
+		
   
 		  const requestOptions = {
 			method: 'PUT',
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(editedCity)
+			body: JSON.stringify(updatedCity[index])
 		  };
   
 		  fetch("https://friendly-eureka-qr65wvrvq75fxj5g-3001.app.github.dev/api/city/", requestOptions)
