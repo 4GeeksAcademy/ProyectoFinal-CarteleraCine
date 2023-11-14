@@ -6,17 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			current_movie: null
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
 
-			// displayMovies: () => {
-				
-			// 	fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api")
-			// 		.then(res => res.json())
-			// 		.then((data) => {
-			// 			console.log(data)
-			// 			setStore({movies: data})
-			// 		});
-			// 		},
 			
 			createMovie: (movie) => {
 				
