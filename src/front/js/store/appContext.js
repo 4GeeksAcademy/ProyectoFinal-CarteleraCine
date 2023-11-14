@@ -30,6 +30,7 @@ const injectContext = PassedComponent => {
 			 **/
 			
 			state.actions.displayMovies(false);
+			state.actions.displayShowtimes(false);
 			
 		}, []);
 
