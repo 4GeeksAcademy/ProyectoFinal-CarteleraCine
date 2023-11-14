@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 import { Movies } from "./pages/movies";
+import { UpcomingMovies } from "./pages/upcoming_movies";
 import { SearchMovies } from "./pages/movie_search";
 import { MovieInfo } from "./pages/movie_info";
 import { MovieForm } from "./pages/movie_form";
@@ -26,6 +27,7 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Movies />} path="/" />
+                        <Route element={<UpcomingMovies />} path="/upcoming_movies" />
                         <Route element={<SearchMovies />} path="movie_search" />
                         <Route element={<MovieInfo />} path="/:movie_id" />
                         <Route element={<MovieForm opt="add" />} path="/Add" />

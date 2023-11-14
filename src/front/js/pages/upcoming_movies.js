@@ -4,17 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Context } from "../store/appContext";
 
-export const Movies = () => {
+export const UpcomingMovies = () => {
 	const { store, actions } = useContext(Context);
 	
 	return (
 		<div className="moviePage container">
-					<h3 className="text-black ms-2 mb-4 mt-3">Now Playing Movies</h3>
+					<h3 className="text-black ms-2 mb-4 mt-3">Upcoming Movies</h3>
 					<Link to="/Add">
 					<button className="mb-3 ms-2 btn btn-primary">Create new movie</button>
 					</Link>
 					<div className="row g-4 d-flex flex-row">
-							{store.movies.map((item, index) => {
+							{store.upcoming_movies.map((item, index) => {
 								return (
 										<div className="col" key={item.id}>
 											<div className="card ms-1 mb-4" style={{width: "200px", height: "450px"}}>

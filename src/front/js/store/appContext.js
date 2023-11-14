@@ -30,6 +30,7 @@ const injectContext = PassedComponent => {
 			 **/
 			
 			state.actions.displayMovies();
+			state.actions.displayUpcomingMovies();
 			// state.actions.searchMovies()
 			
 		}, []);

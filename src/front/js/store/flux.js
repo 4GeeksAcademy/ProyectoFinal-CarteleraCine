@@ -3,6 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			
 			movies: [],
+			upcoming_movies: [],
 			search_movies: [],
 			one_movie: [],
 			current_movie: null
@@ -27,6 +28,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then((data) => {
 						console.log(data)
 						setStore({movies: data.results})
+					});
+					},
+
+			displayUpcomingMovies: () => {
+				
+				let requestOptions = {
+					method: 'GET',
+					body: JSON.stringify(),
+					headers: {
+						"Content-Type": "application/json",
+						"Accept": "application/json",
+						"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YTcxOGQ2YTc0NzcwYmUwZjgwYzliOWY2YTc2OGE0YiIsInN1YiI6IjY1M2ZmODFjNTA3MzNjMDBlMjRhZGYwMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Bz1YACVZh6J9vBDp8p0bPsGlVpe5BZ-sowdWX5wBwdM"
+					}
+					};
+		
+				fetch("https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1", requestOptions)
+					.then(res => res.json())
+					.then((data) => {
+						console.log(data)
+						setStore({upcoming_movies: data.results})
 					});
 					},
 
