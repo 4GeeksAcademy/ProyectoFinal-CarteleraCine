@@ -32,7 +32,28 @@ export const MovieForm = (props) => {
                 
             }
         }
-        
+        function searchMovie () {
+            let requestOptions = {
+                method: 'GET',
+                body: JSON.stringify(),
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YTcxOGQ2YTc0NzcwYmUwZjgwYzliOWY2YTc2OGE0YiIsInN1YiI6IjY1M2ZmODFjNTA3MzNjMDBlMjRhZGYwMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Bz1YACVZh6J9vBDp8p0bPsGlVpe5BZ-sowdWX5wBwdM"
+                }
+                };
+    
+            fetch(`https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1&query=${name}`, requestOptions)
+                .then(res => res.json())
+                .then((data) => {
+                    console.log(data)
+                    setName(data.results[0].title)
+                    setReleaseDate(data.results[0].release_date)
+                    setRating(data.results[0].vote_average)
+                    setOverview(data.results[0].overview)
+                    setImageUrl(`https://www.themoviedb.org/t/p/w300_and_h450_bestv2` + data.results[0].poster_path)
+                });
+        }
+
         useEffect (()=> {
             actions.displayMovies(params.id)
             console.log(params.id)
@@ -53,6 +74,9 @@ export const MovieForm = (props) => {
                 <label htmlFor="Name" className="form-label">Name</label>
                 <input defaultValue= {name} onChange={(e) => {setName(e.target.value)}} type="text" className="form-control" />
             </div>
+            <div className="d-grid gap-2">
+                <button onClick={() => searchMovie()} type="button" className="btn btn-primary mx-5 mt-3 mb-3">Search movie</button>
+			</div>
             <div className="mb-3 mx-5">
                 <label htmlFor="ReleaseDate" className="form-label">Release Date</label>
                 <input defaultValue= {releaseDate} onChange={(e) => {setReleaseDate(e.target.value)}} type="text" className="form-control" />
