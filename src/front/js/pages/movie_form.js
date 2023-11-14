@@ -68,14 +68,14 @@ export const MovieForm = (props) => {
         }, [store.current_movie])
     
 	return (
-		<form action="/">
+		<form className="container" action="/">
 			<h1 className="d-flex justify-content-center mt-5">{props.opt == "add" ? "Add a new movie" : "Edit movie"}</h1>
 			<div className="mb-3 mx-5">
                 <label htmlFor="Name" className="form-label">Name</label>
                 <input defaultValue= {name} onChange={(e) => {setName(e.target.value)}} type="text" className="form-control" />
             </div>
-            <div className="d-grid gap-2">
-                <button onClick={() => searchMovie()} type="button" className="btn btn-primary mx-5 mt-3 mb-3">Search movie</button>
+            <div className="gap-2">
+                <button onClick={() => searchMovie()} type="button" className="btn btn-primary mx-5 mb-4">Search movie</button>
 			</div>
             <div className="mb-3 mx-5">
                 <label htmlFor="ReleaseDate" className="form-label">Release Date</label>
@@ -93,8 +93,8 @@ export const MovieForm = (props) => {
                 <label htmlFor="ImageUrl" className="form-label">Image URL</label>
                 <input defaultValue={imageUrl} onChange={(e) => {setImageUrl(e.target.value)}} type="text" className="form-control" />
             </div>
-			<div className="d-grid gap-2">
-                <button onClick={() => saveButton()} className="btn btn-primary mx-5 mt-3">Save</button>
+			<div className="gap-2">
+                <button onClick={() => saveButton()} className="btn btn-primary mx-5">Save</button>
 				<Link to="/" className="ms-5">
 					or get back to movies
 				</Link>
