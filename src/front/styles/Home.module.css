@@ -4,3 +4,34 @@
     height: 50px;
     width: auto;
 } */
+
+.button {
+    background-color: #fff430;
+    color: #000;; 
+    padding: 10px 20px; /* Esto agrega un poco de espacio alrededor del texto en el botón, puedes ajustarlo según tus necesidades */
+    border: none; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; /* Esto hace que el botón se comporte como un bloque en línea */
+    font-size: 16px; /* Esto establece el tamaño del texto en el botón, puedes ajustarlo según tus necesidades */
+    margin: 4px 2px; /* Esto agrega un poco de espacio exterior alrededor del botón, puedes ajustarlo según tus necesidades */
+    cursor: pointer; /* Esto cambia el cursor cuando pasa sobre el botón */
+    border-radius: 20px;
+    height: 40px;
+  }
+
+  .form-control {
+    height: 40px; /* Ajusta la altura según tus necesidades */
+    border-radius: 20px;
+    background-color: #fff430;
+  }
+
+  .nav-enlace {
+    color: yellow; /* Color de texto amarillo */
+    font-weight: bold; /* Texto más grueso */
+    transition: color 0.3s; /* Transición de color para suavizar el cambio */
+  }
+  
+  .nav-enlace:hover {
+    color: white; /* Cambia a blanco al pasar el ratón */
+  }

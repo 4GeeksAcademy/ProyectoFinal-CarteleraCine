@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import style from "../../styles/Home.module.css";
 
 
 import { Context } from "../store/appContext";
@@ -47,7 +48,7 @@ export const City = () => {
 
 
 
-				<button className="btn btn-warning" onClick={addCity}>Agregar Ciudad</button>
+				<button className={style.button} onClick={addCity}>Agregar Ciudad</button>
 			</div>
 
 			<div>
@@ -84,7 +85,7 @@ export const City = () => {
 			<br />
 			<Link to="/">
 				<div className="d-grid gap-2 d-md-block">
-					<button className="btn btn-warning" type="button">Ir a la página principal</button>
+					<button className={style.button}  type="button">Ir a la página principal</button>
 				</div>
 			</Link>
 		</div>

@@ -98,7 +98,7 @@ const HeaderCarrusel = () => {
                         onClick={handleCloseDetails}
                         style={{ cursor: 'pointer' }}
                     />
-                    <div className="container text-white text-center">
+                    <div className="container text-white text-center" style={{ position: 'absolute', bottom: '0', marginBottom: '50px' }}>
                         <h1 className="display-4 font-weight-bold">{selectedMovie.title}</h1>
                         <p className="lead">{selectedMovie.overview}</p>
                         <button className="btn btn-secondary" onClick={handleCloseDetails}>
