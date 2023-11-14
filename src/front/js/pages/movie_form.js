@@ -7,11 +7,12 @@ export const MovieForm = (props) => {
         const { store, actions } = useContext(Context);
         const params = useParams();
         const [name, setName] = useState("");
+        const [imageUrl, setImageUrl] = useState("");
         const [releaseDate, setReleaseDate] = useState("");
         const [rating, setRating] = useState("");
         const [overview, setOverview] = useState("");
-        const [imageUrl, setImageUrl] = useState("");
-        const newMovie = {name: name, release_date: releaseDate, rating: rating, overview: overview, image_url: imageUrl };
+        
+        const newMovie = {name: name, image_url: imageUrl, release_date: releaseDate, rating: rating, overview: overview };
         function saveButton () {
             if (props.opt == "add") {
                 return actions.createMovie(newMovie)
@@ -47,10 +48,11 @@ export const MovieForm = (props) => {
                 .then((data) => {
                     console.log(data)
                     setName(data.results[0].title)
+                    setImageUrl(`https://www.themoviedb.org/t/p/w300_and_h450_bestv2` + data.results[0].poster_path)
                     setReleaseDate(data.results[0].release_date)
                     setRating(data.results[0].vote_average)
                     setOverview(data.results[0].overview)
-                    setImageUrl(`https://www.themoviedb.org/t/p/w300_and_h450_bestv2` + data.results[0].poster_path)
+                    
                 });
         }
 
@@ -61,10 +63,11 @@ export const MovieForm = (props) => {
 
         useEffect (()=> {
             setName(store.current_movie?.name),
+            setImageUrl(store.current_movie?.image_url)
             setReleaseDate(store.current_movie?.release_date),
             setRating(store.current_movie?.rating),
             setOverview(store.current_movie?.overview)
-            setImageUrl(store.current_movie?.image_url)
+            
         }, [store.current_movie])
     
 	return (
@@ -78,6 +81,10 @@ export const MovieForm = (props) => {
                 <button onClick={() => searchMovie()} type="button" className="btn btn-primary mx-5 mb-4">Search movie</button>
 			</div>
             <div className="mb-3 mx-5">
+                <label htmlFor="ImageUrl" className="form-label">Image URL</label>
+                <input defaultValue={imageUrl} onChange={(e) => {setImageUrl(e.target.value)}} type="text" className="form-control" />
+            </div>
+            <div className="mb-3 mx-5">
                 <label htmlFor="ReleaseDate" className="form-label">Release Date</label>
                 <input defaultValue= {releaseDate} onChange={(e) => {setReleaseDate(e.target.value)}} type="text" className="form-control" />
             </div>
@@ -88,10 +95,6 @@ export const MovieForm = (props) => {
 			<div className="mb-3 mx-5">
                 <label htmlFor="Overview" className="form-label">Overview</label>
                 <input defaultValue= {overview} onChange={(e) => {setOverview(e.target.value)}} type="text" className="form-control"  />
-            </div>
-            <div className="mb-3 mx-5">
-                <label htmlFor="ImageUrl" className="form-label">Image URL</label>
-                <input defaultValue={imageUrl} onChange={(e) => {setImageUrl(e.target.value)}} type="text" className="form-control" />
             </div>
 			<div className="gap-2">
                 <button onClick={() => saveButton()} className="btn btn-primary mx-5">Save</button>

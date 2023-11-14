@@ -9,10 +9,12 @@ export const ShowtimeForm = (props) => {
         const [movieName, setMovieName] = useState("");
         const [showtime, setShowtime] = useState("");
         const [imageUrl, setImageUrl] = useState("");
-        const newShowtime = {movie_name: movieName, showtime: showtime};
+        const newShowtime = {movie_name: movieName, showtime: showtime, image_url: imageUrl};
         function saveButton () {
             if (props.opt == "add") {
+                console.log(newShowtime)
                 return actions.createShowtime(newShowtime)
+                
             }
             if (props.opt == "edit") {
                 
@@ -61,8 +63,8 @@ export const ShowtimeForm = (props) => {
         }, [store.current_showtime])
     
 	return (
-		<form className="container" action="/">
-			<h1 className="d-flex justify-content-center mt-5">{props.opt == "add" ? "Add a new movie" : "Edit movie"}</h1>
+		<form className="container" action="/showtimes">
+			<h1 className="d-flex justify-content-center mt-5">{props.opt == "add" ? "Add a new showtime" : "Edit showtime"}</h1>
 			<div className="mb-3 mx-5">
                 <label htmlFor="MovieName" className="form-label">Movie Name</label>
                 <input defaultValue= {movieName} onChange={(e) => {setMovieName(e.target.value)}} type="text" className="form-control" />

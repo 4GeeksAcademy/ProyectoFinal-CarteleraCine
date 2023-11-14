@@ -74,7 +74,7 @@ def get_showtime(showtime_id):
 @api.route('/showtimes', methods=['POST'])
 def create_showtime():
     body = request.get_json()
-    new_showtime = Showtime(showtime=body["showtime"],movie_name=body["movie_name"])
+    new_showtime = Showtime(showtime=body["showtime"],movie_name=body["movie_name"], image_url=body["image_url"])
     db.session.add(new_showtime)
     db.session.commit()
     return jsonify(new_showtime.serialize()), 200
@@ -85,8 +85,10 @@ def edit_showtime(showtime_id):
     showtime = Showtime.query.filter_by(id=showtime_id).first()
     time = body["showtime"]
     movie_name = body["movie_name"]
+    image_url = body["image_url"]
     showtime.showtime = time
     showtime.movie_name = movie_name
+    showtime.image_url = image_url
     db.session.commit()
     return jsonify(showtime.serialize()), 200
 

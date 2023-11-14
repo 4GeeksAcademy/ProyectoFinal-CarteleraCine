@@ -16,17 +16,18 @@ export const Showtimes = () => {
 					<div className="row g-4 d-flex flex-row">
 							{store.showtimes.map((item, index) => {
 								return (
-									<div>
+									<div className="col" key={item.id}>
+										<img src={item.image_url} style={{width: "150px", height: "225px"}} className="card-img-top" alt="..."/>
 										<div>
-                                            {item.movie_name} {item.showtime}
+                                            <p>{item.movie_name}</p> 
+											<p>{item.showtime}</p>
                                         </div>
 										<div>
 										<Link to={"/EditShowtime/"+ item.id}>
-											<button style={{border: "none"}}><FontAwesomeIcon icon={faPencil} style={{fontSize: "12px"}} className="lh-1 pencil text-secondary"/></button>
+											<button style={{border: "none", backgroundColor: "white"}}><FontAwesomeIcon icon={faPencil} style={{fontSize: "12px"}} className="lh-1 pencil text-secondary"/></button>
 										</Link>
-										<button style={{border: "none"}} onClick={() => actions.deleteShowtime(item.id)}><FontAwesomeIcon icon={faTrashCan} style={{fontSize: "12px"}} className="lh-1 trash text-secondary"/></button>
+										<button style={{border: "none", backgroundColor: "white"}} onClick={() => actions.deleteShowtime(item.id)}><FontAwesomeIcon icon={faTrashCan} style={{fontSize: "12px"}} className="lh-1 trash text-secondary"/></button>
 										</div>
-		
 									</div>
 										);
 									})}
