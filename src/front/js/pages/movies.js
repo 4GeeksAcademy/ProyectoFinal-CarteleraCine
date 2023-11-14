@@ -17,7 +17,7 @@ export const Movies = () => {
 							{store.movies.map((item, index) => {
 								return (
 										<div className="col" key={item.id}>
-											<div className="card ms-1 mb-4" style={{width: "200px", height: "450px"}}>
+											<div className="card ms-1 mb-4" style={{width: "200px", height: "470px"}}>
 												<img src={item.image_url}  className="card-img-top" alt="..."/>
 												<div className="card-body">
 													<Link to={"/" + item.id}>
