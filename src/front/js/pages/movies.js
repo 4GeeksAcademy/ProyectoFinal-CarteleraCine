@@ -9,9 +9,8 @@ export const Movies = () => {
 
 	return (
 		<div className="moviePage container">
-					<h3 className="text-black ms-2 mb-4 mt-3">Now Playing Movies</h3>
 					<Link to="/Add">
-					<button className="mb-3 ms-2 btn btn-light">Create new movie</button>
+					<button className="mb-3 ms-2 mt-4 btn btn-light">Create new movie</button>
 					</Link>
 					<div className="row g-4 d-flex flex-row">
 							{store.movies.map((item, index) => {
@@ -30,8 +29,6 @@ export const Movies = () => {
 														<button style={{border: "none"}}><FontAwesomeIcon icon={faPencil} style={{fontSize: "12px"}} className="lh-1 pencil text-secondary"/></button>
 													</Link>
 													<button style={{border: "none"}} onClick={() => actions.deleteMovie(item.id)}><FontAwesomeIcon icon={faTrashCan} style={{fontSize: "12px"}} className="lh-1 trash text-secondary"/></button>
-													
-													{/* <button onClick={() => actions.displayFavorites(item.name)} className="btn btn-outline-warning"><FontAwesomeIcon icon={faHeart}/></button> */}
 												</div>
 											</div>
 										</div>
