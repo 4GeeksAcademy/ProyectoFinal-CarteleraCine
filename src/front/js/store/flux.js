@@ -3,20 +3,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			
 			movies: [],
-			current_movie: null
+			current_movie: null,
+			showtimes: [],
+			current_showtime: null,
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
 
-			// displayMovies: () => {
-				
-			// 	fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api")
-			// 		.then(res => res.json())
-			// 		.then((data) => {
-			// 			console.log(data)
-			// 			setStore({movies: data})
-			// 		});
-			// 		},
 			
 			createMovie: (movie) => {
 				
@@ -29,6 +21,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					};
 						  
 					fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api", requestOptions)
+					.then(response => response.json())
+					.then(result => console.log(result))
+			},
+
+			createShowtime: (showtime) => {
+				
+				let requestOptions = {
+					method: 'POST',
+					body: JSON.stringify(showtime),
+					headers: {
+						"Content-Type": "application/json"
+					}
+					};
+						  
+					fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/showtimes", requestOptions)
 					.then(response => response.json())
 					.then(result => console.log(result))
 			},
@@ -50,6 +57,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
+			deleteShowtime: (indexDelete) => {
+				console.log(indexDelete)
+				let requestOptions = {
+					method: 'DELETE',
+					redirect: 'follow'
+					};
+						  
+					fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/showtimes/" + indexDelete, requestOptions)
+					.then(response => response.json())
+					.then(result => console.log(result))
+					.then(() => {
+						fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/showtimes/")
+						.then((response) => response.json())
+						.then((data) => setStore({ showtimes: data}))
+					});
+			},
+
 			displayMovies: (id) => {
 				let path = ""
 				id ? path= "/" +id : path="/"
@@ -59,6 +83,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then((data) => {
 						console.log(data)
 						id==false ? setStore({movies:data}) : setStore({current_movie:data})
+						
+			})},
+
+			displayShowtimes: (id) => {
+				let path = ""
+				id ? path= "/" +id : path="/"
+
+				fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/showtimes" + path)
+					.then(response => response.json())
+					.then((data) => {
+						console.log(data)
+						id==false ? setStore({showtimes:data}) : setStore({current_showtime:data})
 						
 			})}
 			

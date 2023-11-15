@@ -6,11 +6,11 @@ export const Navbar = () => {
 		<nav className="navbar navbar-light bg-light">
 			<div className="container-fluid">
 				<Link to="/">
-					<span className="navbar-brand mb-0 h1">Movie Theaters Colombia & Costa Rica</span>
+					<span className="navbar-brand mb-0 h1">AFE Movies</span>
 				</Link>
 				<div className="ml-auto">
-					<Link to="/">
-						<button className="btn btn-secondary">Home</button>
+					<Link to="/showtimes">
+						<button className="btn btn-secondary">Showtimes</button>
 					</Link>
 				</div>
 			</div>
