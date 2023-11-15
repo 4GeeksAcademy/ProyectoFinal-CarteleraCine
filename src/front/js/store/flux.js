@@ -66,19 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							ciudad:ciudad,
 							pais:pais
 						}),
-
 					})
-					// const store = getStore();
-					// const multiplexActualizado = [...store.cadenas,];
-					// multiplexActualizado[index] = multiplexEditado;
-					// setStore({cadenas: multiplexActualizado});
-
-					// const requestOptions = {
-					// 	method: 'PUT',
-					// 	headers: {"Content-Type": "application/json"},
-					// 	body: JSON.stringify(multiplexEditado),
-					// };
-					// const response = await fetch(`${process.env.BACKEND_URL}/api/multiplex/`, requestOptions)
 					return response.status;
 				} catch (error) {
 					console.log("Error al editar", error);					

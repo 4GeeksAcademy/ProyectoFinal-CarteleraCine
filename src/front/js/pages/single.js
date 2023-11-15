@@ -15,7 +15,7 @@ export const Single = props => {
 			<hr className="my-4" />
 
 			<Link to="/cadenas">
-				<span className="btn btn-primary btn-lg" href="#" role="button">
+				<span className="btn btn-warning btn-lg" href="#" role="button">
 					Vuelve a la lista
 				</span>
 			</Link>

@@ -16,11 +16,11 @@ export const Cadenas = () => {
 							className="list-group-item d-flex justify-content-between"
 							style={{ background: item.background }} >
 							< div >
-								<h4>{item.ciudad}</h4>
+								<h4>{item.cinema}</h4>
 								<br />
-								{"Cinema: " + item.cinema}
+								{"Cinema: " + item.cadena}
 								<br />
-								{"Cadena: " + item.cadena}
+								{"Cadena: " + item.ciudad}
 								<br />
 								{item.pais}
 								<br />
@@ -28,17 +28,15 @@ export const Cadenas = () => {
 									<span>{"Ver Más"}</span>
 								</Link>
 							</div >
-							<div className="list-group-item d-flex justify-content-end">
-								<button>
-									<i className="fa fa-trash" type="button" onClick={() => actions.eliminarMultiplex(index)} />
-								</button>
-								<Link to={"/editarMultiplex/"+ item.id} >
-									<button >
-										<i className="fa fa-pencil" type="button" 
-										// onClick={() => actions.editarMultiplex(item.index)} 
-										/>
+							<div className="d-flex justify-content-end">
+								<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+									<button className="btn btn-warning me-md-2" type="button">
+										<i className="fa fa-trash" onClick={() => actions.eliminarMultiplex(index)} />
 									</button>
-								</Link>
+									<Link to={"/editarMultiplex/" + item.id} >
+										<button className="btn btn-warning fa fa-pencil" type="button"></button>
+									</Link>
+								</div>
 							</div>
 						</li>
 					);
@@ -47,10 +45,9 @@ export const Cadenas = () => {
 			<br />
 			<div className="container">
 				<Link to="/formulario">
-					<button className="btn btn-primary">Nuevo multiplex</button>
+					<button className="btn btn-warning">Nuevo multiplex</button>
 				</Link>
 			</div>
-
 		</div >
 	);
 };

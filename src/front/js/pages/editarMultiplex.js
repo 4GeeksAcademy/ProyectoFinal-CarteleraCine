@@ -23,37 +23,39 @@ export const EditarMultiplex = () => {
 
     return (
         <div className="container " >
-            <div class="row">
-                <div class="col">
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" className="form-label text-start">Cadena:</label>
+            <div className="row">
+                <div className="col">
+                    <div className="mb-3">
+                        <label for="exampleInputEmail1" className="form-label text-start"><h5>Cadena:</h5></label>
                         <input type="text" className="form-control" id="cadena" aria-describedby="emailHelp" defaultValue={store.cadena.cadena} onChange={(e) => setCadena(e.target.value)} />
                     </div>
                 </div>
-                <div class="col">
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" className="form-label text-start">Cinema:</label>
-                        <input type="text" className="form-control" id="cinema" aria-describedby="emailHelp" defaultValue={store.cadena.cinema} onChange={(e) => setCinema(e.target.value)}/>
+                <div className="col">
+                    <div className="mb-3">
+                        <label for="exampleInputEmail1" className="form-label text-start"><h5>Cinema:</h5></label>
+                        <input type="text" className="form-control" id="cinema" aria-describedby="emailHelp" defaultValue={store.cadena.cinema} onChange={(e) => setCinema(e.target.value)} />
                     </div>
                 </div>
             </div>
             <div className="row">
-                <div class="col">
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" className="form-label text-start">Ciudad:</label>
-                        <input type="text" className="form-control" id="cinema" aria-describedby="emailHelp" defaultValue={store.cadena.ciudad} onChange={(e) => setCiudad(e.target.value)}/>
+                <div className="col">
+                    <div className="mb-3">
+                        <label for="exampleInputEmail1" className="form-label text-start"><h5>Ciudad:</h5></label>
+                        <input type="text" className="form-control" id="cinema" aria-describedby="emailHelp" defaultValue={store.cadena.ciudad} onChange={(e) => setCiudad(e.target.value)} />
                     </div>
                 </div>
-                <div class="col">
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" className="form-label text-start">Pais:</label>
-                        <input type="text" className="form-control" id="cinema" aria-describedby="emailHelp" defaultValue={store.cadena.pais} onChange={(e) => setPais(e.target.value)}/>
+                <div className="col">
+                    <div className="mb-3">
+                        <label for="exampleInputEmail1" className="form-label text-start"><h5>Pais:</h5></label>
+                        <input type="text" className="form-control" id="cinema" aria-describedby="emailHelp" defaultValue={store.cadena.pais} onChange={(e) => setPais(e.target.value)} />
                     </div>
                 </div>
             </div>
-            <button className="btn btn-warning" type="button" onClick={() => guardarCambios()}>
-                Guardar Cambios
-            </button>
+            <div className="">
+                <button className="btn btn-warning" type="submit" onClick={() => guardarCambios()}>
+                    Guardar Cambios
+                </button>
+            </div>
         </div>
     )
 }
