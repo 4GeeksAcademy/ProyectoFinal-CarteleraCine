@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
@@ -16,17 +15,31 @@ export const Cadenas = () => {
 							key={index}
 							className="list-group-item d-flex justify-content-between"
 							style={{ background: item.background }} >
-							<Link to={"/single/" + index}>
-								<span>Link to: {item.cadena}</span>
-							</Link>
-							<button>
-								<i className="fa fa-trash" type="button" onClick={() => actions.eliminarMultiplex(index)} />
-							</button>
-                            <Link to="/editarMultiplex">
-							<button>
-								<i className="fa-solid fa-pencil" type="button" onClick={() => actions.editarMultiplex(item.index)} />
-							</button>
-                            </Link>
+							< div >
+								<h4>{item.ciudad}</h4>
+								<br />
+								{"Cinema: " + item.cinema}
+								<br />
+								{"Cadena: " + item.cadena}
+								<br />
+								{item.pais}
+								<br />
+								<Link to={"/single/" + index}>
+									<span>{"Ver Más"}</span>
+								</Link>
+							</div >
+							<div className="list-group-item d-flex justify-content-end">
+								<button>
+									<i className="fa fa-trash" type="button" onClick={() => actions.eliminarMultiplex(index)} />
+								</button>
+								<Link to={"/editarMultiplex/"+ item.id} >
+									<button >
+										<i className="fa fa-pencil" type="button" 
+										// onClick={() => actions.editarMultiplex(item.index)} 
+										/>
+									</button>
+								</Link>
+							</div>
 						</li>
 					);
 				})}
@@ -38,6 +51,6 @@ export const Cadenas = () => {
 				</Link>
 			</div>
 
-		</div>
+		</div >
 	);
 };

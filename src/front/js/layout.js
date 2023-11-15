@@ -29,7 +29,7 @@ const Layout = () => {
                         <Route element={<Cadenas />} path="/cadenas" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<Formulario />} path="/formulario" />
-                        <Route element={<EditarMultiplex />} path="/editarMultiplex" />
+                        <Route element={<EditarMultiplex />} path="/editarMultiplex/:id" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

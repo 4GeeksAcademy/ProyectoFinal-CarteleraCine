@@ -13,7 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// 	cinema: "Santa Fe",
 				// 	ciudad: "Medellin"
 				// }
-			]
+			],
+			cadena: {},
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -26,6 +27,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => response.json())
 					.then((data) => {
 						setStore({ cadenas: data })
+						console.log(data);
+					});
+			},
+
+			mostrarMultiplex_id: (id) => {
+				fetch(`${process.env.BACKEND_URL}/api/multiplex/${id}`)
+					.then(response => response.json())
+					.then((data) => {
+						setStore({ cadena: data })
 						console.log(data);
 					});
 			},
@@ -45,19 +55,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			editarMultiplex: async (multiplexEditado, index) => {
+			editarMultiplex: async (id, cadena, cinema, ciudad, pais) => {
 				try {
-					const store = getStore();
-					const multiplexActualizado = [...store.cadenas,];
-					multiplexActualizado[index] = multiplexEditado;
-					setStore({cadenas: multiplexActualizado});
-
-					const requestOptions = {
+					const response = await fetch(`${process.env.BACKEND_URL}/api/multiplex/${id}`, {
 						method: 'PUT',
 						headers: {"Content-Type": "application/json"},
-						body: JSON.stringify(multiplexEditado),
-					};
-					const response = await fetch(`${process.env.BACKEND_URL}/api/multiplex/`, requestOptions)
+						body: JSON.stringify({
+							cadena:cadena,
+							cinema:cinema,
+							ciudad:ciudad,
+							pais:pais
+						}),
+
+					})
+					// const store = getStore();
+					// const multiplexActualizado = [...store.cadenas,];
+					// multiplexActualizado[index] = multiplexEditado;
+					// setStore({cadenas: multiplexActualizado});
+
+					// const requestOptions = {
+					// 	method: 'PUT',
+					// 	headers: {"Content-Type": "application/json"},
+					// 	body: JSON.stringify(multiplexEditado),
+					// };
+					// const response = await fetch(`${process.env.BACKEND_URL}/api/multiplex/`, requestOptions)
 					return response.status;
 				} catch (error) {
 					console.log("Error al editar", error);					
