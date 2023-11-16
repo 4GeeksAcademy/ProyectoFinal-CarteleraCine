@@ -1,41 +1,63 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
-		store: {
-			
+		store: {	
 			movies: [],
 			current_movie: null,
 			showtimes: [],
 			current_showtime: null,
+			cadenas: [],
+			cadena: {},
+
 		},
 		actions: {
 
+	// FETCH MOVIES (FRANCESCA)		
+			displayMovies: (id) => {
+				let path = ""
+				id ? path= "/" + id : path="/"
+
+				fetch(`${process.env.BACKEND_URL}/api/movies${path}`)
+					.then(response => response.json())
+					.then((data) => {
+						console.log(data)
+						id==false ? setStore({movies:data}) : setStore({current_movie:data})				
+			})},
+
+			displayShowtimes: (id) => {
+				let path = ""
+				id ? path= "/" +id : path="/"
+
+				fetch(`${process.env.BACKEND_URL}/api/showtimes${path}`)
+					.then(response => response.json())
+					.then((data) => {
+						console.log(data)
+						id==false ? setStore({showtimes:data}) : setStore({current_showtime:data})						
+			})},
 			
-			createMovie: (movie) => {
-				
+			createMovie: (movie) => {			
 				let requestOptions = {
 					method: 'POST',
 					body: JSON.stringify(movie),
 					headers: {
 						"Content-Type": "application/json"
 					}
-					};
-						  
-					fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/movies", requestOptions)
+					};						  
+					fetch(`${process.env.BACKEND_URL}/api/movies`, requestOptions)
 					.then(response => response.json())
 					.then(result => console.log(result))
 			},
 
-			createShowtime: (showtime) => {
-				
+
+	// FETCH SHOWTIMES (FRANCESCA)
+			createShowtime: (showtime) => {	
 				let requestOptions = {
 					method: 'POST',
 					body: JSON.stringify(showtime),
 					headers: {
 						"Content-Type": "application/json"
 					}
-					};
-						  
-					fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/showtimes", requestOptions)
+					};						  
+					fetch(`${process.env.BACKEND_URL}/api/showtimes`, requestOptions)
 					.then(response => response.json())
 					.then(result => console.log(result))
 			},
@@ -45,13 +67,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let requestOptions = {
 					method: 'DELETE',
 					redirect: 'follow'
-					};
-						  
-					fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/movies/" + indexDelete, requestOptions)
+					};						  
+					fetch(`${process.env.BACKEND_URL}/api/movies/${indexDelete}`, requestOptions)
 					.then(response => response.json())
 					.then(result => console.log(result))
 					.then(() => {
-						fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/movies/")
+						fetch(`${process.env.BACKEND_URL}/api/movies`)
 						.then((response) => response.json())
 						.then((data) => setStore({ movies: data}))
 					});
@@ -62,43 +83,89 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let requestOptions = {
 					method: 'DELETE',
 					redirect: 'follow'
-					};
-						  
-					fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/showtimes/" + indexDelete, requestOptions)
+					};						  
+					fetch(`${process.env.BACKEND_URL}/api/showtimes/${indexDelete}`, requestOptions)
 					.then(response => response.json())
 					.then(result => console.log(result))
 					.then(() => {
-						fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/showtimes/")
+						fetch(`${process.env.BACKEND_URL}/api/showtimes`)
 						.then((response) => response.json())
 						.then((data) => setStore({ showtimes: data}))
 					});
+			},	
+
+
+	// FETCH MULTIPLEX (ADJANI)
+			mostrarMultiplex: () => {
+				fetch(`${process.env.BACKEND_URL}/api/multiplex`)
+					.then(response => response.json())
+					.then((data) => {
+						setStore({ cadenas: data })
+						console.log(data);
+					});
 			},
 
-			displayMovies: (id) => {
-				let path = ""
-				id ? path= "/" +id : path="/"
-
-				fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/movies/" + path)
+			mostrarMultiplex_id: (id) => {
+				
+				fetch(`${process.env.BACKEND_URL}/api/multiplex/${id}`)
 					.then(response => response.json())
 					.then((data) => {
-						console.log(data)
-						id==false ? setStore({movies:data}) : setStore({current_movie:data})
-						
-			})},
+						setStore({ cadena: data })
+						console.log(data);
+					});
+			},
 
-			displayShowtimes: (id) => {
-				let path = ""
-				id ? path= "/" +id : path="/"
+			crearMultiplex: async (newMultiplex) => {
+				const store = getStore();
+				try {
+					const requestOptions = {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(newMultiplex)
+					};
+					const response = await fetch(`${process.env.BACKEND_URL}/api/multiplex`, requestOptions)
+					return response.status
+				} catch (error) {
+					console.log("Ya existe", error)
+				}
+			},
 
-				fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/showtimes/" + path)
-					.then(response => response.json())
-					.then((data) => {
-						console.log(data)
-						id==false ? setStore({showtimes:data}) : setStore({current_showtime:data})
-						
-			})}
+			editarMultiplex: async (id, cadena, cinema, ciudad, pais) => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/api/multiplex/${id}`, {
+						method: 'PUT',
+						headers: {"Content-Type": "application/json"},
+						body: JSON.stringify({
+							cadena:cadena,
+							cinema:cinema,
+							ciudad:ciudad,
+							pais:pais
+						}),
+					})
+					return response.status;
+				} catch (error) {
+					console.log("Error al editar", error);					
+				}					
+			},
 			
-			
+			eliminarMultiplex: async (index) => {
+				try {
+					const store = getStore();
+					const id = store.cadenas[index].id
+					const requestOptions = {
+						method: "DELETE",
+						headers: {"Content-Type": "application/json"},
+					};
+					const response = await fetch(`${process.env.BACKEND_URL}/api/multiplex/${id}`, requestOptions)
+					if (response.status === 200) {
+						const actualizarCadenas = store.cadenas.filter((item, i) => i !==index);
+						setStore({ cadenas: actualizarCadenas})
+					}
+					return response.status
+				} catch (error) {
+					console.log("Error al eliminar", error);
+				}	
+			},	
 		}
 	};
 };

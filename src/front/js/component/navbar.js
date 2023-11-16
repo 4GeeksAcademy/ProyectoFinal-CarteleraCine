@@ -5,12 +5,17 @@ export const Navbar = () => {
 	return (
 		<nav className="navbar navbar-light bg-light">
 			<div className="container-fluid">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">AFE Movies</span>
+				<Link to="/movies">
+					<button className="btn btn-warning">AFE Movies</button>
 				</Link>
 				<div className="ml-auto">
 					<Link to="/showtimes">
-						<button className="btn btn-secondary">Showtimes</button>
+						<button className="btn btn-warning">Showtimes</button>
+					</Link>
+				</div>
+				<div className="ml-auto">
+					<Link to="/cadenas">
+						<button className="btn btn-warning">Ver Multiplex</button>
 					</Link>
 				</div>
 			</div>
