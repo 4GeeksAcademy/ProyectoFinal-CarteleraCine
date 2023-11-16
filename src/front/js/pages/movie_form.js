@@ -23,7 +23,6 @@ export const MovieForm = (props) => {
             return actions.createMovie(newMovie)
         }
         if (props.opt == "edit") {
-
             let requestOptions = {
                 method: 'PUT',
                 body: JSON.stringify(newMovie),
@@ -31,7 +30,6 @@ export const MovieForm = (props) => {
                     "Content-Type": "application/json"
                 }
             };
-            
             fetch(`${process.env.BACKEND_URL}/api/${params.id}`, requestOptions)
                 .then(response => response.json())
                 .then(result => console.log(result))
@@ -47,7 +45,6 @@ export const MovieForm = (props) => {
                 "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YTcxOGQ2YTc0NzcwYmUwZjgwYzliOWY2YTc2OGE0YiIsInN1YiI6IjY1M2ZmODFjNTA3MzNjMDBlMjRhZGYwMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Bz1YACVZh6J9vBDp8p0bPsGlVpe5BZ-sowdWX5wBwdM"
             }
         };
-
         fetch(`https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1&query=${name}`, requestOptions)
             .then(res => res.json())
             .then((data) => {
@@ -68,45 +65,47 @@ export const MovieForm = (props) => {
 
     useEffect(() => {
         setName(store.current_movie?.name),
-            setImageUrl(store.current_movie?.image_url)
+        setImageUrl(store.current_movie?.image_url)
         setReleaseDate(store.current_movie?.release_date),
-            setRating(store.current_movie?.rating),
-            setOverview(store.current_movie?.overview)
+        setRating(store.current_movie?.rating),
+        setOverview(store.current_movie?.overview)
 
     }, [store.current_movie])
 
     return (
-        <form className="container" action="/movies">
-            <h1 className="d-flex justify-content-center mt-5">{props.opt == "add" ? "Add a new movie" : "Edit movie"}</h1>
-            <div className="mb-3 mx-5">
-                <label htmlFor="Name" className="form-label">Name</label>
-                <input defaultValue={name} onChange={(e) => { setName(e.target.value) }} type="text" className="form-control" />
-            </div>
-            <div className="gap-2">
-                <button onClick={() => searchMovie()} type="button" className="btn btn-primary mx-5 mb-4">Search movie</button>
-            </div>
-            <div className="mb-3 mx-5">
-                <label htmlFor="ImageUrl" className="form-label">Image URL</label>
-                <input defaultValue={imageUrl} onChange={(e) => { setImageUrl(e.target.value) }} type="text" className="form-control" />
-            </div>
-            <div className="mb-3 mx-5">
-                <label htmlFor="ReleaseDate" className="form-label">Release Date</label>
-                <input defaultValue={releaseDate} onChange={(e) => { setReleaseDate(e.target.value) }} type="text" className="form-control" />
-            </div>
-            <div className="mb-3 mx-5">
-                <label htmlFor="Rating" className="form-label">Rating</label>
-                <input defaultValue={rating} onChange={(e) => { setRating(e.target.value) }} type="text" className="form-control" />
-            </div>
-            <div className="mb-3 mx-5">
-                <label htmlFor="Overview" className="form-label">Overview</label>
-                <input defaultValue={overview} onChange={(e) => { setOverview(e.target.value) }} type="text" className="form-control" />
-            </div>
-            <div className="gap-2">
-                <button onClick={() => saveButton()} className="btn btn-primary mx-5">Save</button>
-                <Link to="/movies" className="ms-5">
-                    or get back to movies
-                </Link>
-            </div>
-        </form>
+        <div className="container ">
+            <form className="container" action="/movies">
+                <h1 className="d-flex justify-content-center mt-5">{props.opt == "add" ? "Add a new movie" : "Edit movie"}</h1>
+                <div className="mb-3 mx-5">
+                    <label htmlFor="Name" className="form-label"><h5>Name</h5></label>
+                    <input defaultValue={name} onChange={(e) => { setName(e.target.value) }} type="text" className="form-control" />
+                </div>
+                <div className="gap-2">
+                    <button onClick={() => searchMovie()} type="button" className="btn btn-warning mx-5 mb-4">Search movie</button>
+                </div>
+                <div className="mb-3 mx-5">
+                    <label htmlFor="ImageUrl" className="form-label"><h5>Image URL</h5></label>
+                    <input defaultValue={imageUrl} onChange={(e) => { setImageUrl(e.target.value) }} type="text" className="form-control" />
+                </div>
+                <div className="mb-3 mx-5">
+                    <label htmlFor="ReleaseDate" className="form-label"><h5>Release Date</h5></label>
+                    <input defaultValue={releaseDate} onChange={(e) => { setReleaseDate(e.target.value) }} type="text" className="form-control" />
+                </div>
+                <div className="mb-3 mx-5">
+                    <label htmlFor="Rating" className="form-label"><h5>Rating</h5></label>
+                    <input defaultValue={rating} onChange={(e) => { setRating(e.target.value) }} type="text" className="form-control" />
+                </div>
+                <div className="mb-3 mx-5">
+                    <label htmlFor="Overview" className="form-label"><h5>Overview</h5></label>
+                    <input defaultValue={overview} onChange={(e) => { setOverview(e.target.value) }} type="text" className="form-control" />
+                </div>
+                <div className="gap-2">
+                    <button onClick={() => saveButton()} className="btn btn-warning mx-5">Save</button>
+                    <Link to="/movies" className="ms-5">
+                        or get back to movies
+                    </Link>
+                </div>
+            </form>
+        </div>
     );
 };

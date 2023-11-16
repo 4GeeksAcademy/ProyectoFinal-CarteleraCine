@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Movie, Showtime
+from api.models import db, User, Movie, Showtime, Multiplex 
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -17,6 +17,8 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
+
+# RUTAS MOVIES (FRANCESCA)
 @api.route('/movies', methods=['GET'])
 def get_movies():
     all_movies = Movie.query.all()
@@ -60,6 +62,8 @@ def delete_movie(movie_id):
     db.session.commit()
     return jsonify(), 200
 
+
+# RUTAS SHOWTIMES (FRANCESCA)
 @api.route('/showtimes', methods=['GET'])
 def get_showtimes():
     all_showtimes = Showtime.query.all()
@@ -98,3 +102,57 @@ def delete_showtime(showtime_id):
     db.session.delete(delete_showtime)
     db.session.commit()
     return jsonify(), 200
+
+
+# RUTAS MULTIPLEX (ADJANI)
+@api.route("/multiplex", methods=["GET"])
+def mostrar_cines():
+    multiplex = Multiplex.query.all()
+    result = list(map(lambda multiplex: multiplex.serialize(), multiplex))
+    
+    return jsonify(result), 200
+
+@api.route("/multiplex/<int:multiplex_id>", methods=["GET"])
+def mostrar_cine(multiplex_id):
+    cine = Multiplex.query.filter_by(id=multiplex_id).first()
+    
+    return jsonify(cine.serialize()), 200
+
+@api.route("/multiplex", methods=["POST"])
+def crear_multiplex():
+    body = request.get_json()
+    multiplex = Multiplex(
+            cadena = body["cadena"],
+            cinema = body["cinema"],
+            ciudad = body["ciudad"],
+            pais = body["pais"]
+    )
+    db.session.add(multiplex)
+    db.session.commit()
+    print("creado")
+    response_body = {
+        "msg":"multiplex creado"
+    }
+    return jsonify(response_body), 200
+
+@api.route("/multiplex/<int:multiplex_id>", methods=["PUT"])
+def modificar_multiplex(multiplex_id):
+    multiplex = Multiplex.query.filter_by(id=multiplex_id).first()
+    body = request.get_json()
+    multiplex.cadena = body["cadena"]
+    multiplex.cinema = body["cinema"]
+    multiplex.ciudad = body["ciudad"]
+    multiplex.pais = body["pais"]
+    db.session.commit()
+
+    return jsonify(multiplex.serialize()), 200
+
+@api.route("/multiplex/<int:multiplex_id>", methods=["DELETE"])
+def Eliminar_multiplex(multiplex_id):
+    multiplex = Multiplex.query.filter_by(id=multiplex_id).first()  
+    db.session.delete(multiplex)
+    db.session.commit()
+    response_body = {
+        "msg":"Multiplex Eliminado"
+    }
+    return jsonify(response_body), 200

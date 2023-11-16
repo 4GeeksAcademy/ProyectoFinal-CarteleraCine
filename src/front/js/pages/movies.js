@@ -10,7 +10,7 @@ export const Movies = () => {
 	return (
 		<div className="moviePage container">
 			<Link to="/Add">
-				<button className="mb-3 ms-2 mt-4 btn btn-light">Create new movie</button>
+				<button className="mb-3 ms-2 mt-4 btn btn-warning">Create new movie</button>
 			</Link>
 			<div className="row g-4 d-flex flex-row">
 				{store.movies.map((item, index) => {
@@ -19,7 +19,7 @@ export const Movies = () => {
 							<div className="card ms-1 mb-4" style={{ width: "200px", height: "470px" }}>
 								<img src={item.image_url} className="card-img-top" alt="..." />
 								<div className="card-body">
-									<Link to={"/movies" + item.id}>
+									<Link to={"/movies/" + item.id}>
 										<p className="lh-1">{item.name}</p>
 									</Link>
 									<p className="lh-1" style={{ fontSize: "12px" }}>{item.release_date}</p>
