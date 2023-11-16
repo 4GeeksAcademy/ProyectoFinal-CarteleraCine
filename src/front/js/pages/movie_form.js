@@ -13,8 +13,13 @@ export const MovieForm = (props) => {
         const [overview, setOverview] = useState("");
         
         const newMovie = {name: name, image_url: imageUrl, release_date: releaseDate, rating: rating, overview: overview };
-        function saveButton () {
+        function saveButton (e) {
+            console.log("save button")
+            // e.preventDefault()
             if (props.opt == "add") {
+                console.log("Add new movie")
+                console.log(newMovie)
+                console.log(imageUrl)
                 return actions.createMovie(newMovie)
             }
             if (props.opt == "edit") {
