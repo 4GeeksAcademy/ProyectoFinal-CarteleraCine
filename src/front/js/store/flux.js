@@ -20,7 +20,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 					};
 						  
-					fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api", requestOptions)
+					fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/movies", requestOptions)
 					.then(response => response.json())
 					.then(result => console.log(result))
 			},
@@ -47,11 +47,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: 'follow'
 					};
 						  
-					fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/" + indexDelete, requestOptions)
+					fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/movies/" + indexDelete, requestOptions)
 					.then(response => response.json())
 					.then(result => console.log(result))
 					.then(() => {
-						fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/")
+						fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/movies/")
 						.then((response) => response.json())
 						.then((data) => setStore({ movies: data}))
 					});
@@ -78,7 +78,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let path = ""
 				id ? path= "/" +id : path="/"
 
-				fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api" + path)
+				fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/movies/" + path)
 					.then(response => response.json())
 					.then((data) => {
 						console.log(data)
@@ -90,7 +90,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let path = ""
 				id ? path= "/" +id : path="/"
 
-				fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/showtimes" + path)
+				fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/showtimes/" + path)
 					.then(response => response.json())
 					.then((data) => {
 						console.log(data)

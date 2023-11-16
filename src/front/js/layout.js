@@ -26,9 +26,9 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar />
                     <Routes>
-                        <Route element={<Movies />} path="/" />
+                        <Route element={<Movies />} path="/movies" />
                         <Route element={<Showtimes />} path="/showtimes" />
-                        <Route element={<MovieInfo />} path="/:movie_id" />
+                        <Route element={<MovieInfo />} path="/movies/:movie_id" />
                         <Route element={<MovieForm opt="add" />} path="/Add" />
 						<Route element={<MovieForm opt="edit" />} path="/Edit/:id" />
                         <Route element={<ShowtimeForm opt="add" />} path="/AddShowtime" />
