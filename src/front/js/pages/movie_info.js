@@ -8,8 +8,7 @@ export const MovieInfo = () => {
     console.log(params.movie_id)
 
     useEffect (() => {
-        
-        fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/" + params.movie_id)
+        fetch(`${process.env.BACKEND_URL}/api/movies/${params.movie_id}`)
         .then((response) => response.json())
         .then((data) => {
             console.log(data)

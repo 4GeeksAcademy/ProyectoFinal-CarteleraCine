@@ -26,7 +26,7 @@ export const ShowtimeForm = (props) => {
                                 }
                             };
                       
-                       fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/showtimes/" + params.id, requestOptions)
+                            fetch(`${process.env.BACKEND_URL}/api/showtimes/${params.id}`, requestOptions)
                         .then(response => response.json())
                         .then(result => console.log(result))
                 

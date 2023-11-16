@@ -9,33 +9,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 
-			
-			createMovie: (movie) => {
-				
+			createMovie: (movie) => {			
 				let requestOptions = {
 					method: 'POST',
 					body: JSON.stringify(movie),
 					headers: {
 						"Content-Type": "application/json"
 					}
-					};
-						  
-					fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/movies", requestOptions)
+					};						  
+					fetch(`${process.env.BACKEND_URL}/api/movies`, requestOptions)
 					.then(response => response.json())
 					.then(result => console.log(result))
 			},
 
-			createShowtime: (showtime) => {
-				
+			createShowtime: (showtime) => {	
 				let requestOptions = {
 					method: 'POST',
 					body: JSON.stringify(showtime),
 					headers: {
 						"Content-Type": "application/json"
 					}
-					};
-						  
-					fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/showtimes", requestOptions)
+					};						  
+					fetch(`${process.env.BACKEND_URL}/api/showtimes`, requestOptions)
 					.then(response => response.json())
 					.then(result => console.log(result))
 			},
@@ -45,13 +40,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let requestOptions = {
 					method: 'DELETE',
 					redirect: 'follow'
-					};
-						  
-					fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/movies/" + indexDelete, requestOptions)
+					};						  
+					fetch(`${process.env.BACKEND_URL}/api/movies/${indexDelete}`, requestOptions)
 					.then(response => response.json())
 					.then(result => console.log(result))
 					.then(() => {
-						fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/movies/")
+						fetch(`${process.env.BACKEND_URL}/api/movies`)
 						.then((response) => response.json())
 						.then((data) => setStore({ movies: data}))
 					});
@@ -62,13 +56,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let requestOptions = {
 					method: 'DELETE',
 					redirect: 'follow'
-					};
-						  
-					fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/showtimes/" + indexDelete, requestOptions)
+					};						  
+					fetch(`${process.env.BACKEND_URL}/api/showtimes/${indexDelete}`, requestOptions)
 					.then(response => response.json())
 					.then(result => console.log(result))
 					.then(() => {
-						fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/showtimes/")
+						fetch(`${process.env.BACKEND_URL}/api/showtimes`)
 						.then((response) => response.json())
 						.then((data) => setStore({ showtimes: data}))
 					});
@@ -78,27 +71,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let path = ""
 				id ? path= "/" +id : path="/"
 
-				fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/movies/" + path)
+				fetch(`${process.env.BACKEND_URL}/api/movies${path}`)
 					.then(response => response.json())
 					.then((data) => {
 						console.log(data)
-						id==false ? setStore({movies:data}) : setStore({current_movie:data})
-						
+						id==false ? setStore({movies:data}) : setStore({current_movie:data})				
 			})},
 
 			displayShowtimes: (id) => {
 				let path = ""
 				id ? path= "/" +id : path="/"
 
-				fetch("https://bug-free-tribble-g449jj9jvv9h946x-3001.app.github.dev/api/showtimes/" + path)
+				fetch(`${process.env.BACKEND_URL}/api/showtimes${path}`)
 					.then(response => response.json())
 					.then((data) => {
 						console.log(data)
-						id==false ? setStore({showtimes:data}) : setStore({current_showtime:data})
-						
-			})}
-			
-			
+						id==false ? setStore({showtimes:data}) : setStore({current_showtime:data})						
+			})}						
 		}
 	};
 };
