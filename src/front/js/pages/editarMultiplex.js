@@ -26,13 +26,13 @@ export const EditarMultiplex = () => {
             <div className="row">
                 <div className="col">
                     <div className="mb-3">
-                        <label for="exampleInputEmail1" className="form-label text-start"><h5>Cadena:</h5></label>
+                        <label htmlFor="exampleInputEmail1" className="form-label text-start"><h5>Cadena:</h5></label>
                         <input type="text" className="form-control" id="cadena" aria-describedby="emailHelp" defaultValue={store.cadena.cadena} onChange={(e) => setCadena(e.target.value)} />
                     </div>
                 </div>
                 <div className="col">
                     <div className="mb-3">
-                        <label for="exampleInputEmail1" className="form-label text-start"><h5>Cinema:</h5></label>
+                        <label htmlFor="exampleInputEmail1" className="form-label text-start"><h5>Cinema:</h5></label>
                         <input type="text" className="form-control" id="cinema" aria-describedby="emailHelp" defaultValue={store.cadena.cinema} onChange={(e) => setCinema(e.target.value)} />
                     </div>
                 </div>
@@ -40,13 +40,13 @@ export const EditarMultiplex = () => {
             <div className="row">
                 <div className="col">
                     <div className="mb-3">
-                        <label for="exampleInputEmail1" className="form-label text-start"><h5>Ciudad:</h5></label>
+                        <label htmlFor="exampleInputEmail1" className="form-label text-start"><h5>Ciudad:</h5></label>
                         <input type="text" className="form-control" id="cinema" aria-describedby="emailHelp" defaultValue={store.cadena.ciudad} onChange={(e) => setCiudad(e.target.value)} />
                     </div>
                 </div>
                 <div className="col">
                     <div className="mb-3">
-                        <label for="exampleInputEmail1" className="form-label text-start"><h5>Pais:</h5></label>
+                        <label htmlFor="exampleInputEmail1" className="form-label text-start"><h5>Pais:</h5></label>
                         <input type="text" className="form-control" id="cinema" aria-describedby="emailHelp" defaultValue={store.cadena.pais} onChange={(e) => setPais(e.target.value)} />
                     </div>
                 </div>

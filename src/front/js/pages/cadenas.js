@@ -29,7 +29,7 @@ export const Cadenas = () => {
 								</Link>
 							</div >
 							<div className="d-flex justify-content-end">
-								<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+								<div className="d-grid gap-2 d-md-flex justify-content-md-end">
 									<button className="btn btn-warning me-md-2" type="button">
 										<i className="fa fa-trash" onClick={() => actions.eliminarMultiplex(index)} />
 									</button>
