@@ -5,7 +5,6 @@ import { Context } from "../store/appContext";
 export const Cadenas = () => {
 	const { store, actions } = useContext(Context);
 
-
 	return (
 		<div className="container">
 			<ul className="list-group">
