@@ -5,6 +5,7 @@ import { BackendURL } from "./component/backendURL";
 
 import  Home  from "./pages/Home.jsx";
 import { City} from "./pages/city";
+import { CityForm } from "./pages/FormularioCity.jsx";
 
 // import {Map} from "./Map"; 
 
@@ -14,6 +15,9 @@ import injectContext from "./store/appContext";
 
 import  Navbar  from "./component/Navbar.jsx";
 import Footer  from "./component/Footer.jsx";
+import Header from "./component/Header.jsx";
+
+
 import HeaderCarrusel from "./component/HeaderCarrusel.jsx";
 
 //create your first componentN
@@ -26,6 +30,7 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
+                    <Header />
                     <Navbar />
                   
                     <Routes>
@@ -39,6 +44,7 @@ const Layout = () => {
               }
             />
             <Route path="/ciudades" element={<City />} />
+            <Route path="/city-form" element={<CityForm  />} />
             <Route path="/single/:theid" element={<Single />} />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
