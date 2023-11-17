@@ -12,6 +12,7 @@ import { Cadenas } from "./pages/cadenas";
 import { Single } from "./pages/single";
 import { Formulario } from "./pages/formulario"
 import { EditarMultiplex } from "./pages/editarMultiplex"
+import { Login } from "./pages/login";
 
 import injectContext from "./store/appContext";
 
@@ -43,6 +44,7 @@ const Layout = () => {
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<Formulario />} path="/formulario" />
                         <Route element={<EditarMultiplex />} path="/editarMultiplex/:id" />
+                        <Route element={<Login />} path="login"/>
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                 </ScrollToTop>

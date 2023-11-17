@@ -4,6 +4,10 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Movie, Showtime, Multiplex 
 from api.utils import generate_sitemap, APIException
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
 
 api = Blueprint('api', __name__)
 
@@ -156,3 +160,66 @@ def Eliminar_multiplex(multiplex_id):
         "msg":"Multiplex Eliminado"
     }
     return jsonify(response_body), 200
+
+
+# RUTAS PARA CREAR AL USUARIO
+# @api.route("/user", methods=["GET"])
+# def get_user():
+#     user = User.query.all()
+#     result = list(map(lambda user: user.serialize(), user))
+    
+#     return jsonify(result), 200
+
+# @api.route("/user/<int:user_id>", methods=["GET"])
+# def get_user(user_id):
+#     user = User.query.filter_by(id=user_id).first()
+    
+#     return jsonify(user.serialize()), 200
+
+@api.route("/user", methods=["POST"])
+def crear_user():
+    body = request.get_json()
+    user = User(
+            email = body["email"],
+            password = body["password"],
+            is_active = body["is_active"]
+    )
+    db.session.add(user)
+    db.session.commit()
+    print("creado")
+    response_body = {
+        "msg":"user creado"
+    }
+    return jsonify(response_body), 200
+
+# CREA RUTA PARA AUTENTICAR EL USER, DEVUELVE JWTs/TOKEN.
+@api.route("/login", methods=["POST"])
+def login():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    user = User.query.filter_by(email=email).first()   
+    if user is None:
+        return jsonify({"msg":"el user no está en sistema"}), 401
+    print(user.serialize())
+    print(user.password)
+
+    if password != user.password:
+        return jsonify({"msg": "password incorrecto"}), 401
+    access_token = create_access_token(identity=email)
+    return jsonify(access_token=access_token)
+
+
+# PROTEJE LA RUTA CON EL TOKEN, EVITA EL ACCESO.
+@api.route("/protected", methods=["GET"])
+@jwt_required()
+def protected():
+    user_email = get_jwt_identity()
+    user = User.query.filter_by(email=user_email).first()   
+    print(user)
+    response_body = {
+        "msg":"User encontrado",
+        "user": user.serialize()
+    }
+    return jsonify(response_body), 200
+
+

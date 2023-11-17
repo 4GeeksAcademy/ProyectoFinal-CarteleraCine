@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
+
 
 export const Navbar = () => {
+	const { store } = useContext(Context)
+	console.log(store.user?.email);
+
 	return (
 		<nav className="navbar navbar-light bg-light">
 			<div className="container-fluid">
@@ -18,6 +23,15 @@ export const Navbar = () => {
 						<button className="btn btn-warning">Ver Multiplex</button>
 					</Link>
 				</div>
+				<Link to="/login">
+					<button className="btn btn-warning">Login </button>
+				</Link>
+				<Link to="/login">
+					<button className="btn btn-warning "
+						onClick={() => localStorage.clear()}>
+						<h6>{store.user?.email}</h6>Logout
+					</button>
+				</Link>
 			</div>
 		</nav>
 	);
