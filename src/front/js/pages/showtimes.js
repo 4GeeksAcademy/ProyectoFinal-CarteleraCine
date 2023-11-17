@@ -19,7 +19,7 @@ export const Showtimes = () => {
 						<div className="col" key={item.id}>
 							
 							<div>
-								<p>{item.movie_name}</p>
+								<h4>{item.movie_name}</h4>
 								<p>{item.cinema}</p>
 								<p>{item.showtime}</p>
 							</div>

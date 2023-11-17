@@ -49,13 +49,16 @@ export const ShowtimeForm = (props) => {
     return (
         <form className="container" action="/showtimes">
             <h1 className="d-flex justify-content-center mt-5">{props.opt == "add" ? "Add a new showtime" : "Edit showtime"}</h1>
-            <select className="form-select" value={movieName} onChange={(e) => { setMovieName(e.target.value) }} aria-label="Default select example">
+            <select className="form-select" value={movieName} onChange={(e) => { setMovieName(e.target.value) }} >
+                <option selected>Peliculas</option>
                 {store.movies.map(movie => (<option key={movie.id}>{movie.name}</option>))};
             </select>
-            <select className="form-select" value={cinema} onChange={(e) => { setCinema(e.target.value) }} aria-label="Default select example">
+            <select className="form-select" value={cinema} onChange={(e) => { setCinema(e.target.value) }} >
+                <option selected>Cinemas</option>
                 {store.cadenas.map(multiplex => (<option key={multiplex.id}>{multiplex.cinema}</option>))};
             </select>
-            <select className="form-select" value={showtime} onChange={(e) => { setShowtime(e.target.value) }} aria-label="Default select example">
+            <select className="form-select" value={showtime} onChange={(e) => { setShowtime(e.target.value) }} >
+                <option selected>Horarios</option>
                 <option >14:00</option>
                 <option>16:00</option>
                 <option>18:00</option>
