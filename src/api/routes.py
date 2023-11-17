@@ -42,16 +42,11 @@ def create_movie():
 def edit_movie(movie_id):
     body = request.get_json()
     movie = Movie.query.filter_by(id=movie_id).first()
-    name = body["name"]
-    release_date = body["release_date"]
-    rating = body["rating"]
-    overview = body["overview"]
-    image_url = body["image_url"]
-    movie.name = name
-    movie.release_date = release_date
-    movie.rating = rating
-    movie.overview = overview
-    movie.image_url = image_url
+    movie.name = body["name"]
+    movie.release_date = body["release_date"]
+    movie.rating = body["rating"]
+    movie.overview = body["overview"]
+    movie.image_url = body["image_url"]
     db.session.commit()
     return jsonify(movie.serialize()), 200
 
@@ -87,12 +82,9 @@ def create_showtime():
 def edit_showtime(showtime_id):
     body = request.get_json()
     showtime = Showtime.query.filter_by(id=showtime_id).first()
-    movie_name = body["movie_name"]
-    multiplex_cinema = body["multiplex_cinema"]
-    time = body["showtime"]
-    showtime.movie_name = movie_name
-    showtime.multiplex_cinema = multiplex_cinema
-    showtime.showtime = time
+    showtime.movie_name = body["movie_name"]
+    showtime.multiplex_cinema = body["multiplex_cinema"]
+    showtime.showtime = body["showtime"]
     db.session.commit()
     return jsonify(showtime.serialize()), 200
 
