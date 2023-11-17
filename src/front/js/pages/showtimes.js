@@ -17,9 +17,10 @@ export const Showtimes = () => {
 				{store.showtimes.map((item, index) => {
 					return (
 						<div className="col" key={item.id}>
-							<img src={item.image_url} style={{ width: "150px", height: "225px" }} className="card-img-top" alt="..." />
+							
 							<div>
 								<p>{item.movie_name}</p>
+								<p>{item.cinema}</p>
 								<p>{item.showtime}</p>
 							</div>
 							<div>
