@@ -9,9 +9,9 @@ export const Showtimes = () => {
 
 	return (
 		<div className="showtimePage container">
-			<h3 className="text-black ms-2 mb-4 mt-3">Showtimes</h3>
+			<h3 className="text-black ms-2 mb-4 mt-3">Cartelera</h3>
 			<Link to="/AddShowtime">
-				<button className="mb-3 btn btn-warning">Create new showtime</button>
+				<button className="mb-3 btn btn-warning">Crear nuevo horario</button>
 			</Link>
 			<div className="row g-4 d-flex flex-row">
 				{store.showtimes.map((item, index) => {

@@ -10,7 +10,7 @@ export const Movies = () => {
 	return (
 		<div className="moviePage container">
 			<Link to="/Add">
-				<button className="mb-3 ms-2 mt-4 btn btn-warning">Create new movie</button>
+				<button className="mb-3 ms-2 mt-4 btn btn-warning">Crear nueva película</button>
 			</Link>
 			<div className="row g-4 d-flex flex-row">
 				{store.movies.map((item, index) => {

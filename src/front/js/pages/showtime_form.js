@@ -39,13 +39,6 @@ export const ShowtimeForm = (props) => {
     }, [])
 
 
-    // useEffect(() => {
-    //         setMovieName(store.current_movie_name?.movie_name),
-    //         setCinema(store.current_cinema?.multiplex_cinema),
-    //         setShowtime(store.current_showtime?.showtime)
-            
-    // }, [store.current_showtime])
-
     return (
         <form className="container" action="/showtimes">
             <h1 className="d-flex justify-content-center mt-5">{props.opt == "add" ? "Add a new showtime" : "Edit showtime"}</h1>
