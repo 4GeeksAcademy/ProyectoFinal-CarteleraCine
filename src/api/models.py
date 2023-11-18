@@ -78,3 +78,37 @@ class Showtime(db.Model):
             
             # do not serialize the password, its a security breach
         }
+    
+class City (db.Model):
+    id    = db.Column(db.Integer, primary_key=True)
+    name  = db.Column(db.String(80), unique=False, nullable=False)
+    image = db.Column(db.String(), unique=False, nullable=False)
+
+    def __repr__(self):
+        return f'<City {self.name}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "image": self.image
+            # do not serialize the password, its a security breach
+        }
+
+class Movie2(db.Model):  # Cambié el nombre de la clase aquí
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(80), unique=False, nullable=False)
+    posterPath = db.Column(db.String(), unique=False, nullable=False)
+    overview = db.Column(db.String(), unique=False, nullable=False)
+
+    def __repr__(self):
+        return f'<Movie2 {self.name}>'  # Cambié el nombre aquí
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "posterPath": self.posterPath,
+            "overview": self.overview
+            # no serializamos la contraseña, es un riesgo de seguridad
+        }
