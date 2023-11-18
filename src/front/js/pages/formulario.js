@@ -26,6 +26,7 @@ export const Formulario = () => {
         console.log(result);
         if (result === 200) {
             alert("¡Creado satisfactoriamente!");
+            location.replace("/cadenas")
         } else if (result === 409) {
             alert("Ya existe");
         } else {

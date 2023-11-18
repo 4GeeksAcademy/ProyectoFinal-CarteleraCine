@@ -14,6 +14,8 @@ export const EditarMultiplex = () => {
 
     const guardarCambios = () => {
         actions.editarMultiplex(params.id, cadena, cinema, ciudad, pais);
+        location.replace("/cadenas")
+        
     };
 
     useEffect(() => {
@@ -51,11 +53,11 @@ export const EditarMultiplex = () => {
                 </div>
             </div>
             <div className="ml-auto">
-                <button className="btn btn-warning" type="submit" onClick={() => guardarCambios()} >
+                <button className="btn btn-warning" type="submit" onClick={() => guardarCambios()}>
                     Guardar Cambios
                 </button>
                 <Link to="/cadenas">
-                    <span className="text mx-3" href="#" role="button">
+                    <span className="text mx-3" href="#" role="button" >
                         Vuelve a la lista
                     </span>
                 </Link>

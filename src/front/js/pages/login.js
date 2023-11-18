@@ -1,21 +1,18 @@
 
 import React, { useState, useContext } from "react"
 import { Context } from "../store/appContext";
-import { Navigate, useNavigate } from "react-router-dom";
 
 export const Login = () => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const{actions} = useContext(Context)
-    const navigate = useNavigate()
 
     function sendData(e) {
         e.preventDefault()
         console.log("send Data");
         console.log(name, email, password);
         actions.login(name, email, password)
-        // navigate("/cadenas")
     }
 
   
