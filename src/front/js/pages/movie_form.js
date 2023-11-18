@@ -45,7 +45,7 @@ export const MovieForm = (props) => {
                 "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YTcxOGQ2YTc0NzcwYmUwZjgwYzliOWY2YTc2OGE0YiIsInN1YiI6IjY1M2ZmODFjNTA3MzNjMDBlMjRhZGYwMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Bz1YACVZh6J9vBDp8p0bPsGlVpe5BZ-sowdWX5wBwdM"
             }
         };
-        fetch(`https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1&query=${name}`, requestOptions)
+        fetch(`https://api.themoviedb.org/3/search/movie?include_adult=false&language=es-ES&page=1&query=${name}`, requestOptions)
             .then(res => res.json())
             .then((data) => {
                 console.log(data)
@@ -75,34 +75,34 @@ export const MovieForm = (props) => {
     return (
         <div className="container ">
             <form className="container" action="/movies">
-                <h1 className="d-flex justify-content-center mt-5">{props.opt == "add" ? "Add a new movie" : "Edit movie"}</h1>
+                <h4 className="d-flex justify-content-center mt-5">{props.opt == "add" ? "Agregar película" : "Editar película"}</h4>
                 <div className="mb-3 mx-5">
-                    <label htmlFor="Name" className="form-label"><h5>Name</h5></label>
+                    <label htmlFor="Name" className="form-label"><h5>Título</h5></label>
                     <input defaultValue={name} onChange={(e) => { setName(e.target.value) }} type="text" className="form-control" />
                 </div>
                 <div className="gap-2">
-                    <button onClick={() => searchMovie()} type="button" className="btn btn-warning mx-5 mb-4">Search movie</button>
+                    <button onClick={() => searchMovie()} type="button" className="btn btn-warning mx-5 mb-4">Buscar película</button>
                 </div>
                 <div className="mb-3 mx-5">
-                    <label htmlFor="ImageUrl" className="form-label"><h5>Image URL</h5></label>
+                    <label htmlFor="ImageUrl" className="form-label"><h5>URL Imagen</h5></label>
                     <input defaultValue={imageUrl} onChange={(e) => { setImageUrl(e.target.value) }} type="text" className="form-control" />
                 </div>
                 <div className="mb-3 mx-5">
-                    <label htmlFor="ReleaseDate" className="form-label"><h5>Release Date</h5></label>
+                    <label htmlFor="ReleaseDate" className="form-label"><h5>Fecha de estreno</h5></label>
                     <input defaultValue={releaseDate} onChange={(e) => { setReleaseDate(e.target.value) }} type="text" className="form-control" />
                 </div>
                 <div className="mb-3 mx-5">
-                    <label htmlFor="Rating" className="form-label"><h5>Rating</h5></label>
+                    <label htmlFor="Rating" className="form-label"><h5>Calificación</h5></label>
                     <input defaultValue={rating} onChange={(e) => { setRating(e.target.value) }} type="text" className="form-control" />
                 </div>
                 <div className="mb-3 mx-5">
-                    <label htmlFor="Overview" className="form-label"><h5>Overview</h5></label>
+                    <label htmlFor="Overview" className="form-label"><h5>Descripción</h5></label>
                     <input defaultValue={overview} onChange={(e) => { setOverview(e.target.value) }} type="text" className="form-control" />
                 </div>
                 <div className="gap-2">
-                    <button onClick={() => saveButton()} className="btn btn-warning mx-5">Save</button>
+                    <button onClick={() => saveButton()} className="btn btn-warning mx-5">Guardar</button>
                     <Link to="/movies" className="ms-5">
-                        or get back to movies
+                        o volver a películas
                     </Link>
                 </div>
             </form>

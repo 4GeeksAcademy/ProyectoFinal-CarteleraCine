@@ -22,12 +22,12 @@ export const MovieInfo = () => {
                     <div className="col-4">
                         <img src={movie.image_url}  className="card-img-top" style={{width: "300px", height: "450px"}} alt="..."/>
                     </div>
-                    <div className="col-8">
+                    <div className="col-8 mt-5">
                         <h2>{movie.name}</h2>
-                        <p>{movie.release_date}</p>
-                        <p className="fst-italic">User Score: </p>
+                        <p>Fecha de estreno: {movie.release_date}</p>
+                        <p className="fst-italic">Calificación: </p>
                         <p className="rounded-circle bg-info text-white d-flex justify-content-center align-items-center fs-3" style={{width: "70px", height: "70px"}}>{movie.rating}</p>
-                        <h5>Overview</h5>
+                        <h5>Descripción</h5>
                         <p>{movie.overview}</p>
                     </div>
                 </div>

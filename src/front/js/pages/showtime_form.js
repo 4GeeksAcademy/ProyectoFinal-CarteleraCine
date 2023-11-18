@@ -41,7 +41,7 @@ export const ShowtimeForm = (props) => {
 
     return (
         <form className="container" action="/showtimes">
-            <h1 className="d-flex justify-content-center mt-5">{props.opt == "add" ? "Add a new showtime" : "Edit showtime"}</h1>
+            <h1 className="d-flex justify-content-center mt-5">{props.opt == "add" ? "Agregar horario" : "Editar horario"}</h1>
             <select className="form-select" value={movieName} onChange={(e) => { setMovieName(e.target.value) }} >
                 <option selected>Peliculas</option>
                 {store.movies.map(movie => (<option key={movie.id}>{movie.name}</option>))};
@@ -58,9 +58,9 @@ export const ShowtimeForm = (props) => {
                 <option>20:00</option>
             </select>
             <div className="gap-2 mt-4">
-                <button onClick={() => saveButton()} className="btn btn-warning mx-5">Save</button>
+                <button onClick={() => saveButton()} className="btn btn-warning mx-5">Guardar</button>
                 <Link to="/showtimes" className="ms-5">
-                    or get back to showtimes
+                    volver a horarios
                 </Link>
             </div>
         </form>
