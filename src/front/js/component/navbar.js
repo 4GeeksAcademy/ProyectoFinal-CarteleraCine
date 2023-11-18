@@ -29,7 +29,7 @@ export const Navbar = () => {
 				<Link to="/login">
 					<button className="btn btn-warning "
 						onClick={() => localStorage.clear()}>
-						<h6>{store.user?.email}</h6>Logout
+						<h6>{store.user?.name}</h6>Logout
 					</button>
 				</Link>
 			</div>

@@ -163,23 +163,11 @@ def Eliminar_multiplex(multiplex_id):
 
 
 # RUTAS PARA CREAR AL USUARIO
-# @api.route("/user", methods=["GET"])
-# def get_user():
-#     user = User.query.all()
-#     result = list(map(lambda user: user.serialize(), user))
-    
-#     return jsonify(result), 200
-
-# @api.route("/user/<int:user_id>", methods=["GET"])
-# def get_user(user_id):
-#     user = User.query.filter_by(id=user_id).first()
-    
-#     return jsonify(user.serialize()), 200
-
 @api.route("/user", methods=["POST"])
 def crear_user():
     body = request.get_json()
     user = User(
+            name = body["name"],
             email = body["email"],
             password = body["password"],
             is_active = body["is_active"]
@@ -192,12 +180,13 @@ def crear_user():
     }
     return jsonify(response_body), 200
 
-# CREA RUTA PARA AUTENTICAR EL USER, DEVUELVE JWTs/TOKEN.
+# CREA RUTA PARA AUTENTICAR EL USER, DEVUELVE JWTs/TOKEN.(ADJANI)
 @api.route("/login", methods=["POST"])
 def login():
+    name = request.json.get("name", None)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    user = User.query.filter_by(email=email).first()   
+    user = User.query.filter_by(name=name).first()   
     if user is None:
         return jsonify({"msg":"el user no está en sistema"}), 401
     print(user.serialize())

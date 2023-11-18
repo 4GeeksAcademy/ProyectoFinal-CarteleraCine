@@ -171,7 +171,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			// FETCH LOGIN/USER (ADJANI)
-			login: async (email, password) => {
+			login: async (name, email, password) => {
 				console.log("login desde flux");
 				try {
 					const requestOptions = {
@@ -180,6 +180,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify(
 							{
 								"email": email,
+								"name": name,
 								"password": password
 							}
 						)
@@ -188,6 +189,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const data = await response.json();
 					console.log(data);
 					localStorage.setItem("access_token", data.access_token)
+					
 					await fetch(`${process.env.BACKEND_URL}/api/protected`,
 						{
 							method: 'GET',
@@ -201,6 +203,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("error", error);
 				}
 			},
+			
+
 		}
 	};
 };
