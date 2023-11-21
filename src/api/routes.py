@@ -70,10 +70,22 @@ def get_showtime(showtime_id):
     get_showtime = Showtime.query.filter_by(id=showtime_id).first()
     return jsonify(get_showtime.serialize()), 200
 
+@api.route('/showtimes/movie/<int:movie_id>/multiplex/<int:multiplex_id>', methods=['GET'])
+def get_showtime_movie_id(movie_id, multiplex_id):
+    get_showtime = Showtime.query.filter_by(movie_id=movie_id, multiplex_id=multiplex_id).all()
+    result = list(map(lambda item: item.serialize(), get_showtime))
+    return jsonify(result), 200
+
+@api.route('/showtimes/multiplex/<int:multiplex_id>', methods=['GET'])
+def get_showtime_multiplex_id(multiplex_id):
+    get_showtime = Showtime.query.filter_by(multiplex_id=multiplex_id).all()
+    result = list(map(lambda item: item.serialize(), get_showtime))
+    return jsonify(result), 200
+
 @api.route('/showtimes', methods=['POST'])
 def create_showtime():
     body = request.get_json()
-    new_showtime = Showtime(movie_name=body["movie_name"], multiplex_cinema=body["multiplex_cinema"], showtime=body["showtime"])
+    new_showtime = Showtime(movie_id=body["movie_id"], multiplex_id=body["multiplex_id"], showtime=body["showtime"])
     db.session.add(new_showtime)
     db.session.commit()
     return jsonify(new_showtime.serialize()), 200
@@ -82,8 +94,8 @@ def create_showtime():
 def edit_showtime(showtime_id):
     body = request.get_json()
     showtime = Showtime.query.filter_by(id=showtime_id).first()
-    showtime.movie_name = body["movie_name"]
-    showtime.multiplex_cinema = body["multiplex_cinema"]
+    showtime.movie_id = body["movie_id"]
+    showtime.multiplex_id = body["multiplex_id"]
     showtime.showtime = body["showtime"]
     db.session.commit()
     return jsonify(showtime.serialize()), 200

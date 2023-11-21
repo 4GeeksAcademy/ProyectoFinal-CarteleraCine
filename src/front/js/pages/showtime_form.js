@@ -6,10 +6,10 @@ export const ShowtimeForm = (props) => {
 
     const { store, actions } = useContext(Context);
     const params = useParams();
-    const [movieName, setMovieName] = useState("");
-    const [cinema, setCinema] = useState("");
+    const [movieId, setMovieId] = useState("");
+    const [multiplexId, setMultiplexId] = useState("");
     const [showtime, setShowtime] = useState("");
-    const newShowtime = { movie_name: movieName, multiplex_cinema: cinema, showtime: showtime };
+    const newShowtime = { movie_id: movieId, multiplex_id: multiplexId, showtime: showtime };
     function saveButton() {
         if (props.opt == "add") {
             console.log("IS THIS WORKING")
@@ -42,16 +42,16 @@ export const ShowtimeForm = (props) => {
     return (
         <form className="container" action="/showtimes">
             <h1 className="d-flex justify-content-center mt-5">{props.opt == "add" ? "Agregar horario" : "Editar horario"}</h1>
-            <select className="form-select" value={movieName} onChange={(e) => { setMovieName(e.target.value) }} >
-                <option selected>Peliculas</option>
-                {store.movies.map(movie => (<option key={movie.id}>{movie.name}</option>))};
+            <select className="form-select" value={movieId} onChange={(e) => { setMovieId(e.target.value) }} >
+                <option value="Peliculas">Peliculas</option>
+                {store.movies.map(movie => (<option key={movie.id}>{movie.id}</option>))};
             </select>
-            <select className="form-select" value={cinema} onChange={(e) => { setCinema(e.target.value) }} >
-                <option selected>Cinemas</option>
-                {store.cadenas.map(multiplex => (<option key={multiplex.id}>{multiplex.cinema}</option>))};
+            <select className="form-select" value={multiplexId} onChange={(e) => { setMultiplexId(e.target.value) }} >
+                <option value="Cinemas">Cinemas</option>
+                {store.cadenas.map(multiplex => (<option key={multiplex.id}>{multiplex.id}</option>))};
             </select>
             <select className="form-select" value={showtime} onChange={(e) => { setShowtime(e.target.value) }} >
-                <option selected>Horarios</option>
+                <option value="Horarios">Horarios</option>
                 <option >14:00</option>
                 <option>16:00</option>
                 <option>18:00</option>

@@ -1,8 +1,16 @@
 import React, { useState, useEffect, useContext}  from "react";
 import { useParams } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const MovieInfo = () => {
+    const { store, actions } = useContext(Context);
     const [movie, setMovie] = useState({});
+    const [paseo, setPaseo] = useState([]);
+    const [oxigeno, setOxigeno] = useState([]);
+    const [molinos, setMolinos] = useState([]);
+    const [santaFe, setSantaFe] = useState([]);
+    const [florida, setFlorida] = useState([]);
+    const [aventura, setAventura] = useState([]);
     const params = useParams();
     console.log(params)
     console.log(params.movie_id)
@@ -13,6 +21,42 @@ export const MovieInfo = () => {
         .then((data) => {
             console.log(data)
             setMovie(data)
+        })
+        fetch(`${process.env.BACKEND_URL}/api/showtimes/movie/${params.movie_id}/multiplex/1`)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+            setPaseo(data)
+        })
+        fetch(`${process.env.BACKEND_URL}/api/showtimes/movie/${params.movie_id}/multiplex/2`)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+            setOxigeno(data)
+        })
+        fetch(`${process.env.BACKEND_URL}/api/showtimes/movie/${params.movie_id}/multiplex/3`)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+            setMolinos(data)
+        })
+        fetch(`${process.env.BACKEND_URL}/api/showtimes/movie/${params.movie_id}/multiplex/4`)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+            setSantaFe(data)
+        })
+        fetch(`${process.env.BACKEND_URL}/api/showtimes/movie/${params.movie_id}/multiplex/5`)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+            setFlorida(data)
+        })
+        fetch(`${process.env.BACKEND_URL}/api/showtimes/movie/${params.movie_id}/multiplex/6`)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+            setAventura(data)
         })
     }, [])
 
@@ -38,10 +82,7 @@ export const MovieInfo = () => {
                         </div>
                         <div className="collapse" id="paseo">
                             <div className="card card-body d-grid gap-4 d-md-block col-12 mx-auto">
-                                <button className="btn btn-light">14:00</button>
-                                <button className="btn btn-light">16:00</button>
-                                <button className="btn btn-light">18:00</button>
-                                <button className="btn btn-light">20:00</button>
+                                {paseo.map(showtime => (<button className="btn btn-light" key={showtime.id}>{showtime.showtime}</button>))}
                             </div>
                         </div>
                         <div>
@@ -50,11 +91,8 @@ export const MovieInfo = () => {
                             </button>
                         </div>
                         <div className="collapse" id="oxigeno">
-                        <div className="card card-body d-grid gap-4 d-md-block col-12 mx-auto">
-                                <button className="btn btn-light">14:00</button>
-                                <button className="btn btn-light">16:00</button>
-                                <button className="btn btn-light">18:00</button>
-                                <button className="btn btn-light">20:00</button>
+                            <div className="card card-body d-grid gap-4 d-md-block col-12 mx-auto">
+                                {oxigeno.map(showtime => (<button className="btn btn-light" key={showtime.id}>{showtime.showtime}</button>))}
                             </div>
                         </div>
                         <div>
@@ -64,7 +102,7 @@ export const MovieInfo = () => {
                         </div>
                         <div className="collapse" id="molinos">
                             <div className="card card-body d-grid gap-2 col-12 mx-auto">
-                                Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                                {molinos.map(showtime => (<button className="btn btn-light" key={showtime.id}>{showtime.showtime}</button>))}
                             </div>
                         </div>
                         <div>
@@ -74,7 +112,7 @@ export const MovieInfo = () => {
                         </div>
                         <div className="collapse" id="santaFe">
                             <div className="card card-body d-grid gap-2 col-12 mx-auto">
-                                Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                                {santaFe.map(showtime => (<button className="btn btn-light" key={showtime.id}>{showtime.showtime}</button>))}
                             </div>
                         </div>
                         <div>
@@ -84,7 +122,7 @@ export const MovieInfo = () => {
                         </div>
                         <div className="collapse" id="florida">
                             <div className="card card-body d-grid gap-2 col-12 mx-auto">
-                                Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                                {florida.map(showtime => (<button className="btn btn-light" key={showtime.id}>{showtime.showtime}</button>))}
                             </div>
                         </div>
                         <div>
@@ -94,7 +132,7 @@ export const MovieInfo = () => {
                         </div>
                         <div className="collapse mb-5" id="aventura">
                             <div className="card card-body d-grid gap-2 col-12 mx-auto">
-                                Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                                {aventura.map(showtime => (<button className="btn btn-light" key={showtime.id}>{showtime.showtime}</button>))}
                             </div>
                         </div>
                     </div>

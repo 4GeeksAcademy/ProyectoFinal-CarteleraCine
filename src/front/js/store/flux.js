@@ -22,17 +22,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(data)
 						id==false ? setStore({movies:data}) : setStore({current_movie:data})				
 			})},
-
-			displayShowtimes: (id) => {
-				let path = ""
-				id ? path= "/" +id : path="/"
-
-				fetch(`${process.env.BACKEND_URL}/api/showtimes${path}`)
-					.then(response => response.json())
-					.then((data) => {
-						console.log(data)
-						id==false ? setStore({showtimes:data}) : setStore({current_showtime:data})						
-			})},
 			
 			createMovie: (movie) => {			
 				let requestOptions = {
@@ -47,21 +36,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(result => console.log(result))
 			},
 
-
-	// FETCH SHOWTIMES (FRANCESCA)
-			createShowtime: (showtime) => {	
-				let requestOptions = {
-					method: 'POST',
-					body: JSON.stringify(showtime),
-					headers: {
-						"Content-Type": "application/json"
-					}
-					};						  
-					fetch(`${process.env.BACKEND_URL}/api/showtimes`, requestOptions)
-					.then(response => response.json())
-					.then(result => console.log(result))
-			},
-					
 			deleteMovie: (indexDelete) => {
 				console.log(indexDelete)
 				let requestOptions = {
@@ -78,6 +52,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
+
+	// FETCH SHOWTIMES (FRANCESCA)
+			
+			displayShowtimes: (id) => {
+				let path = ""
+				id ? path= "/" +id : path="/"
+
+				fetch(`${process.env.BACKEND_URL}/api/showtimes${path}`)
+					.then(response => response.json())
+					.then((data) => {
+						console.log(data)
+						id==false ? setStore({showtimes:data}) : setStore({current_showtime:data})						
+			})},
+	
+			createShowtime: (showtime) => {	
+				let requestOptions = {
+					method: 'POST',
+					body: JSON.stringify(showtime),
+					headers: {
+						"Content-Type": "application/json"
+					}
+					};						  
+					fetch(`${process.env.BACKEND_URL}/api/showtimes`, requestOptions)
+					.then(response => response.json())
+					.then(result => console.log(result))
+			},
+					
 			deleteShowtime: (indexDelete) => {
 				console.log(indexDelete)
 				let requestOptions = {

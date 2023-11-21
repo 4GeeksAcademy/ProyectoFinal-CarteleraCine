@@ -62,8 +62,8 @@ class Multiplex(db.Model):
     
 class Showtime(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    movie_name = db.Column(db.String(120), db.ForeignKey("movie.name"))
-    multiplex_cinema = db.Column(db.String(50), db.ForeignKey("multiplex.cinema"))
+    movie_id = db.Column(db.Integer, db.ForeignKey("movie.id"))
+    multiplex_id = db.Column(db.Integer, db.ForeignKey("multiplex.id"))
     showtime = db.Column(db.String(120), unique=False, nullable=False)
     
     def __repr__(self):
@@ -72,8 +72,8 @@ class Showtime(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "movie_name": self.movie_name,
-            "cinema": self.multiplex_cinema,
+            "movie_id": self.movie_id,
+            "multiplex_id": self.multiplex_id,
             "showtime": self.showtime,
             
             # do not serialize the password, its a security breach
