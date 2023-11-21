@@ -31,6 +31,7 @@ const injectContext = PassedComponent => {
 			state.actions.displayMovies(false);
 			state.actions.displayShowtimes(false);
 			state.actions.mostrarMultiplex();
+			state.actions.displayCity();
 			
 		}, []);
 

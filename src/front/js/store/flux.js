@@ -7,6 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			current_showtime: null,
 			cadenas: [],
 			cadena: {},
+			City: []
 
 		},
 		actions: {
@@ -166,6 +167,77 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error al eliminar", error);
 				}	
 			},	
+		
+		// FETCH CIUDADES (ERIK)
+		displayCity: async () => {
+			try {
+				// Realiza una solicitud para obtener un mensaje del backend (ajusta la URL según tu configuración)
+				const response = await fetch(`${process.env.BACKEND_URL}/api/city`);
+				if (!response.ok) {
+					throw new Error("Error en la solicitud");
+				}
+				const data = await response.json();
+
+				// Actualiza el mensaje en el estado
+				console.log(data)
+				const store = getStore();
+				setStore({ City: data });
+			} catch (error) {
+				console.error("Error al cargar el mensaje desde el backend", error);
+			}
+		},
+
+		addCity: newCity => {
+		  const requestOptions = {
+			method: 'POST',
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(newCity)
+		  };
+  
+		  fetch(`${process.env.BACKEND_URL}/api/city`, requestOptions)
+			.then(response => response.text())
+			.then(result => console.log(result))
+			.catch(error => console.log('Error al agregar ciudad', error));
+		},
+
+		editCity: (editedCity, index) => {
+			const store = getStore();
+			const updatedCity = [...store.City];
+			updatedCity[index] = { ...editedCity }; // Realiza una copia de editedCity
+		  
+			setStore({ City: updatedCity });
+		
+  
+		  const requestOptions = {
+			method: 'PUT',
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(updatedCity[index])
+		  };
+  
+		  fetch(`${process.env.BACKEND_URL}/api/city`, requestOptions)
+			.then(response => response.text())
+			.then(result => console.log(result))
+			.catch(error => console.log('Error al editar ciudad', error));
+		},
+		deleteCity: id => {
+		  const store = getStore();
+		  console.log("Eliminar ciudad con ID: " + id);
+  
+		  setStore({ City: store.City.filter(item => item.id !== id) });
+  
+		  const requestOptions = {
+			method: 'DELETE',
+			redirect: 'follow'
+		  };
+  
+		  fetch(`${process.env.BACKEND_URL}/api/city/${id}`, requestOptions)
+			.then(response => response.text())
+			.then(result => {
+			  console.log(result);
+			})
+			.catch(error => console.log('Error al eliminar ciudad', error));
+		}
+		
 		}
 	};
 };

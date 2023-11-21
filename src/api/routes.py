@@ -213,7 +213,7 @@ def get_all_movie():
     return jsonify(movies), 200
 
 @api.route('/movie2/<int:movie_id>', methods=['GET'])  
-def get_movie(movie_id):
+def get_movie2(movie_id):
     movie = Movie2.query.get(movie_id)  
     if movie is None:
         raise APIException('Movie not found', status_code=404)
@@ -246,7 +246,7 @@ def update_movie(movie_id):
     return jsonify({"msg": "Movie modified successfully"}), 200
 
 @api.route('/movie2/<int:movie_id>', methods=['DELETE'])  
-def delete_movie(movie_id):
+def delete_movie2(movie_id):
     delete_movie = Movie2.query.get(movie_id) 
     db.session.delete(delete_movie)
     db.session.commit()

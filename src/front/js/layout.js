@@ -4,6 +4,8 @@ import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
 import { Movies } from "./pages/movies";
+import { City } from "./pages/city";
+import { CityForm } from "./pages/FormularioCity.jsx";
 import { Showtimes } from "./pages/showtimes";
 import { MovieInfo } from "./pages/movie_info";
 import { MovieForm } from "./pages/movie_form";
@@ -16,7 +18,7 @@ import { EditarMultiplex } from "./pages/editarMultiplex"
 import injectContext from "./store/appContext";
 
 // import { Navbar } from "./component/navbar";
-import { Footer } from "./component/footer";
+import Footer from "./component/footer";
 import Header from "./component/Header.jsx";
 import  Home  from "./pages/Home.jsx";
 import  Navbar  from "./component/Navbar.jsx";
@@ -39,6 +41,8 @@ const Layout = () => {
 
                     <Routes>
                         <Route element={<Movies />} path="/movies" />
+                        <Route element={<City />} path="/ciudades" />
+                        <Route element={<CityForm />} path="/city-form" />
                         <Route element={<Showtimes />} path="/showtimes" />
                         <Route element={<MovieInfo />} path="/movies/:movie_id" />
                         <Route element={<MovieForm opt="add" />} path="/Add" />
@@ -52,6 +56,7 @@ const Layout = () => {
                         <Route path="/" element={<Home /> } />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
+                    <Footer />
                 </ScrollToTop>
             </BrowserRouter>
         </div>
