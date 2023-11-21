@@ -5,7 +5,7 @@ import LogoEmpresa from '../../img/ROLLOPELI.png';
 const Footer = () => {
     return (
 
-        <footer className="dark-bg pt-4" style={{ backgroundColor: "black", color: "white" }}>
+        <footer className="dark-bg pt-4 mt-5" style={{ backgroundColor: "black", color: "white" }}>
             <div className="container mt-5 mb-3 dark-bg" style={{ height: "350px" }}>
                 <div className="row">
                     <div className="col-md-4">
@@ -48,8 +48,8 @@ const Footer = () => {
 
                 </div>
             </div>
-            <div class="row">
-                <p class="text-center">&copy; 2023 AFE Movies. Todos los derechos reservados.¡Construido con Bootstrap 5.0!</p>
+            <div className="row">
+                <p className="text-center">&copy; 2023 AFE Movies. Todos los derechos reservados.¡Construido con Bootstrap 5.0!</p>
             </div>
         </footer >
 
