@@ -6,6 +6,8 @@ const HeaderCarrusel = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [selectedMovie, setSelectedMovie] = useState(null);
+    const [selectedPosterIndex, setSelectedPosterIndex] = useState(null);
+    const [isClicking, setIsClicking] = useState(false);
 
     useEffect(() => {
         const apiKey = 'ea088d978fc6da3b4fda0c9a6fb0532e';
@@ -29,13 +31,30 @@ const HeaderCarrusel = () => {
             });
     }, []);
 
-    const handleMovieClick = (movie) => {
+    const handleMovieHover = (index) => {
+        if (!isClicking) {
+            setSelectedPosterIndex(index);
+        }
+    };
+
+    const handleMovieClick = (movie, index) => {
         setSelectedMovie(movie);
+        setSelectedPosterIndex(index);
+        setIsClicking(true);
+    };
+
+    const handleMouseLeave = () => {
+        if (!isClicking) {
+            setSelectedPosterIndex(null);
+        }
     };
 
     const handleCloseDetails = () => {
         setSelectedMovie(null);
+        setIsClicking(false);
     };
+
+
 
     if (loading) {
         return <p>Cargando...</p>;
@@ -71,25 +90,21 @@ const HeaderCarrusel = () => {
                                         <img
                                             key={i}
                                             src={`https://image.tmdb.org/t/p/w200${movieSlice.poster_path}`}
-                                            className="d-block w-25 me-3" // Agrega un margen derecho (me-3)
+                                            className={`d-block w-25 me-3 ${index * 4 + i === selectedPosterIndex
+                                                ? `${style.selectedPoster}`
+                                                : `${style.posterHover}`
+                                                }`}
                                             alt={`Slide ${index + 1}`}
-                                            onClick={() => handleMovieClick(movieSlice)}
+                                            onMouseEnter={() => handleMovieHover(index * 4 + i)}
+                                            onMouseLeave={handleMouseLeave}
+                                            onClick={() => handleMovieClick(movieSlice, index * 4 + i)}
                                             style={{ cursor: 'pointer' }}
                                         />
                                     ))}
-                                    {/* {movies.slice(index * 4, index * 4 + 4).map((movieSlice, i) => (
-                                        <img
-                                            key={i}
-                                            src={`https://image.tmdb.org/t/p/w200${movieSlice.poster_path}`}
-                                            className={`d-block w-25 me-3 ${style.blackAndWhiteImg}`} // Agrega la nueva clase aquí
-                                            alt={`Slide ${index + 1}`}
-                                            onClick={() => handleMovieClick(movieSlice)}
-                                            style={{ cursor: 'pointer' }}
-                                        />
-                                    ))} */}
                                 </div>
                             </div>
                         ))}
+
                     </div>
 
                     <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
@@ -105,28 +120,29 @@ const HeaderCarrusel = () => {
 
             {/* Mostrar detalles de la película seleccionada */}
             {selectedMovie && (
-                <div className={`${style.movieDetails} carousel-item active`}>
-                    <div className="d-flex justify-content-center align-items-center">
-                        <img
-                            src={`https://image.tmdb.org/t/p/w200${selectedMovie.poster_path}`}
-                            className="d-block w-25"
-                            alt={`Slide ${movies.length + 1}`}
-                            onClick={handleCloseDetails}
-                            style={{ cursor: 'pointer' }}
-                        />
-                        <div className="container text-white text-center">
-                            <h1 className="display-4 font-weight-bold">{selectedMovie.title}</h1>
-                            <p className="lead">{selectedMovie.overview}</p>
-                            <button className={`${style.button} ms-5`} onClick={handleCloseDetails}>
-                                Cerrar detalles
-                            </button>
-
-                        </div>
+                <div className={`${style.movieDetails} carousel-item active d-flex justify-content-center align-items-center`}>
+                    <img
+                        src={`https://image.tmdb.org/t/p/w200${selectedMovie.poster_path}`}
+                        className="d-block w-25"
+                        alt={`Slide ${movies.length + 1}`}
+                        onClick={handleCloseDetails}
+                        style={{ cursor: 'pointer' }}
+                    />
+                    <div className="container text-white text-center ms-3">
+                        <h1 className="display-4 font-weight-bold">{selectedMovie.title}</h1>
+                        <p className="lead">{selectedMovie.overview}</p>
+                        <button className={`${style.button} ms-5`} onClick={handleCloseDetails}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-door-closed" viewBox="0 0 16 16">
+                                <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z" />
+                                <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
             )}
+
         </div>
-    );
+    )
 };
 
-export default HeaderCarrusel;
+export default HeaderCarrusel

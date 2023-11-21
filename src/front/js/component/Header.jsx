@@ -1,5 +1,5 @@
 import React from 'react'
-import LogoMoviesImage from '../../img/LogoMovies3.png';
+import LogoMoviesImage from '../../img/FondoMovieCine2.png';
 
 
 const Header = () => {
@@ -9,7 +9,7 @@ const Header = () => {
                 src={LogoMoviesImage}
                 className="card-img"
                 alt="logoMovies3"
-                style={{ width: '100%', maxWidth: 'none' }}
+                style={{ width: '100%', height: '25%', maxWidth: 'none' }}
             />
             <div className="card-img-overlay">
                
