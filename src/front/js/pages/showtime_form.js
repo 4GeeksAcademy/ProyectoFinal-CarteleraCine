@@ -7,9 +7,9 @@ export const ShowtimeForm = (props) => {
     const { store, actions } = useContext(Context);
     const params = useParams();
     const [movieName, setMovieName] = useState("");
-    const [cinema, setCinema] = useState("");
-    const [showtime, setShowtime] = useState("");
-    const newShowtime = { movie_name: movieName, multiplex_cinema: cinema, showtime: showtime };
+    const [multiplexCinema, setMultiplexCinema] = useState("");
+    const [showtime, setShowtime] = useState([]);
+    const newShowtime = { movie_name: movieName, multiplex_cinema: multiplexCinema, showtime: showtime };
     function saveButton() {
         if (props.opt == "add") {
             console.log("IS THIS WORKING")
@@ -38,29 +38,96 @@ export const ShowtimeForm = (props) => {
         
     }, [])
 
+    const handleChange = (e) => {
+        // Destructuring
+        const { value, checked } = e.target;
+ 
+        console.log(`${value} is ${checked}`);
+ 
+        // Case 1 : The user checks the box
+        if (checked) {
+            setShowtime ([...showtime, value]);
+        }
+ 
+        // Case 2  : The user unchecks the box
+        else {
+            setShowtime([
+                showtime.filter(
+                    (e) => e !== value
+                )
+                ]);
+        }
+    };
+
 
     return (
         <form className="container" action="/showtimes">
-            <h1 className="d-flex justify-content-center mt-5">{props.opt == "add" ? "Add a new showtime" : "Edit showtime"}</h1>
+            <h1 className="d-flex justify-content-center mt-5">{props.opt == "add" ? "Agregar horario" : "Editar horario"}</h1>
             <select className="form-select" value={movieName} onChange={(e) => { setMovieName(e.target.value) }} >
-                <option selected>Peliculas</option>
+                <option value="Peliculas">Peliculas</option>
                 {store.movies.map(movie => (<option key={movie.id}>{movie.name}</option>))};
             </select>
-            <select className="form-select" value={cinema} onChange={(e) => { setCinema(e.target.value) }} >
-                <option selected>Cinemas</option>
+            <select className="form-select" value={multiplexCinema} onChange={(e) => { setMultiplexCinema(e.target.value) }} >
+                <option value="Cinemas">Cinemas</option>
                 {store.cadenas.map(multiplex => (<option key={multiplex.id}>{multiplex.cinema}</option>))};
             </select>
-            <select className="form-select" value={showtime} onChange={(e) => { setShowtime(e.target.value) }} >
-                <option selected>Horarios</option>
-                <option >14:00</option>
-                <option>16:00</option>
-                <option>18:00</option>
-                <option>20:00</option>
-            </select>
+            <div className="ms-2 mt-3">
+                <p>Horarios:</p>
+            </div>
+            <div className="d-flex">
+                <div className="form-check ms-2 me-4">
+                    <input className="form-check-input" type="checkbox" value="13:00" onChange={handleChange} id="showtime"/>
+                    <label className="form-check-label" htmlFor="showtime">
+                        13:00
+                    </label>
+                </div>
+                <div className="form-check me-4">
+                    <input className="form-check-input" type="checkbox" value="14:00" onChange={handleChange} id="showtime"/>
+                    <label className="form-check-label" htmlFor="showtime">
+                        14:00
+                    </label>
+                </div>
+                <div className="form-check me-4">
+                    <input className="form-check-input" type="checkbox" value="15:00" onChange={handleChange} id="showtime"/>
+                    <label className="form-check-label" htmlFor="showtime">
+                        15:00
+                    </label>
+                </div>
+                <div className="form-check me-4">
+                    <input className="form-check-input" type="checkbox" value="16:00" onChange={handleChange} id="showtime"/>
+                    <label className="form-check-label" htmlFor="showtime">
+                        16:00
+                    </label>
+                </div>
+                <div className="form-check me-4">
+                    <input className="form-check-input" type="checkbox" value="17:00" onChange={handleChange} id="showtime"/>
+                    <label className="form-check-label" htmlFor="showtime">
+                        17:00
+                    </label>
+                </div>
+                <div className="form-check me-4">
+                    <input className="form-check-input" type="checkbox" value="18:00" onChange={handleChange} id="showtime"/>
+                    <label className="form-check-label" htmlFor="showtime">
+                        18:00
+                    </label>
+                </div>
+                <div className="form-check me-4">
+                    <input className="form-check-input" type="checkbox" value="19:00" onChange={handleChange} id="showtime"/>
+                    <label className="form-check-label" htmlFor="showtime">
+                        19:00
+                    </label>
+                </div>
+                <div className="form-check me-4">
+                    <input className="form-check-input" type="checkbox" value="20:00" onChange={handleChange} id="showtime"/>
+                    <label className="form-check-label" htmlFor="showtime">
+                        20:00
+                    </label>
+                </div>
+            </div>
             <div className="gap-2 mt-4">
-                <button onClick={() => saveButton()} className="btn btn-warning mx-5">Save</button>
+                <button onClick={() => saveButton()} className="btn btn-warning mx-5">Guardar</button>
                 <Link to="/showtimes" className="ms-5">
-                    or get back to showtimes
+                    volver a horarios
                 </Link>
             </div>
         </form>

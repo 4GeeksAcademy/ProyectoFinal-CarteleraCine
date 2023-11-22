@@ -70,6 +70,18 @@ def get_showtime(showtime_id):
     get_showtime = Showtime.query.filter_by(id=showtime_id).first()
     return jsonify(get_showtime.serialize()), 200
 
+@api.route('/showtimes/<int:movie_name>/<int:multiplex_cinema>', methods=['GET'])
+def get_showtime_movie_id(movie_name, multiplex_cinema):
+    get_showtime = Showtime.query.filter_by(movie_name=movie_name, multiplex_cinema=multiplex_cinema).all()
+    result = list(map(lambda item: item.serialize(), get_showtime))
+    return jsonify(result), 200
+
+@api.route('/showtimes/multiplex/<int:multiplex_cinema>', methods=['GET'])
+def get_showtime_multiplex_id(multiplex_cinema):
+    get_showtime = Showtime.query.filter_by(multiplex_cinema=multiplex_cinema).all()
+    result = list(map(lambda item: item.serialize(), get_showtime))
+    return jsonify(result), 200
+
 @api.route('/showtimes', methods=['POST'])
 def create_showtime():
     body = request.get_json()

@@ -73,7 +73,7 @@ class Showtime(db.Model):
         return {
             "id": self.id,
             "movie_name": self.movie_name,
-            "cinema": self.multiplex_cinema,
+            "multiplex_cinema": self.multiplex_cinema,
             "showtime": self.showtime,
             
             # do not serialize the password, its a security breach
