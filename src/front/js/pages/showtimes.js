@@ -6,6 +6,7 @@ import { Context } from "../store/appContext";
 
 export const Showtimes = () => {
 	const { store, actions } = useContext(Context);
+	
 
 	return (
 		<div className="showtimePage container">
@@ -20,7 +21,7 @@ export const Showtimes = () => {
 							
 							<div>
 								<h4>{item.movie_name}</h4>
-								<p>{item.cinema}</p>
+								<p>{item.multiplex_cinema}</p>
 								<p>{item.showtime}</p>
 							</div>
 							<div>

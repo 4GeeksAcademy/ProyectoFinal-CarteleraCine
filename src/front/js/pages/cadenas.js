@@ -12,7 +12,7 @@ export const Cadenas = () => {
                     return (
                         <li
                             key={index}
-                            className="list-group-item d-flex justify-content-between"
+                            className="list-group-item d-flex justify-content-between mt-4"
                             style={{ background: item.background }} >
                             < div >
                                 <h4>{item.cinema}</h4>
@@ -23,7 +23,7 @@ export const Cadenas = () => {
                                 <br />
                                 {item.pais}
                                 <br />
-                                <Link to={"/single/" + index}>
+                                <Link to={"/single/" + item.id}>
                                     <span>{"Ver Más"}</span>
                                 </Link>
                             </div >

@@ -5,15 +5,7 @@ import { Context } from "../store/appContext";
 export const MovieInfo = () => {
     const { store, actions } = useContext(Context);
     const [movie, setMovie] = useState({});
-    const [paseo, setPaseo] = useState([]);
-    const [oxigeno, setOxigeno] = useState([]);
-    const [molinos, setMolinos] = useState([]);
-    const [santaFe, setSantaFe] = useState([]);
-    const [florida, setFlorida] = useState([]);
-    const [aventura, setAventura] = useState([]);
     const params = useParams();
-    console.log(params)
-    console.log(params.movie_id)
 
     useEffect (() => {
         fetch(`${process.env.BACKEND_URL}/api/movies/${params.movie_id}`)
@@ -22,42 +14,7 @@ export const MovieInfo = () => {
             console.log(data)
             setMovie(data)
         })
-        fetch(`${process.env.BACKEND_URL}/api/showtimes/movie/${params.movie_id}/multiplex/1`)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data)
-            setPaseo(data)
-        })
-        fetch(`${process.env.BACKEND_URL}/api/showtimes/movie/${params.movie_id}/multiplex/2`)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data)
-            setOxigeno(data)
-        })
-        fetch(`${process.env.BACKEND_URL}/api/showtimes/movie/${params.movie_id}/multiplex/3`)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data)
-            setMolinos(data)
-        })
-        fetch(`${process.env.BACKEND_URL}/api/showtimes/movie/${params.movie_id}/multiplex/4`)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data)
-            setSantaFe(data)
-        })
-        fetch(`${process.env.BACKEND_URL}/api/showtimes/movie/${params.movie_id}/multiplex/5`)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data)
-            setFlorida(data)
-        })
-        fetch(`${process.env.BACKEND_URL}/api/showtimes/movie/${params.movie_id}/multiplex/6`)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data)
-            setAventura(data)
-        })
+       
     }, [])
 
 		return (
@@ -81,8 +38,8 @@ export const MovieInfo = () => {
                             </button>
                         </div>
                         <div className="collapse" id="paseo">
-                            <div className="card card-body d-grid gap-4 d-md-block col-12 mx-auto">
-                                {paseo.map(showtime => (<button className="btn btn-light" key={showtime.id}>{showtime.showtime}</button>))}
+                            <div className="card card-body d-grid gap-2 col-12 mx-auto">
+                                {store.showtimes.map(showtime => (showtime.movie_name == movie.name && showtime.multiplex_cinema == "Paseo de las Flores") ? (<button className="btn btn-light" key={showtime.id}>{showtime.showtime}</button>) : null)}
                             </div>
                         </div>
                         <div>
@@ -91,8 +48,8 @@ export const MovieInfo = () => {
                             </button>
                         </div>
                         <div className="collapse" id="oxigeno">
-                            <div className="card card-body d-grid gap-4 d-md-block col-12 mx-auto">
-                                {oxigeno.map(showtime => (<button className="btn btn-light" key={showtime.id}>{showtime.showtime}</button>))}
+                            <div className="card card-body d-grid gap-2 col-12 mx-auto">
+                                {store.showtimes.map(showtime => (showtime.movie_name == movie.name && showtime.multiplex_cinema == "Oxígeno") ? (<button className="btn btn-light" key={showtime.id}>{showtime.showtime}</button>) : null)}
                             </div>
                         </div>
                         <div>
@@ -102,7 +59,7 @@ export const MovieInfo = () => {
                         </div>
                         <div className="collapse" id="molinos">
                             <div className="card card-body d-grid gap-2 col-12 mx-auto">
-                                {molinos.map(showtime => (<button className="btn btn-light" key={showtime.id}>{showtime.showtime}</button>))}
+                                {store.showtimes.map(showtime => (showtime.movie_name == movie.name && showtime.multiplex_cinema == "Molinos") ? (<button className="btn btn-light" key={showtime.id}>{showtime.showtime}</button>) : null)}
                             </div>
                         </div>
                         <div>
@@ -112,7 +69,7 @@ export const MovieInfo = () => {
                         </div>
                         <div className="collapse" id="santaFe">
                             <div className="card card-body d-grid gap-2 col-12 mx-auto">
-                                {santaFe.map(showtime => (<button className="btn btn-light" key={showtime.id}>{showtime.showtime}</button>))}
+                                {store.showtimes.map(showtime => (showtime.movie_name == movie.name && showtime.multiplex_cinema == "SantaFe") ? (<button className="btn btn-light" key={showtime.id}>{showtime.showtime}</button>) : null)}
                             </div>
                         </div>
                         <div>
@@ -122,7 +79,7 @@ export const MovieInfo = () => {
                         </div>
                         <div className="collapse" id="florida">
                             <div className="card card-body d-grid gap-2 col-12 mx-auto">
-                                {florida.map(showtime => (<button className="btn btn-light" key={showtime.id}>{showtime.showtime}</button>))}
+                                {store.showtimes.map(showtime => (showtime.movie_name == movie.name && showtime.multiplex_cinema == "Florida") ? (<button className="btn btn-light" key={showtime.id}>{showtime.showtime}</button>) : null)}
                             </div>
                         </div>
                         <div>
@@ -132,7 +89,7 @@ export const MovieInfo = () => {
                         </div>
                         <div className="collapse mb-5" id="aventura">
                             <div className="card card-body d-grid gap-2 col-12 mx-auto">
-                                {aventura.map(showtime => (<button className="btn btn-light" key={showtime.id}>{showtime.showtime}</button>))}
+                                {store.showtimes.map(showtime => (showtime.movie_name == movie.name && showtime.multiplex_cinema == "Aventura") ? (<button className="btn btn-light" key={showtime.id}>{showtime.showtime}</button>) : null)}
                             </div>
                         </div>
                     </div>
