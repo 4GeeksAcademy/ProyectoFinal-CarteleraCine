@@ -160,3 +160,20 @@ width: 100%;
   width: 75%; 
   height: 100%;
 }
+
+.formulario-container {
+  background-color: #007bff; /* Cambia el color según tus preferencias */
+  padding: 20px; /* Ajusta según sea necesario */
+  border-radius: 10px; /* Ajusta según sea necesario */
+  width: 70%; /* Ajusta según sea necesario */
+  margin: auto;
+  border: 2px solid red;
+}
+
+.form-label {
+  margin-bottom: 5px; /* Ajusta según sea necesario */
+}
+
+.form-control {
+  margin-bottom: 10px; /* Ajusta según sea necesario */
+}

@@ -10,7 +10,7 @@ export const Movies = () => {
 	return (
 		<div className="moviePage container">
 			<Link to="/Add">
-				<button className="mb-3 ms-2 mt-4 btn btn-dark">Crear nueva película</button>
+				<button className="mb-3 ms-2 mt-4 btn btn-dark" style={{ backgroundColor: '#0d6efd', color: '#ffffff', border: '1px solid #ffffff' }}>Crear nueva película</button>
 			</Link>
 			<div className="row g-4 d-flex flex-row">
 				{store.movies.map((item, index) => {

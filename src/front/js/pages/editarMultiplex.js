@@ -1,3 +1,71 @@
+// import React, { useContext, useEffect, useState } from "react";
+// import { Context } from "../store/appContext";
+// import { Link, useParams } from "react-router-dom";
+// import "../../styles/home.css";
+
+
+// export const EditarMultiplex = () => {
+//     const { store, actions } = useContext(Context);
+//     const params = useParams()
+//     const [cadena, setCadena] = useState(store.cadena.cadena)
+//     const [cinema, setCinema] = useState(store.cadena.cinema)
+//     const [ciudad, setCiudad] = useState(store.cadena.ciudad)
+//     const [pais, setPais] = useState(store.cadena.pais)
+
+//     const guardarCambios = () => {
+//         actions.editarMultiplex(params.id, cadena, cinema, ciudad, pais);
+//     };
+
+//     useEffect(() => {
+//         actions.mostrarMultiplex_id(params.id)
+//     }, [])
+
+//     return (
+//         <div className="container " >
+//             <div className="row">
+//                 <div className="col">
+//                     <div className="mb-3">
+//                         <label htmlFor="cadena" className="form-label text-start"><h5>Cadena:</h5></label>
+//                         <input type="text" className="form-control" id="cadena" aria-describedby="cadenaHelp" defaultValue={store.cadena.cadena} onChange={(e) => setCadena(e.target.value)} />
+//                     </div>
+//                 </div>
+//                 <div className="col">
+//                     <div className="mb-3">
+//                         <label htmlFor="cinema" className="form-label text-start"><h5>Cinema:</h5></label>
+//                         <input type="text" className="form-control" id="cinema" aria-describedby="cinemaHelp" defaultValue={store.cadena.cinema} onChange={(e) => setCinema(e.target.value)} />
+//                     </div>
+//                 </div>
+//             </div>
+//             <div className="row">
+//                 <div className="col">
+//                     <div className="mb-3">
+//                         <label htmlFor="ciudad" className="form-label text-start"><h5>Ciudad:</h5></label>
+//                         <input type="text" className="form-control" id="cinema" aria-describedby="ciudadHelp" defaultValue={store.cadena.ciudad} onChange={(e) => setCiudad(e.target.value)} />
+//                     </div>
+//                 </div>
+//                 <div className="col">
+//                     <div className="mb-3">
+//                         <label htmlFor="pais" className="form-label text-start"><h5>Pais:</h5></label>
+//                         <input type="text" className="form-control" id="cinema" aria-describedby="paisHelp" defaultValue={store.cadena.pais} onChange={(e) => setPais(e.target.value)} />
+//                     </div>
+//                 </div>
+//             </div>
+//             <div className="ml-auto">
+//                 <button className="btn btn-dark" type="submit" onClick={() => guardarCambios()}>
+//                     Guardar Cambios
+//                 </button>
+//                 <Link to="/cadenas">
+//                     <span className="text mx-3" href="#" role="button">
+//                         Vuelve a la lista
+//                     </span>
+//                 </Link>
+//             </div>
+//         </div>
+//     )
+// }
+
+
+
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link, useParams } from "react-router-dom";
@@ -21,10 +89,10 @@ export const EditarMultiplex = () => {
     }, [])
 
     return (
-        <div className="container " >
+        <div className="container formulario-container mt-5 style={{ backgroundColor: '#0d6efd', width: 75%, color: '#ffffff', border: '1px solid #ffffff' }}">
             <div className="row">
                 <div className="col">
-                    <div className="mb-3">
+                    <div className="mb-3"> 
                         <label htmlFor="cadena" className="form-label text-start"><h5>Cadena:</h5></label>
                         <input type="text" className="form-control" id="cadena" aria-describedby="cadenaHelp" defaultValue={store.cadena.cadena} onChange={(e) => setCadena(e.target.value)} />
                     </div>
@@ -51,7 +119,7 @@ export const EditarMultiplex = () => {
                 </div>
             </div>
             <div className="ml-auto">
-                <button className="btn btn-dark" type="submit" onClick={() => guardarCambios()}>
+                <button className="btn" style={{ backgroundColor: '#0d6efd', color: '#ffffff', border: '1px solid #ffffff' }} type="submit" onClick={() => guardarCambios()}>
                     Guardar Cambios
                 </button>
                 <Link to="/cadenas">
@@ -63,4 +131,5 @@ export const EditarMultiplex = () => {
         </div>
     )
 }
+
 

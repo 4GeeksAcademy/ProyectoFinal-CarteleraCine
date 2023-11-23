@@ -27,13 +27,13 @@ export const MovieInfo = () => {
                         <h2>{movie.name}</h2>
                         <p>Fecha de estreno: {movie.release_date}</p>
                         <p className="fst-italic">Calificación: </p>
-                        <p className="rounded-circle bg-secondary text-white d-flex justify-content-center align-items-center fs-3" style={{width: "70px", height: "70px"}}>{movie.rating}</p>
+                        <p className="rounded-circle  text-white d-flex justify-content-center align-items-center fs-3" style={{backgroundColor: '#0d6efd', color: '#ffffff', border: '2px solid #ffffff' , width: "70px", height: "70px"}}>{movie.rating}</p>
                         <h5>Descripción</h5>
                         <p>{movie.overview}</p>
                     </div>
                     <div className="">
                         <div>
-                            <button className="btn btn-secondary p-3 mb-1 d-grid gap-2 col-12 mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#paseo" aria-expanded="false" aria-controls="collapseExample">
+                            <button className="btn p-3 mb-1 d-grid gap-2 col-12 mx-auto" style={{ backgroundColor: '#0d6efd', color: '#ffffff', border: '3px solid #ffffff' }} type="button" data-bs-toggle="collapse" data-bs-target="#paseo" aria-expanded="false" aria-controls="collapseExample">
                                 Cinépolis Paseo de las Flores Heredia
                             </button>
                         </div>
@@ -43,7 +43,7 @@ export const MovieInfo = () => {
                             </div>
                         </div>
                         <div>
-                            <button className="btn btn-secondary p-3 mb-1 d-grid gap-2 col-12 mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#oxigeno" aria-expanded="false" aria-controls="collapseExample">
+                            <button className="btn p-3 mb-1 d-grid gap-2 col-12 mx-auto" style={{ backgroundColor: '#0d6efd', color: '#ffffff', border: '3px solid #ffffff' }} type="button" data-bs-toggle="collapse" data-bs-target="#oxigeno" aria-expanded="false" aria-controls="collapseExample">
                                 Cinemark Oxígeno Heredia
                             </button>
                         </div>
@@ -53,7 +53,7 @@ export const MovieInfo = () => {
                             </div>
                         </div>
                         <div>
-                            <button className="btn btn-secondary p-3 mb-1 d-grid gap-2 col-12 mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#molinos" aria-expanded="false" aria-controls="collapseExample">
+                            <button className="btn p-3 mb-1 d-grid gap-2 col-12 mx-auto" style={{ backgroundColor: '#0d6efd', color: '#ffffff', border: '3px solid #ffffff' }} type="button" data-bs-toggle="collapse" data-bs-target="#molinos" aria-expanded="false" aria-controls="collapseExample">
                                 CineColombia Molinos Medellín
                             </button>
                         </div>
@@ -63,7 +63,7 @@ export const MovieInfo = () => {
                             </div>
                         </div>
                         <div>
-                            <button className="btn btn-secondary p-3 mb-1 d-grid gap-2 col-12 mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#santaFe" aria-expanded="false" aria-controls="collapseExample">
+                            <button className="btn p-3 mb-1 d-grid gap-2 col-12 mx-auto" style={{ backgroundColor: '#0d6efd', color: '#ffffff', border: '3px solid #ffffff' }} type="button" data-bs-toggle="collapse" data-bs-target="#santaFe" aria-expanded="false" aria-controls="collapseExample">
                                 CineColombia Santa Fe Medellín
                             </button>
                         </div>
@@ -73,7 +73,7 @@ export const MovieInfo = () => {
                             </div>
                         </div>
                         <div>
-                            <button className="btn btn-secondary p-3 mb-1 d-grid gap-2 col-12 mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#florida" aria-expanded="false" aria-controls="collapseExample">
+                            <button className="btn p-3 mb-1 d-grid gap-2 col-12 mx-auto" style={{ backgroundColor: '#0d6efd', color: '#ffffff', border: '3px solid #ffffff' }} type="button" data-bs-toggle="collapse" data-bs-target="#florida" aria-expanded="false" aria-controls="collapseExample">
                                 Procinal Florida Medellín
                             </button>
                         </div>
@@ -83,7 +83,7 @@ export const MovieInfo = () => {
                             </div>
                         </div>
                         <div>
-                            <button className="btn btn-secondary p-3 mb-1 d-grid gap-2 col-12 mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#aventura" aria-expanded="false" aria-controls="collapseExample">
+                            <button className="btn p-3 mb-1 d-grid gap-2 col-12 mx-auto" style={{ backgroundColor: '#0d6efd', color: '#ffffff', border: '3px solid #ffffff' }} type="button" data-bs-toggle="collapse" data-bs-target="#aventura" aria-expanded="false" aria-controls="collapseExample">
                                 Procinal Aventura Medellín
                             </button>
                         </div>
