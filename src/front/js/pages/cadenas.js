@@ -8,9 +8,10 @@ export const Cadenas = () => {
     return (
         <div className="container">
             <div className="container mt-4">
+                {store.auth === true ?
                 <Link to="/formulario">
                     <button className="btn btn-dark">Nuevo multiplex</button>
-                </Link>
+                </Link> : null}
             </div>
             <ul className="list-group">
                 {store.cadenas.map((item, index) => {
@@ -32,6 +33,7 @@ export const Cadenas = () => {
                                     <span>{"Ver Más"}</span>
                                 </Link>
                             </div >
+                            {store.auth === true ?
                             <div className="justify-content-end">
                                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                                     <button className="btn btn-dark fa fa-trash" type="button"
@@ -41,7 +43,7 @@ export const Cadenas = () => {
                                         <button className="btn btn-dark fa fa-pencil" type="button"></button>
                                     </Link>
                                 </div>
-                            </div>
+                            </div> : null}
                         </li>
                     );
                 })}

@@ -2,16 +2,14 @@ import React, { useState, useContext } from "react"
 import { Context } from "../store/appContext";
 
 export const Login = () => {
-    const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const{actions} = useContext(Context)
+    const { store, actions } = useContext(Context);
 
     function sendData(e) {
         e.preventDefault()
         console.log("send Data");
-        console.log(name, email, password);
-        actions.login(name, email, password)
+        actions.login(email, password)
     }
 
   
@@ -24,7 +22,7 @@ export const Login = () => {
                         <h3 className="text-center mb-1">Iniciar sesión</h3>
                         <p className="text-center mb-4">Entra con tu usuario registrado</p>
 
-                        <div className="mb-3">
+                        {/* <div className="mb-3">
                             <label htmlFor="inputName" className="form-label">Name</label>
                             <input
                                 type="text"
@@ -33,7 +31,7 @@ export const Login = () => {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                             />
-                        </div>
+                        </div> */}
 
                         <div className="mb-3">
                             <label htmlFor="inputEmail" className="form-label">Email</label>

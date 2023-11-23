@@ -7,7 +7,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			current_showtime: null,
 			cadenas: [],
 			cadena: {},
-			City: []
+			City: [],
+			auth: false
 
 		},
 		actions: {
@@ -239,6 +240,54 @@ const getState = ({ getStore, getActions, setStore }) => {
 			.catch(error => console.log('Error al eliminar ciudad', error));
 		}
 		
+		},
+
+		login: (email, password) => {
+			console.log("login desde flux")
+			const requestOptions = {
+				method: "POST",
+				headers: { "Content-type": "application/json" },
+				body: JSON.stringify(
+					{
+						"email":email,
+						"password": password
+					}
+				)
+			};
+			fetch(`${process.env.BACKEND_URL}/api/login`, requestOptions)
+				.then(response => {
+					console.log(response.status)
+					if(response.status === 200){
+						setStore({auth: true});
+					}
+					return response.json()
+				})
+				.then(data => {
+					localStorage.setItem("token", data.access_token);
+					console.log(data)
+				});
+		},
+
+		signup: (email, password) => {
+			console.log("signup desde flux")
+			fetch(`${process.env.BACKEND_URL}/api/signup`, {
+				method: "POST",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify(
+					{
+						"email":email,
+						"password": password
+					}
+				)
+			})
+			.then((response) => response.json())
+			.then((data) => console.log(data))
+		},
+
+		logout: () => {
+			console.log("logout desde flux")
+			setStore({auth: false})
+			localStorage.removeItem("token");
 		}
 	};
 };

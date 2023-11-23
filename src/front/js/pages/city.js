@@ -132,13 +132,14 @@ export const City = () => {
 					</li>
 					))}
 				</ul>
+                {store.auth === true ?
                 <Link to="/city-form">
           <div className="d-grid gap-2 d-md-block">
             <button className={style.button} type="button">
               Ir al formulario de ciudades
             </button>
           </div>
-        </Link>
+        </Link> : null}
 			</div>
 
 			<br />
