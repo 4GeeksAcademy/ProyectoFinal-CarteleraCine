@@ -26,9 +26,13 @@ export const Login = () => {
                         <h1 className="text-center">LOGIN</h1>
                         <div className="container">
                             <div className="row col mb-3">
-                                <label htmlFor="inputName3" className="col-sm-2 col-form-label">Name</label>
+                                <label htmlFor="inputName3" 
+                                className="col-sm-2 col-form-label">Name</label>
                                 <div className="col-sm-10">
-                                    <input className="form-control" type="name" value={name} onChange={(e) => setName(e.target.value)} id="inputName3" />
+                                    <input className="form-control" 
+                                    type="name" 
+                                    value={name} onChange={(e) => setName(e.target.value)} 
+                                    id="inputName3" />
                                 </div>
                             </div>
                             <div className="row col mb-3">

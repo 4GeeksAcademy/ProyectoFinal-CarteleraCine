@@ -36,7 +36,7 @@ export const Navbar = () => {
 				</Link>
 				{store.auth === true ? 
 				<button className="btn btn-warning "  onClick={() => handleLogout()} >
-					<h6>{store.user.name}</h6>
+					<h6>{store.user?.name}</h6>
 					Logout
 				</button> : null}
 				{/* <Link to="/login">

@@ -140,6 +140,7 @@ def crear_multiplex():
     return jsonify(response_body), 200
 
 @api.route("/multiplex/<int:multiplex_id>", methods=["PUT"])
+@jwt_required()
 def modificar_multiplex(multiplex_id):
     multiplex = Multiplex.query.filter_by(id=multiplex_id).first()
     body = request.get_json()
@@ -226,7 +227,7 @@ def login():
         return jsonify({"msg": "password incorrecto"}), 401
     
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token)
+    return jsonify({"token":access_token, "name": user.name})
 
 
 @api.route("/signup", methods=["POST"]) 

@@ -8,7 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			cadenas: [],
 			cadena: {},
 			user: [],
-			auth: false
+			auth: localStorage.getItem("token")? true : false,
 		},
 		actions: {
 
@@ -136,7 +136,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/api/multiplex/${id}`, {
 						method: 'PUT',
-						headers: { "Content-Type": "application/json" },
+						headers: { "Content-Type": "application/json", "authorization":`Bearer ${localStorage.getItem("token")}`  },
 						body: JSON.stringify({
 							cadena: cadena,
 							cinema: cinema,
@@ -144,7 +144,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 							pais: pais
 						}),
 					})
-					return response.status;
+					if (response.ok) {
+						getActions().mostrarMultiplex()
+						return response.status;						
+					}
 				} catch (error) {
 					console.log("Error al editar", error);
 				}
@@ -254,20 +257,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 								"password": password
 							}
 						)
-					}
-					// const response = await 
+					} 
 					fetch(`${process.env.BACKEND_URL}/api/login`, requestOptions)
 					.then(response=>{
 						console.log(response.status);
 						if (response.status === 200) {
-							setStore({auth: true});
-							
+							setStore({auth: true});							
 						}
 						return response.json()
 					})
 					.then(data => {
 						localStorage.setItem("token", data.access_token);
 						console.log(data);
+						setStore({user: {name: data.name}})
 					})
 
 

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import "../../styles/home.css";
 
 
@@ -11,11 +11,18 @@ export const EditarMultiplex = () => {
     const [cinema, setCinema] = useState(store.cadena.cinema)
     const [ciudad, setCiudad] = useState(store.cadena.ciudad)
     const [pais, setPais] = useState(store.cadena.pais)
+    const navigate = useNavigate()
 
-    const guardarCambios = () => {
-        actions.editarMultiplex(params.id, cadena, cinema, ciudad, pais);
-        location.replace("/cadenas")
-        
+
+    const guardarCambios = async () => {
+        let response = await actions.editarMultiplex(params.id, cadena, cinema, ciudad, pais);
+        // location.replace("/cadenas")
+        if (response == 200) {
+            navigate("/cadenas")
+
+            
+        }
+        console.log(response);
     };
 
     useEffect(() => {
@@ -53,7 +60,7 @@ export const EditarMultiplex = () => {
                 </div>
             </div>
             <div className="ml-auto">
-                <button className="btn btn-warning" type="submit" onClick={() => guardarCambios()}>
+                <button className="btn btn-warning" type="button" onClick={() => guardarCambios()}>
                     Guardar Cambios
                 </button>
                 <Link to="/cadenas">
