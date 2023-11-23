@@ -81,7 +81,7 @@ export const MovieForm = (props) => {
                     <input defaultValue={name} onChange={(e) => { setName(e.target.value) }} type="text" className="form-control" />
                 </div>
                 <div className="gap-2">
-                    <button onClick={() => searchMovie()} type="button" className="btn btn-warning mx-5 mb-4">Buscar película</button>
+                    <button onClick={() => searchMovie()} type="button" className="btn btn-dark mx-5 mb-4">Buscar película</button>
                 </div>
                 <div className="mb-3 mx-5">
                     <label htmlFor="ImageUrl" className="form-label"><h5>URL Imagen</h5></label>
@@ -100,7 +100,7 @@ export const MovieForm = (props) => {
                     <input defaultValue={overview} onChange={(e) => { setOverview(e.target.value) }} type="text" className="form-control" />
                 </div>
                 <div className="gap-2">
-                    <button onClick={() => saveButton()} className="btn btn-warning mx-5">Guardar</button>
+                    <button onClick={() => saveButton()} className="btn btn-dark mx-5">Guardar</button>
                     <Link to="/movies" className="ms-5">
                         o volver a películas
                     </Link>

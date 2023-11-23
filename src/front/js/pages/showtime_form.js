@@ -125,7 +125,7 @@ export const ShowtimeForm = (props) => {
                 </div>
             </div>
             <div className="gap-2 mt-4">
-                <button onClick={() => saveButton()} className="btn btn-warning mx-5">Guardar</button>
+                <button onClick={() => saveButton()} className="btn btn-dark mx-5">Guardar</button>
                 <Link to="/showtimes" className="ms-5">
                     volver a horarios
                 </Link>

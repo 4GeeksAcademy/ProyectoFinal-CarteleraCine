@@ -13,24 +13,24 @@ const Footer = () => {
                         <img src={LogoEmpresa} alt="Logo de Tu Empresa" className="logo" style={{ maxWidth: '100px', maxHeight: '70px' }} />
                     </div>
                     <div className="col-md-2">
-                        <h3>Movies</h3>
+                        <h3>Películas</h3>
                         <ul>
-                            <li>Now Playing</li>
+                            <li>Cartelera</li>
                             <li>Cinema 4D</li>
                             <li>CinéArts</li>
-                            <li>Coming Soon</li>
+                            <li>Próximamente</li>
                         </ul>
                     </div>
                     <div className="col-md-2">
-                        <h3>Programs</h3>
+                        <h3>Programas</h3>
                         <ul>
-                            <li>Programs</li>
-                            <li>Private Events</li>
-                            <li>Movie Clasics</li>
+                            <li>Programas</li>
+                            <li>Eventos Privados</li>
+                            <li>Películas Clásicas</li>
                         </ul>
                     </div>
                     <div className="col-md-2">
-                        <h3>Technology</h3>
+                        <h3>Tecnología</h3>
                         <ul>
                             <li>Cinema 4D</li>
                             <li>IMAX</li>
@@ -38,10 +38,10 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div className="col-md-2">
-                        <h3>Account</h3>
+                        <h3>Cuenta</h3>
                         <ul>
-                            <li>Opportunities</li>
-                            <li>Employee Referrals </li>
+                            <li>Oportunidades</li>
+                            <li>Referencias de Empleados</li>
 
                         </ul>
                     </div>
