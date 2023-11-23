@@ -269,37 +269,37 @@ def delete_movie2(movie_id):
     return jsonify({"msg": "Movie deleted successfully"}), 200
 
 
-@api.route("/login", methods=["POST"])
-def login():
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
-    user = User.query.filter_by(email=email).first()
-    print(user)
+# @api.route("/login", methods=["POST"])
+# def login():
+#     email = request.json.get("email", None)
+#     password = request.json.get("password", None)
+#     user = User.query.filter_by(email=email).first()
+#     print(user)
 
-    if user is None:
-        return jsonify({"msg": "The user doesnt exist"}), 401
+#     if user is None:
+#         return jsonify({"msg": "The user doesnt exist"}), 401
 
-    if password != user.password:
-        return jsonify({"msg": "Wrong password"}), 401
+#     if password != user.password:
+#         return jsonify({"msg": "Wrong password"}), 401
 
-    access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token)
+#     access_token = create_access_token(identity=email)
+#     return jsonify(access_token=access_token)
 
-@api.route('/signup', methods=['POST'])
-def signup():
-    body = request.get_json()
-    print(body)
-    user = User.query.filter_by(email=body["email"]).first()
-    print(user)
-    if user == None:
-        new_user = User(email=body["email"],password=body["password"], is_active=True)
-        db.session.add(new_user)
-        db.session.commit()
-        response_body = {
-            "msg": "New user created"
-        }
-        return jsonify(response_body), 200
-    else:
-        return jsonify({"msg": "There is already a user created with this email"}), 401
+# @api.route('/signup', methods=['POST'])
+# def signup():
+#     body = request.get_json()
+#     print(body)
+#     user = User.query.filter_by(email=body["email"]).first()
+#     print(user)
+#     if user == None:
+#         new_user = User(email=body["email"],password=body["password"], is_active=True)
+#         db.session.add(new_user)
+#         db.session.commit()
+#         response_body = {
+#             "msg": "New user created"
+#         }
+#         return jsonify(response_body), 200
+#     else:
+#         return jsonify({"msg": "There is already a user created with this email"}), 401
 
 
