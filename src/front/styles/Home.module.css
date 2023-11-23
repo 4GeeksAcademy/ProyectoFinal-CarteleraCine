@@ -1,3 +1,8 @@
+body {
+  background-color: black;
+  color: white;
+}
+
 .general{
 
   background-color: rgb(99, 98, 98);
@@ -145,4 +150,13 @@ background-repeat: no-repeat;
 height: 50px; /* Ajusta la altura según tus necesidades */
 width: 100%;
 
+}
+
+.custom-form {
+  background:  #3f3e3e; /* Puedes ajustar los colores según tus preferencias */
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px 0px rgba(253, 252, 252, 0.7); /* Sombra para resaltar el formulario */
+  width: 75%; 
+  height: 100%;
 }

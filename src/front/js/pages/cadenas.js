@@ -12,7 +12,7 @@ export const Cadenas = () => {
                     return (
                         <li
                             key={index}
-                            className="list-group-item d-flex justify-content-between mt-4"
+                            className="list-group-item d-flex justify-content-between mt-4 bg-secondary text-white"
                             style={{ background: item.background }} >
                             < div >
                                 <h4>{item.cinema}</h4>
@@ -29,11 +29,11 @@ export const Cadenas = () => {
                             </div >
                             <div className="justify-content-end">
                                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                                    <button className="btn btn-warning fa fa-trash" type="button"
+                                    <button className="btn btn-dark fa fa-trash" type="button"
                                         onClick={() => actions.eliminarMultiplex(index)}>
                                     </button>
                                     <Link to={"/editarMultiplex/" + item.id} >
-                                        <button className="btn btn-warning fa fa-pencil" type="button"></button>
+                                        <button className="btn btn-dark fa fa-pencil" type="button"></button>
                                     </Link>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@ export const Cadenas = () => {
             <br />
             <div className="container">
                 <Link to="/formulario">
-                    <button className="btn btn-warning">Nuevo multiplex</button>
+                    <button className="btn btn-dark">Nuevo multiplex</button>
                 </Link>
             </div>
         </div >

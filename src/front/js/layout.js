@@ -12,6 +12,7 @@ import { MovieForm } from "./pages/movie_form";
 import { ShowtimeForm } from "./pages/showtime_form";
 import { Cadenas } from "./pages/cadenas";
 import { Single } from "./pages/single";
+import { Login } from "./pages/login";
 import { Formulario } from "./pages/formulario"
 import { EditarMultiplex } from "./pages/editarMultiplex"
 
@@ -53,7 +54,8 @@ const Layout = () => {
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<Formulario />} path="/formulario" />
                         <Route element={<EditarMultiplex />} path="/editarMultiplex/:id" />
-                        <Route path="/" element={<Home /> } />
+                        <Route element={<Login />} path="login"/>
+                        <Route element={<Home /> } path="/" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

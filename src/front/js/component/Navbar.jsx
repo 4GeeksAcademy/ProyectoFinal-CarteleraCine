@@ -23,14 +23,14 @@ const Navbar = () => {
                     <div className="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul className="navbar-nav mx-auto text-center">
                             <li className="nav-item fw-bold">
+                                <Link to="/" className="nav-link active me-5" style={{ color: 'White' }} aria-current="page" href="#">
+                                    Inicio 
+                                </Link>
+                            </li>
+                            <li className="nav-item fw-bold">
                                 <Link to="/movies" className="nav-link active me-5" style={{ color: 'White' }} aria-current="page" href="#">
                                     Cartelera 
                                 </Link>
-                            </li>
-                            <li className="nav-item ms-3 fw-bold" >
-                                <a className="nav-link me-5" style={{ color: 'white' }} href="#">
-                                    Proximos Estrenos
-                                </a>
                             </li>
                             <li className="nav-item ms-3 fw-bold" >
                                 <Link to="/cadenas" className="nav-link me-5" style={{ color: 'white' }} href="#">
@@ -44,7 +44,7 @@ const Navbar = () => {
                                 </Link> 
                             </li>
                             <li className="nav-item ms-3 fw-bold" >
-                                <Link to="/" className="nav-link" style={{ color: 'white' }}>
+                                <Link to="/login" className="nav-link" style={{ color: 'white' }}>
                                     Inicio de sesion
                                 </Link> 
                             </li>
