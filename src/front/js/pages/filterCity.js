@@ -2,15 +2,17 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const Heredia = () => {
+export const FilterCity = () => {
     const { store, actions } = useContext(Context);
+    const params = useParams();
+
 
     return (
         <div className="container">
             <ul className="list-group">
                 {store.cadenas.map((item, index) => {
                     return (
-                        (item.ciudad == Heredia) ?  <li
+                        (item.ciudad == params.name) ?  <li
                             key={index}
                             className="list-group-item d-flex justify-content-between mt-4 bg-secondary text-white"
                             style={{ background: item.background }} >

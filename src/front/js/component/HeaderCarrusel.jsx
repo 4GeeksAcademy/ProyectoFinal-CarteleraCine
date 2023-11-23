@@ -69,7 +69,7 @@ const HeaderCarrusel = () => {
             <div className={style.carouselContainer}>
                 <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
-                        {movies.slice(0, 3).map((_, index) => (
+                        {movies.slice(0, 2).map((_, index) => (
                             <button
                                 key={index}
                                 type="button"
@@ -83,7 +83,7 @@ const HeaderCarrusel = () => {
                     </div>
 
                     <div className="carousel-inner">
-                        {movies.slice(0, 3).map((movie, index) => (
+                        {movies.slice(0, 2).map((movie, index) => (
                             <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
                                 <div className="d-flex justify-content-around align-items-center">
                                     {movies.slice(index * 4, index * 4 + 4).map((movieSlice, i) => (

@@ -13,7 +13,7 @@ import { ShowtimeForm } from "./pages/showtime_form";
 import { Cadenas } from "./pages/cadenas";
 import { Single } from "./pages/single";
 import { Login } from "./pages/login";
-import { Heredia } from "./pages/heredia";
+import { FilterCity } from "./pages/filterCity.js";
 import { Formulario } from "./pages/formulario"
 import { EditarMultiplex } from "./pages/editarMultiplex"
 
@@ -57,7 +57,7 @@ const Layout = () => {
                         <Route element={<EditarMultiplex />} path="/editarMultiplex/:id" />
                         <Route element={<Login />} path="login"/>
                         <Route element={<Home /> } path="/" />
-                        <Route element={<Heredia /> } path="/Heredia" />
+                        <Route element={<FilterCity /> } path="/ciudades/:name" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

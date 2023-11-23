@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Cadenas = () => {
-    const { store, actions } = useContext(Context);
+    const { store, actions } = useContext(Context);  
 
     return (
         <div className="container">

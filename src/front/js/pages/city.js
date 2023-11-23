@@ -115,7 +115,7 @@ export const City = () => {
 						<div className="row">
 						<div className="col align-self-center mb-2 fw-bold">
 						<br />
-                            <Link to={"/" + city.name}>
+                            <Link to={"/ciudades/" + city.name}>
                             {city.name}
                             </Link>
 							
