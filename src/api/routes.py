@@ -163,6 +163,13 @@ def Eliminar_multiplex(multiplex_id):
 
 
 # RUTAS PARA CREAR AL USUARIO
+@api.route("/user", methods=["GET"])
+def mostrar_user():
+    user = User.query.all()
+    result = list(map(lambda user: user.serialize(), user))
+    
+    return jsonify(result), 200
+
 @api.route("/user", methods=["POST"])
 def crear_user():
     body = request.get_json()
@@ -170,7 +177,7 @@ def crear_user():
             name = body["name"],
             email = body["email"],
             password = body["password"],
-            is_active = body["is_active"]
+            is_active = True
     )
     db.session.add(user)
     db.session.commit()
@@ -180,13 +187,36 @@ def crear_user():
     }
     return jsonify(response_body), 200
 
+@api.route("/user/<int:user_id>", methods=["PUT"])
+def modificar_user(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    body = request.get_json()
+    user.name = body["name"]
+    user.email = body["email"]
+    user.password = body["password"]
+    db.session.commit()
+
+    return jsonify(user.serialize()), 200
+
+@api.route("/user/<int:user_id>", methods=["DELETE"])
+def Eliminar_user(user_id):
+    user = User.query.filter_by(id=user_id).first()  
+    db.session.delete(user)
+    db.session.commit()
+    response_body = {
+        "msg":"Usuario Eliminado"
+    }
+    return jsonify(response_body), 200
+
+
 # CREA RUTA PARA AUTENTICAR EL USER, DEVUELVE JWTs/TOKEN.(ADJANI)
 @api.route("/login", methods=["POST"])
 def login():
     name = request.json.get("name", None)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    user = User.query.filter_by(name=name).first()   
+    user = User.query.filter_by(email=email).first()   
+    
     if user is None:
         return jsonify({"msg":"el user no está en sistema"}), 401
     print(user.serialize())
@@ -194,9 +224,41 @@ def login():
 
     if password != user.password:
         return jsonify({"msg": "password incorrecto"}), 401
+    
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
 
+
+@api.route("/signup", methods=["POST"]) 
+def signup():
+    body = request.get_json()
+    print(body)
+    
+    user = User.query.filter_by(email=body["email"]).first()
+    print(user)
+    if user is None:
+        user = User(
+            name = body["name"],
+            email = body["email"],
+            password = body["password"],
+            is_active = True
+        )
+        db.session.add(user)
+        db.session.commit()
+        response_body = {
+            "msg": "Usuario Creado"
+        }
+        return jsonify(response_body), 200
+    else:
+        return jsonify({"msg": "Usuario Existente"}), 401
+    
+    
+
+    if password != user.password:
+        return jsonify({"msg": "password incorrecto"}), 401
+    
+    access_token = create_access_token(identity=email)
+    return jsonify(access_token=access_token)
 
 # PROTEJE LA RUTA CON EL TOKEN, EVITA EL ACCESO.
 @api.route("/protected", methods=["GET"])

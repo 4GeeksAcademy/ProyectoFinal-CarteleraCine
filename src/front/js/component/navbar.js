@@ -1,12 +1,19 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 
 export const Navbar = () => {
-	const { store } = useContext(Context)
-	console.log(store.user?.email);
+	const { store, actions } = useContext(Context)
+	const navigate = useNavigate()
+	// console.log(store.user?.email);
 
+	function handleLogout() {
+		actions.logout()
+		navigate("/cadenas")
+	}
+	
 	return (
 		<nav className="navbar navbar-light bg-light">
 			<div className="container-fluid">
@@ -24,14 +31,20 @@ export const Navbar = () => {
 					</Link>
 				</div>
 				<Link to="/login">
-					<button className="btn btn-warning">Login </button>
+					{/* <button className="btn btn-warning">Login </button> */}
+					{store.auth === false? <button className="btn btn-warning ">Login</button> : null}
 				</Link>
-				<Link to="/login">
+				{store.auth === true ? 
+				<button className="btn btn-warning "  onClick={() => handleLogout()} >
+					<h6>{store.user.name}</h6>
+					Logout
+				</button> : null}
+				{/* <Link to="/login">
 					<button className="btn btn-warning "
 						onClick={() => localStorage.clear()}>
 						<h6>{store.user?.name}</h6>Logout
 					</button>
-				</Link>
+				</Link> */}
 			</div>
 		</nav>
 	);
