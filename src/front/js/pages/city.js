@@ -115,8 +115,10 @@ export const City = () => {
 						<div className="row">
 						<div className="col align-self-center mb-2 fw-bold">
 						<br />
-
-							{city.name}
+                            <Link to={"/ciudades/" + city.name}>
+                            {city.name}
+                            </Link>
+							
 							{/* <button className="icon-button" onClick={() => (city.name)}>
 							</button> */}
 
@@ -130,13 +132,14 @@ export const City = () => {
 					</li>
 					))}
 				</ul>
+                {store.auth === true ?
                 <Link to="/city-form">
           <div className="d-grid gap-2 d-md-block">
             <button className={style.button} type="button">
               Ir al formulario de ciudades
             </button>
           </div>
-        </Link>
+        </Link> : null}
 			</div>
 
 			<br />

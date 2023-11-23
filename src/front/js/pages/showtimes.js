@@ -26,9 +26,9 @@ export const Showtimes = () => {
 							</div>
 							<div>
 								<Link to={"/EditShowtime/" + item.id}>
-									<button style={{ border: "none", backgroundColor: "white" }}><FontAwesomeIcon icon={faPencil} style={{ fontSize: "12px" }} className="lh-1 pencil text-secondary" /></button>
+									<button style={{ border: "none", backgroundColor: "black" }}><FontAwesomeIcon icon={faPencil} style={{ fontSize: "12px" }} className="lh-1 pencil text-secondary" /></button>
 								</Link>
-								<button style={{ border: "none", backgroundColor: "white" }} onClick={() => actions.deleteShowtime(item.id)}><FontAwesomeIcon icon={faTrashCan} style={{ fontSize: "12px" }} className="lh-1 trash text-secondary" /></button>
+								<button style={{ border: "none", backgroundColor: "black" }} onClick={() => actions.deleteShowtime(item.id)}><FontAwesomeIcon icon={faTrashCan} style={{ fontSize: "12px" }} className="lh-1 trash text-secondary" /></button>
 							</div>
 						</div>
 					);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import style from "../../styles/Home.module.css";
+import { Movies } from "../pages/movies";
 
 const HeaderCarrusel = () => {
     const [movies, setMovies] = useState([]);
@@ -10,9 +11,8 @@ const HeaderCarrusel = () => {
     const [isClicking, setIsClicking] = useState(false);
 
     useEffect(() => {
-        const apiKey = 'ea088d978fc6da3b4fda0c9a6fb0532e';
-        const baseApiUrl = 'https://api.themoviedb.org/3';
-        const discoverMoviesUrl = `${baseApiUrl}/discover/movie?api_key=${apiKey}&page=1`;
+        
+        const discoverMoviesUrl = `${process.env.BACKEND_URL}/api/movies`;
 
         fetch(discoverMoviesUrl)
             .then(response => {
@@ -22,7 +22,7 @@ const HeaderCarrusel = () => {
                 return response.json();
             })
             .then(data => {
-                setMovies(data.results);
+                setMovies(data);
                 setLoading(false);
             })
             .catch(error => {
@@ -69,7 +69,7 @@ const HeaderCarrusel = () => {
             <div className={style.carouselContainer}>
                 <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
-                        {movies.slice(0, 4).map((_, index) => (
+                        {movies.slice(0, 2).map((_, index) => (
                             <button
                                 key={index}
                                 type="button"
@@ -83,13 +83,13 @@ const HeaderCarrusel = () => {
                     </div>
 
                     <div className="carousel-inner">
-                        {movies.slice(0, 4).map((movie, index) => (
+                        {movies.slice(0, 2).map((movie, index) => (
                             <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
                                 <div className="d-flex justify-content-around align-items-center">
                                     {movies.slice(index * 4, index * 4 + 4).map((movieSlice, i) => (
                                         <img
                                             key={i}
-                                            src={`https://image.tmdb.org/t/p/w200${movieSlice.poster_path}`}
+                                            src={movieSlice.image_url}
                                             className={`d-block w-25 me-3 ${index * 4 + i === selectedPosterIndex
                                                 ? `${style.selectedPoster}`
                                                 : `${style.posterHover}`
@@ -118,19 +118,19 @@ const HeaderCarrusel = () => {
                 </div>
             </div>
 
-            {/* Mostrar detalles de la película seleccionada */}
+            {/* Mostrar detalles de la película seleccionada
             {selectedMovie && (
                 <div className={`${style.movieDetails} carousel-item active d-flex justify-content-center align-items-center`}>
                     <img
-                        src={`https://image.tmdb.org/t/p/w200${selectedMovie.poster_path}`}
+                        src={movies.image_url}
                         className="d-block w-25"
                         alt={`Slide ${movies.length + 1}`}
                         onClick={handleCloseDetails}
                         style={{ cursor: 'pointer' }}
                     />
                     <div className="container text-white text-center ms-3">
-                        <h1 className="display-4 font-weight-bold">{selectedMovie.title}</h1>
-                        <p className="lead">{selectedMovie.overview}</p>
+                        <h1 className="display-4 font-weight-bold">{movies.name}</h1>
+                        <p className="lead">{movies.overview}</p>
                         <button className={`${style.button} ms-5`} onClick={handleCloseDetails}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-door-closed" viewBox="0 0 16 16">
                                 <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z" />
@@ -139,7 +139,7 @@ const HeaderCarrusel = () => {
                         </button>
                     </div>
                 </div>
-            )}
+            )} */}
 
         </div>
     )
