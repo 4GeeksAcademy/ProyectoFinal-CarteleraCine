@@ -115,8 +115,10 @@ export const City = () => {
 						<div className="row">
 						<div className="col align-self-center mb-2 fw-bold">
 						<br />
-
-							{city.name}
+                            <Link to={"/" + city.name}>
+                            {city.name}
+                            </Link>
+							
 							{/* <button className="icon-button" onClick={() => (city.name)}>
 							</button> */}
 

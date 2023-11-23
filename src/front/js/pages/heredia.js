@@ -2,27 +2,25 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const Cadenas = () => {
+export const Heredia = () => {
     const { store, actions } = useContext(Context);
 
     return (
         <div className="container">
-            <div className="container mt-4">
-                <Link to="/formulario">
-                    <button className="btn btn-dark">Nuevo multiplex</button>
-                </Link>
-            </div>
             <ul className="list-group">
                 {store.cadenas.map((item, index) => {
                     return (
-                        <li
+                        (item.ciudad == Heredia) ?  <li
                             key={index}
                             className="list-group-item d-flex justify-content-between mt-4 bg-secondary text-white"
                             style={{ background: item.background }} >
                             < div >
+                            <div>
+                            
+                            </div>
                                 <h4>{item.cinema}</h4>
                                 <br />
-                                {"Cadena: " + item.cadena}
+                                {"Cinema: " + item.cadena}
                                 <br />
                                 {"Ciudad: " + item.ciudad}
                                 <br />
@@ -42,12 +40,11 @@ export const Cadenas = () => {
                                     </Link>
                                 </div>
                             </div>
-                        </li>
+                        </li> : null
+                        
                     );
                 })}
             </ul>
-            <br />
-            
         </div >
     );
 };

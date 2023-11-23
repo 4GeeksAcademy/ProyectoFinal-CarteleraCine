@@ -43,6 +43,11 @@ const Navbar = () => {
                                     Ciudades
                                 </Link> 
                             </li>
+                            <li className="nav-item me-5 ms-3 fw-bold" >
+                                <Link to="/showtimes" className="nav-link" style={{ color: 'white' }}>
+                                    Crear horarios
+                                </Link> 
+                            </li>
                             <li className="nav-item ms-3 fw-bold" >
                                 <Link to="/login" className="nav-link" style={{ color: 'white' }}>
                                     Inicio de sesion
