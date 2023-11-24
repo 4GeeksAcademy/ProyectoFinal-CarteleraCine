@@ -144,6 +144,7 @@ def crear_multiplex():
     return jsonify(response_body), 200
 
 @api.route("/multiplex/<int:multiplex_id>", methods=["PUT"])
+@jwt_required()
 def modificar_multiplex(multiplex_id):
     multiplex = Multiplex.query.filter_by(id=multiplex_id).first()
     body = request.get_json()
@@ -165,8 +166,8 @@ def Eliminar_multiplex(multiplex_id):
     }
     return jsonify(response_body), 200
 
-# RUTAS CIUDADES (ERIK)
 
+# RUTAS CIUDADES (ERIK)
 @api.route('/city', methods=['GET'])
 def get_all_city():
     city = City.query.all()
@@ -182,7 +183,6 @@ def get_city(city_id):
       raise APIException('City not found', status_code=404)
 
    return jsonify(city.serialize()), 200
-
 
 @api.route('/city', methods=[ 'POST'])
 def create_cities():
@@ -209,7 +209,6 @@ def update_city(city_id):
     
     return jsonify({"msg": "City modified successfully"}), 200
 
-
 @api.route('/city/<int:city_id>', methods=['DELETE'])
 def delete_city(city_id):
     delete_city = City.query.get(city_id)
@@ -217,9 +216,8 @@ def delete_city(city_id):
     db.session.commit()
     return jsonify({"msg": "City deleted successfully"}), 200
 
+
 # RUTAS Movies2 (ERIK)
-
-
 @api.route('/movie2', methods=['GET'])  
 def get_all_movie():
     movies = Movie2.query.all()  
@@ -269,6 +267,119 @@ def delete_movie2(movie_id):
     return jsonify({"msg": "Movie deleted successfully"}), 200
 
 
+# RUTAS PARA CREAR AL USUARIO
+@api.route("/user", methods=["GET"])
+def mostrar_user():
+    user = User.query.all()
+    result = list(map(lambda user: user.serialize(), user))
+    
+    return jsonify(result), 200
+
+@api.route("/user", methods=["POST"])
+def crear_user():
+    body = request.get_json()
+    user = User(
+            name = body["name"],
+            email = body["email"],
+            password = body["password"],
+            is_active = True
+    )
+    db.session.add(user)
+    db.session.commit()
+    print("creado")
+    response_body = {
+        "msg":"user creado"
+    }
+    return jsonify(response_body), 200
+
+@api.route("/user/<int:user_id>", methods=["PUT"])
+def modificar_user(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    body = request.get_json()
+    user.name = body["name"]
+    user.email = body["email"]
+    user.password = body["password"]
+    db.session.commit()
+
+    return jsonify(user.serialize()), 200
+
+@api.route("/user/<int:user_id>", methods=["DELETE"])
+def Eliminar_user(user_id):
+    user = User.query.filter_by(id=user_id).first()  
+    db.session.delete(user)
+    db.session.commit()
+    response_body = {
+        "msg":"Usuario Eliminado"
+    }
+    return jsonify(response_body), 200
+
+
+# CREA RUTA PARA AUTENTICAR EL USER, DEVUELVE JWTs/TOKEN.(ADJANI)
+@api.route("/login", methods=["POST"])
+def login():
+    name = request.json.get("name", None)
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    user = User.query.filter_by(email=email).first() 
+
+    if user is None:
+        return jsonify({"msg":"el user no está en sistema"}), 401
+    print(user.serialize())
+    print(user.password)
+
+    if password != user.password:
+        return jsonify({"msg": "password incorrecto"}), 401
+    
+    access_token = create_access_token(identity=email)
+    return jsonify({"token":access_token, "name": user.name})
+
+@api.route("/signup", methods=["POST"]) 
+def signup():
+    body = request.get_json()
+    print(body)
+    
+    user = User.query.filter_by(email=body["email"]).first()
+    print(user)
+    if user is None:
+        user = User(
+            name = body["name"],
+            email = body["email"],
+            password = body["password"],
+            is_active = True
+        )
+        db.session.add(user)
+        db.session.commit()
+        response_body = {
+            "msg": "Usuario Creado"
+        }
+        return jsonify(response_body), 200
+    else:
+        return jsonify({"msg": "Usuario Existente"}), 401
+    
+    if password != user.password:
+        return jsonify({"msg": "password incorrecto"}), 401
+    
+    access_token = create_access_token(identity=email)
+    return jsonify(access_token=access_token)
+
+# PROTEJE LA RUTA CON EL TOKEN, EVITA EL ACCESO.
+@api.route("/protected", methods=["GET"])
+@jwt_required()
+def protected():
+    user_email = get_jwt_identity()
+    user = User.query.filter_by(email=user_email).first()   
+    print(user)
+    response_body = {
+        "msg":"User encontrado",
+        "user": user.serialize()
+    }
+    return jsonify(response_body), 200
+
+
+
+
+
+
 # @api.route("/login", methods=["POST"])
 # def login():
 #     email = request.json.get("email", None)
@@ -301,5 +412,3 @@ def delete_movie2(movie_id):
 #         return jsonify(response_body), 200
 #     else:
 #         return jsonify({"msg": "There is already a user created with this email"}), 401
-
-

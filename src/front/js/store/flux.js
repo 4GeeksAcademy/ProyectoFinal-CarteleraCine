@@ -170,8 +170,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}	
 			},	
 		
-		// FETCH CIUDADES (ERIK)
-		displayCity: async () => {
+	// FETCH CIUDADES (ERIK)
+			displayCity: async () => {
 			try {
 				// Realiza una solicitud para obtener un mensaje del backend (ajusta la URL según tu configuración)
 				const response = await fetch(`${process.env.BACKEND_URL}/api/city`);
@@ -187,9 +187,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			} catch (error) {
 				console.error("Error al cargar el mensaje desde el backend", error);
 			}
-		},
+			},
 
-		addCity: newCity => {
+			addCity: newCity => {
 		  const requestOptions = {
 			method: 'POST',
 			headers: { "Content-Type": "application/json" },
@@ -200,9 +200,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			.then(response => response.text())
 			.then(result => console.log(result))
 			.catch(error => console.log('Error al agregar ciudad', error));
-		},
+			},
 
-		editCity: (editedCity, index) => {
+			editCity: (editedCity, index) => {
 			const store = getStore();
 			const updatedCity = [...store.City];
 			updatedCity[index] = { ...editedCity }; // Realiza una copia de editedCity
@@ -220,8 +220,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			.then(response => response.text())
 			.then(result => console.log(result))
 			.catch(error => console.log('Error al editar ciudad', error));
-		},
-		deleteCity: id => {
+			},
+
+			deleteCity: id => {
 		  const store = getStore();
 		  console.log("Eliminar ciudad con ID: " + id);
   
@@ -238,7 +239,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			  console.log(result);
 			})
 			.catch(error => console.log('Error al eliminar ciudad', error));
-		}
+			},
 		
 		},
 
