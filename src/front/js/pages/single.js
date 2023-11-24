@@ -26,7 +26,7 @@ export const Single = props => {
 					return (
 					<div key={item.id} className="container">
                         <div>
-                            {(item.multiplex_cinema == cinema.cinema) ? <button className="btn btn-secondary p-3 mb-1 d-grid gap-2 col-12 mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#movie" aria-expanded="false" aria-controls="collapseExample">{item.movie_name}</button> : null}
+                            {(item.multiplex_cinema == cinema.cinema) ? <button className="btn btn-secondary p-3 mb-1 d-grid gap-2 col-12 mx-auto" style={{backgroundColor: "#2a80a0"}} type="button" data-bs-toggle="collapse" data-bs-target="#movie" aria-expanded="false" aria-controls="collapseExample">{item.movie_name}</button> : null}
                         </div>
                         <div className="collapse" id="movie">
                             {(item.multiplex_cinema == cinema.cinema) ? <div className="card card-body d-grid gap-2 col-12 mx-auto"><button className="btn btn-light">{item.showtime}</button></div> : null}
