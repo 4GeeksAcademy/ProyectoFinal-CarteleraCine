@@ -11,6 +11,7 @@ const Navbar = () => {
 		actions.logout()
 		navigate("/")
 	}
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -58,13 +59,20 @@ const Navbar = () => {
                             </li>
                             : null}
                             <li className="nav-item ms-3 fw-bold" >
+                                {store.auth === false?
                                 <Link to="/login" className="nav-link" style={{ color: 'white' }}>
-                                    Inicio de sesion
-                                </Link> 
+                                    Login 
+                                </Link> : null}
                             </li>
-                            <li className="nav-item ms-3 fw-bold">
+                            <li li className="nav-item fw-bold">
+                                {store.auth === true ? <button className="btn btn-dark nav-item ms-3 fw-bold" style={{ color: 'white' }} onClick={() => handleLogout()} >
+                                    {/* <h6>{store.user?.name}</h6> */}
+                                    Logout
+                                </button> : null}
+                            </li>
+                            {/* <li className="nav-item ms-3 fw-bold">
                                 {store.auth === true ? <button onClick={()=>handleLogout()} className="btn btn-dark nav-item ms-3 fw-bold" style={{ color: 'white' }}>Logout</button> : null}
-                            </li>
+                            </li> */}
                             {/* <form className="d-flex">
                                 <input className={`${style.button} ms-3`} type="search" placeholder="Search" aria-label="Search" />
                                 <button className={`${style.button} me-3`} type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search border-radius: 20px; height: 40px;" viewBox="0 0 16 16">
