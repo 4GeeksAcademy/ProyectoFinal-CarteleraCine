@@ -1,27 +1,26 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 import { Context } from "../store/appContext";
 
-export const Login = () => {
+export const Signup = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const {store, actions} = useContext(Context)
+    const navigate = useNavigate()
 
-    function sendData(e){
-        e.preventDefault()
-        actions.login(email, password)
+    function sendData(){
+        actions.signup(email,password)
+        navigate("/")
     }
 
 	return (
         <div className="container mt-5">
             <div className="row justify-content-center">
                 <div className="col-md-6">
-                    {store.auth === true ? <Navigate to="/movies"/>:
-                    <>
-                    <form onSubmit={sendData} className="custom-form">
-                        <h3 className="text-center mb-1">Iniciar sesión</h3>
-                        <p className="text-center mb-4">Entra con tu usuario registrado</p>
+		            <form className="container my-4">
+                        <h3 className="text-center mb-1">Crear usuario</h3>
                         <div className="mb-3">
                             <label htmlFor="inputEmail" className="form-label">Email</label>
                             <input
@@ -43,13 +42,8 @@ export const Login = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
-                        <button type="submit" className="btn btn-dark mt-4 me-4">Log in</button>
-                        {/* <Link to="/signup">
-                            <button type="submit" className="btn btn-dark mt-4">Create new account</button>
-                        </Link> */}
+                        <button onClick={() => sendData()} type="submit" className="btn btn-dark mt-4">Submit</button>
                     </form>
-                    </>
-            }
                 </div>
             </div>
         </div>

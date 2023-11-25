@@ -1,9 +1,17 @@
-import React from 'react'
-
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext";
 import style from "../../styles/Home.module.css";
 
 const Navbar = () => {
+    const {store, actions} = useContext(Context)
+	const navigate = useNavigate()
+
+	function handleLogout() {
+		actions.logout()
+		navigate("/")
+	}
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -43,16 +51,28 @@ const Navbar = () => {
                                     Ciudades
                                 </Link> 
                             </li>
+                            {store.auth === true ?
                             <li className="nav-item me-5 ms-3 fw-bold" >
-                                <Link to="/showtimes" className="nav-link" style={{ color: 'white' }}>
-                                    Crear horarios
-                                </Link> 
+                            <Link to="/showtimes" className="nav-link" style={{ color: 'white' }}>
+                                Crear horarios
+                            </Link> 
                             </li>
+                            : null}
                             <li className="nav-item ms-3 fw-bold" >
+                                {store.auth === false?
                                 <Link to="/login" className="nav-link" style={{ color: 'white' }}>
-                                    Inicio de sesion
-                                </Link> 
+                                    Login 
+                                </Link> : null}
                             </li>
+                            <li li className="nav-item fw-bold">
+                                {store.auth === true ? <button className="btn btn-dark nav-item ms-3 fw-bold" style={{ color: 'white' }} onClick={() => handleLogout()} >
+                                    {/* <h6>{store.user?.name}</h6> */}
+                                    Logout
+                                </button> : null}
+                            </li>
+                            {/* <li className="nav-item ms-3 fw-bold">
+                                {store.auth === true ? <button onClick={()=>handleLogout()} className="btn btn-dark nav-item ms-3 fw-bold" style={{ color: 'white' }}>Logout</button> : null}
+                            </li> */}
                             {/* <form className="d-flex">
                                 <input className={`${style.button} ms-3`} type="search" placeholder="Search" aria-label="Search" />
                                 <button className={`${style.button} me-3`} type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search border-radius: 20px; height: 40px;" viewBox="0 0 16 16">

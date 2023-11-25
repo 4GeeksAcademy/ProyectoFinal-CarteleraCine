@@ -7,13 +7,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			current_showtime: null,
 			cadenas: [],
 			cadena: {},
-			City: [],
-			auth: false
+			user: [],
+			auth: localStorage.getItem("token")? true : false,
 
 		},
 		actions: {
 
 	// FETCH MOVIES (FRANCESCA)		
+			
+			
 			displayMovies: (id) => {
 				let path = ""
 				id ? path= "/" + id : path="/"
@@ -137,18 +139,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/api/multiplex/${id}`, {
 						method: 'PUT',
-						headers: {"Content-Type": "application/json"},
+						headers: { "Content-Type": "application/json", "authorization":`Bearer ${localStorage.getItem("token")}`  },
 						body: JSON.stringify({
-							cadena:cadena,
-							cinema:cinema,
-							ciudad:ciudad,
-							pais:pais
+							cadena: cadena,
+							cinema: cinema,
+							ciudad: ciudad,
+							pais: pais
 						}),
 					})
-					return response.status;
+					if (response.ok) {
+						getActions().mostrarMultiplex()
+						return response.status;						
+					}else {
+						const errorData = await response.json();
+						console.log("Error al editar:", errorData);
+						return response.status;
+					}
 				} catch (error) {
-					console.log("Error al editar", error);					
-				}					
+					console.log("Error al editar", error);
+				}
 			},
 			
 			eliminarMultiplex: async (index) => {
@@ -171,124 +180,236 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},	
 		
 		// FETCH CIUDADES (ERIK)
-		displayCity: async () => {
-			try {
-				// Realiza una solicitud para obtener un mensaje del backend (ajusta la URL según tu configuración)
-				const response = await fetch(`${process.env.BACKEND_URL}/api/city`);
-				if (!response.ok) {
-					throw new Error("Error en la solicitud");
+			displayCity: async () => {
+				try {
+					// Realiza una solicitud para obtener un mensaje del backend (ajusta la URL según tu configuración)
+					const response = await fetch(`${process.env.BACKEND_URL}/api/city`);
+					if (!response.ok) {
+						throw new Error("Error en la solicitud");
+					}
+					const data = await response.json();
+
+					// Actualiza el mensaje en el estado
+					console.log(data)
+					const store = getStore();
+					setStore({ City: data });
+				} catch (error) {
+					console.error("Error al cargar el mensaje desde el backend", error);
 				}
-				const data = await response.json();
+			},
 
-				// Actualiza el mensaje en el estado
-				console.log(data)
+			addCity: newCity => {
+			const requestOptions = {
+				method: 'POST',
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(newCity)
+			};
+	
+			fetch(`${process.env.BACKEND_URL}/api/city`, requestOptions)
+				.then(response => response.text())
+				.then(result => console.log(result))
+				.catch(error => console.log('Error al agregar ciudad', error));
+			},
+
+			editCity: (editedCity, index) => {
 				const store = getStore();
-				setStore({ City: data });
-			} catch (error) {
-				console.error("Error al cargar el mensaje desde el backend", error);
-			}
-		},
-
-		addCity: newCity => {
-		  const requestOptions = {
-			method: 'POST',
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(newCity)
-		  };
-  
-		  fetch(`${process.env.BACKEND_URL}/api/city`, requestOptions)
-			.then(response => response.text())
-			.then(result => console.log(result))
-			.catch(error => console.log('Error al agregar ciudad', error));
-		},
-
-		editCity: (editedCity, index) => {
+				const updatedCity = [...store.City];
+				updatedCity[index] = { ...editedCity }; // Realiza una copia de editedCity
+			
+				setStore({ City: updatedCity });
+			
+	
+			const requestOptions = {
+				method: 'PUT',
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(updatedCity[index])
+			};
+	
+			fetch(`${process.env.BACKEND_URL}/api/city`, requestOptions)
+				.then(response => response.text())
+				.then(result => console.log(result))
+				.catch(error => console.log('Error al editar ciudad', error));
+			},
+			deleteCity: id => {
 			const store = getStore();
-			const updatedCity = [...store.City];
-			updatedCity[index] = { ...editedCity }; // Realiza una copia de editedCity
-		  
-			setStore({ City: updatedCity });
-		
-  
-		  const requestOptions = {
-			method: 'PUT',
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(updatedCity[index])
-		  };
-  
-		  fetch(`${process.env.BACKEND_URL}/api/city`, requestOptions)
-			.then(response => response.text())
-			.then(result => console.log(result))
-			.catch(error => console.log('Error al editar ciudad', error));
-		},
-		deleteCity: id => {
-		  const store = getStore();
-		  console.log("Eliminar ciudad con ID: " + id);
-  
-		  setStore({ City: store.City.filter(item => item.id !== id) });
-  
-		  const requestOptions = {
-			method: 'DELETE',
-			redirect: 'follow'
-		  };
-  
-		  fetch(`${process.env.BACKEND_URL}/api/city/${id}`, requestOptions)
-			.then(response => response.text())
-			.then(result => {
-			  console.log(result);
-			})
-			.catch(error => console.log('Error al eliminar ciudad', error));
+			console.log("Eliminar ciudad con ID: " + id);
+	
+			setStore({ City: store.City.filter(item => item.id !== id) });
+	
+			const requestOptions = {
+				method: 'DELETE',
+				redirect: 'follow'
+			};
+	
+			fetch(`${process.env.BACKEND_URL}/api/city/${id}`, requestOptions)
+				.then(response => response.text())
+				.then(result => {
+				console.log(result);
+				})
+				.catch(error => console.log('Error al eliminar ciudad', error));
+			},
+
+			// login: (email, password) => {
+			// 	console.log("login desde flux")
+				
+			// 	const requestOptions = {
+			// 		method: "POST",
+			// 		headers: { "Content-type": "application/json" },
+			// 		body: JSON.stringify(
+			// 			{
+			// 				"email":email,
+			// 				"password": password
+			// 			}
+			// 		)
+			// 	};
+			// 	fetch(`${process.env.BACKEND_URL}/api/login`, requestOptions)
+			// 		.then(response => {
+			// 			console.log(response.status)
+			// 			if(response.status === 200){
+			// 				setStore({auth: true});
+			// 			}
+			// 			return response.json()
+			// 		})
+			// 		.then(data => {
+			// 			localStorage.setItem("token", data.access_token);
+			// 			console.log(data)
+			// 		});
+			// },
+			
+			// logout: () => {
+			// 	console.log("logout desde flux")
+			// 	setStore({auth: false})
+			// 	localStorage.removeItem("token");
+			// },
+
+			// signup: (email, password) => {
+			// 	console.log("signup desde flux")
+			// 	fetch(`${process.env.BACKEND_URL}/api/signup`, {
+			// 		method: "POST",
+			// 		headers: {"Content-Type": "application/json"},
+			// 		body: JSON.stringify(
+			// 			{
+			// 				"email":email,
+			// 				"password": password
+			// 			}
+			// 		)
+			// 	})
+			// 	.then((response) => response.json())
+			// 	.then((data) => console.log(data))
+			// },
+
+			mostrarUsuario: () => {
+				fetch(`${process.env.BACKEND_URL}/api/user`)
+					.then(response => response.json())
+					.then((data) => {
+						setStore({ user: data })
+						console.log(data);
+					});
+			},
+
+			mostrarUser_id: (id) => {
+				fetch(`${process.env.BACKEND_URL}/api/user/${id}`)
+					.then(response => response.json())
+					.then((data) => {
+						setStore({ user: data })
+						console.log(data);
+					});
+			},
+
+			crearUser: async (newUser) => {
+				const store = getStore();
+				try {
+					const requestOptions = {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(newUser)
+					};
+					const response = await fetch(`${process.env.BACKEND_URL}/api/user`, requestOptions)
+					return response.status
+				} catch (error) {
+					console.log("Ya existe", error)
+				}
+			},
+
+			modificarUser: async (id, email, password) => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/api/user/${id}`, {
+						method: 'PUT',
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							// name: name,
+							email: email,
+							password: password,
+						}),
+					})
+					return response.status;
+				} catch (error) {
+					console.log("Error al editar", error);
+				}
+			},
+
+			eliminarUser: async (index) => {
+				try {
+					const store = getStore();
+					const id = store.user[index].id
+					const requestOptions = {
+						method: "DELETE",
+						headers: { "Content-Type": "application/json" },
+					};
+					const response = await fetch(`${process.env.BACKEND_URL}/api/user/${id}`, requestOptions)
+					if (response.status === 200) {
+						const actualizarUser = store.user.filter((item, i) => i !== index);
+						setStore({ user: actualizarUser })
+					}
+					return response.status
+				} catch (error) {
+					console.log("Error al eliminar", error);
+				}
+			},
+
+			login: async (email, password) => {
+				console.log("login desde flux");
+					const requestOptions = {
+						method: 'POST',
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(
+							{
+								// "name": name,
+								"email": email,
+								"password": password
+							}
+						)
+					}
+					try {
+						const response = await fetch(`${process.env.BACKEND_URL}/api/login`, requestOptions) 
+						console.log(response.status);
+						if (response.status === 200) {
+							setStore({auth: true});							
+						}
+						const data = await response.json();
+						console.log(data);
+						localStorage.setItem("token", data.access_token);
+						// setStore({user: {name: data.name}})
+			
+						await fetch(`${process.env.BACKEND_URL}/api/protected`, {
+								method: 'GET',
+								headers: {
+									'Authorization': `Bearer ${data.access_token}`,
+									'Content-Type': 'application/json'
+								}
+						}).then((res) => res.json()).then((data) => setStore({user: data.user}))
+						// window.location.href = "/"
+					} catch (error) {
+						console.error("error", error);
+					}
+				},
+
+			logout: () => {
+				console.log("Logout desde flux");
+				setStore({auth: false});
+				localStorage.removeItem("token");
+			}
 		}
-		
-		},
-
-		// login: (email, password) => {
-		// 	console.log("login desde flux")
-		// 	const requestOptions = {
-		// 		method: "POST",
-		// 		headers: { "Content-type": "application/json" },
-		// 		body: JSON.stringify(
-		// 			{
-		// 				"email":email,
-		// 				"password": password
-		// 			}
-		// 		)
-		// 	};
-		// 	fetch(`${process.env.BACKEND_URL}/api/login`, requestOptions)
-		// 		.then(response => {
-		// 			console.log(response.status)
-		// 			if(response.status === 200){
-		// 				setStore({auth: true});
-		// 			}
-		// 			return response.json()
-		// 		})
-		// 		.then(data => {
-		// 			localStorage.setItem("token", data.access_token);
-		// 			console.log(data)
-		// 		});
-		// },
-
-		// signup: (email, password) => {
-		// 	console.log("signup desde flux")
-		// 	fetch(`${process.env.BACKEND_URL}/api/signup`, {
-		// 		method: "POST",
-		// 		headers: {"Content-Type": "application/json"},
-		// 		body: JSON.stringify(
-		// 			{
-		// 				"email":email,
-		// 				"password": password
-		// 			}
-		// 		)
-		// 	})
-		// 	.then((response) => response.json())
-		// 	.then((data) => console.log(data))
-		// },
-
-		// logout: () => {
-		// 	console.log("logout desde flux")
-		// 	setStore({auth: false})
-		// 	localStorage.removeItem("token");
-		// }
 	};
 };
 
